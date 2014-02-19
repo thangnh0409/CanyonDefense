@@ -25,6 +25,13 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		4E4A038F18B4B1C80030D229 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A038C18B4B1C80030D229 /* Player.png */; };
+		4E4A039018B4B1C80030D229 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A038D18B4B1C80030D229 /* Projectile.png */; };
+		4E4A039118B4B1C80030D229 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A038E18B4B1C80030D229 /* Target.png */; };
+		4E4A039818B4B2720030D229 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816DF18B3485800BD2D93 /* GameObject.cpp */; };
+		4E4A039918B4B2720030D229 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E518B34FAB00BD2D93 /* Missile.cpp */; };
+		4E4A039A18B4B2720030D229 /* MissileTurret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E818B34FC300BD2D93 /* MissileTurret.cpp */; };
+		4E4A039B18B4B2720030D229 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EB18B3526100BD2D93 /* Enemy.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -270,6 +277,9 @@
 		1D6058910D05DD3D006BFB54 /* CanyonDefense iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CanyonDefense iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4E4A038C18B4B1C80030D229 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
+		4E4A038D18B4B1C80030D229 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Projectile.png; sourceTree = "<group>"; };
+		4E4A038E18B4B1C80030D229 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Target.png; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -547,6 +557,9 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E4A038C18B4B1C80030D229 /* Player.png */,
+				4E4A038D18B4B1C80030D229 /* Projectile.png */,
+				4E4A038E18B4B1C80030D229 /* Target.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
@@ -753,6 +766,7 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				4E4A039118B4B1C80030D229 /* Target.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
@@ -761,8 +775,10 @@
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				4E4A038F18B4B1C80030D229 /* Player.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				4E4A039018B4B1C80030D229 /* Projectile.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,

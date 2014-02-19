@@ -7,13 +7,3 @@
 //
 
 #include "Missile.h"
-
-
-void Missile::handleCollisonWith(GameObject *obj)
-{
-    
-}
-void Missile::update()
-{
-    
-}
