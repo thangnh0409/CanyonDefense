@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
-#include "GameScene.cpp"
+#include "GameScene.h"
+#include "HelloWorldScene.h"
 #include <vector>
 #include <string>
 
@@ -67,8 +68,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
     
     // create a scene. it's an autorelease object
-    auto scene = GameScene::createScene();
-    
+    //auto scene = GameScene::createScene();
+    auto scene = HelloWorld::createScene();
     // run
     director->runWithScene(scene);
     

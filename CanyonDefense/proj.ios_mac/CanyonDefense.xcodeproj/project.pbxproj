@@ -62,16 +62,20 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		5F07C26F18B3BE5F00000925 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F07C26D18B3BE5F00000925 /* GameScene.cpp */; };
+		5F07C27018B3C39C00000925 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F07C26D18B3BE5F00000925 /* GameScene.cpp */; };
+		5F07C27118B3C39C00000925 /* LevelLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */; };
+		5F07C27218B3C39C00000925 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F818B3633500BD2D93 /* MenuScene.cpp */; };
+		5F07C27318B3C39C00000925 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816DF18B3485800BD2D93 /* GameObject.cpp */; };
+		5F07C27418B3C39C00000925 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E518B34FAB00BD2D93 /* Missile.cpp */; };
+		5F07C27518B3C39C00000925 /* MissileTurret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E818B34FC300BD2D93 /* MissileTurret.cpp */; };
+		5F07C27618B3C39C00000925 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EB18B3526100BD2D93 /* Enemy.cpp */; };
 		5F0816E118B3485800BD2D93 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816DF18B3485800BD2D93 /* GameObject.cpp */; };
 		5F0816E718B34FAC00BD2D93 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E518B34FAB00BD2D93 /* Missile.cpp */; };
 		5F0816EA18B34FC300BD2D93 /* MissileTurret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E818B34FC300BD2D93 /* MissileTurret.cpp */; };
 		5F0816ED18B3526100BD2D93 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EB18B3526100BD2D93 /* Enemy.cpp */; };
 		5F0816F118B3563000BD2D93 /* LevelLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */; };
-		5F0816F218B3563000BD2D93 /* LevelLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */; };
-		5F0816F618B3616100BD2D93 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F418B3616100BD2D93 /* GameScene.cpp */; };
-		5F0816F718B3616100BD2D93 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F418B3616100BD2D93 /* GameScene.cpp */; };
 		5F0816FA18B3633500BD2D93 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F818B3633500BD2D93 /* MenuScene.cpp */; };
-		5F0816FB18B3633500BD2D93 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F818B3633500BD2D93 /* MenuScene.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -298,6 +302,8 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		5F07C26D18B3BE5F00000925 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/GameScene.cpp; sourceTree = "<group>"; };
+		5F07C26E18B3BE5F00000925 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
 		5F0816DF18B3485800BD2D93 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameObject.cpp; path = ../Classes/GameObject.cpp; sourceTree = "<group>"; };
 		5F0816E018B3485800BD2D93 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameObject.h; path = ../Classes/GameObject.h; sourceTree = "<group>"; };
 		5F0816E418B34BD900BD2D93 /* AppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMacros.h; path = ../Classes/AppMacros.h; sourceTree = "<group>"; };
@@ -309,8 +315,6 @@
 		5F0816EC18B3526100BD2D93 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = ../Classes/Enemy.h; sourceTree = "<group>"; };
 		5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelLayer.cpp; path = ../Classes/LevelLayer.cpp; sourceTree = "<group>"; };
 		5F0816F018B3563000BD2D93 /* LevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelLayer.h; path = ../Classes/LevelLayer.h; sourceTree = "<group>"; };
-		5F0816F418B3616100BD2D93 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/GameScene.cpp; sourceTree = "<group>"; };
-		5F0816F518B3616100BD2D93 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
 		5F0816F818B3633500BD2D93 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/MenuScene.cpp; sourceTree = "<group>"; };
 		5F0816F918B3633500BD2D93 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/MenuScene.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -530,10 +534,10 @@
 		5F0816EE18B355C900BD2D93 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5F07C26D18B3BE5F00000925 /* GameScene.cpp */,
+				5F07C26E18B3BE5F00000925 /* GameScene.h */,
 				5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */,
 				5F0816F018B3563000BD2D93 /* LevelLayer.h */,
-				5F0816F418B3616100BD2D93 /* GameScene.cpp */,
-				5F0816F518B3616100BD2D93 /* GameScene.h */,
 				5F0816F818B3633500BD2D93 /* MenuScene.cpp */,
 				5F0816F918B3633500BD2D93 /* MenuScene.h */,
 			);
@@ -793,8 +797,8 @@
 				5F0816EA18B34FC300BD2D93 /* MissileTurret.cpp in Sources */,
 				5F0816ED18B3526100BD2D93 /* Enemy.cpp in Sources */,
 				5F0816F118B3563000BD2D93 /* LevelLayer.cpp in Sources */,
-				5F0816F618B3616100BD2D93 /* GameScene.cpp in Sources */,
 				5F0816FA18B3633500BD2D93 /* MenuScene.cpp in Sources */,
+				5F07C26F18B3BE5F00000925 /* GameScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,12 +806,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F07C27018B3C39C00000925 /* GameScene.cpp in Sources */,
+				5F07C27118B3C39C00000925 /* LevelLayer.cpp in Sources */,
+				5F07C27218B3C39C00000925 /* MenuScene.cpp in Sources */,
+				5F07C27318B3C39C00000925 /* GameObject.cpp in Sources */,
+				5F07C27418B3C39C00000925 /* Missile.cpp in Sources */,
+				5F07C27518B3C39C00000925 /* MissileTurret.cpp in Sources */,
+				5F07C27618B3C39C00000925 /* Enemy.cpp in Sources */,
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
 				5087E75817EB910900C73F5D /* HelloWorldScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				5F0816F218B3563000BD2D93 /* LevelLayer.cpp in Sources */,
-				5F0816F718B3616100BD2D93 /* GameScene.cpp in Sources */,
-				5F0816FB18B3633500BD2D93 /* MenuScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
