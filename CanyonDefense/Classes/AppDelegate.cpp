@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "GameScene.cpp"
+#include "GameScene.h"
 #include <vector>
 #include <string>
 

@@ -7,6 +7,9 @@
 //
 
 #include "LevelLayer.h"
+#include "GameObject.h"
+#include "Missile.h"
+#include "Enemy.h"
 
 Scene* LevelLayer::scene()
 {
@@ -22,9 +25,31 @@ bool LevelLayer::init()
     }
     this->setTouchEnabled(true);
     this->scheduleUpdate();
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Point origin = Director::getInstance()->getVisibleOrigin();
+    
+    //init array
+    
+    enemyArray = new Array();
+    projectileArray = new Array();
+    
+    // add sprite to screen
+    
+    auto missile = Missile::create("Player.png");
+    missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
+    this->addChild(missile);
+    
+    auto enemy = Enemy::create("Target.png");
+    
     return true;
 }
 void LevelLayer::update(float delta)
+{
+    
+}
+
+void LevelLayer::ccTouchesEnded(cocos2d::__Set *pTouches, cocos2d::Event *pEvent)
 {
     
 }

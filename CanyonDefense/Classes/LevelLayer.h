@@ -15,6 +15,10 @@ USING_NS_CC;
 
 class LevelLayer : public Layer {
     
+private:
+    Array *enemyArray;
+    Array *projectileArray;
+    
 public:
     static Scene *scene();
     virtual bool init();
