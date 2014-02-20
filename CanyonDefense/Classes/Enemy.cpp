@@ -26,7 +26,7 @@ void Enemy::handleCollisionWith(GameObject *obj)
     Missile *missile = dynamic_cast<Missile*>(obj);
     if (missile) {
         // occur collision
-        log("occur collison");
+        log("occur collison2");
     }
 }
 void Enemy::update()

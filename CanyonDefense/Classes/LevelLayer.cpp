@@ -79,7 +79,7 @@ bool LevelLayer::init()
         aniFrame.pushBack(frame);
     }
     Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.3f);
-    sprite1->runAction(RepeatForever::create(Animate::create(animation)));
+    missile->runAction(RepeatForever::create(Animate::create(animation)));
     
     return true;
 }
@@ -107,11 +107,24 @@ void LevelLayer::update(float delta)
                                              gameObject2->getContentSize().width, gameObject2->getContentSize().height);
                     
                     if (gameObj1Rect.intersectsRect(gameObj2Rect)) {
-                        gameObject1->handleCollisionWith(gameObject2);
+                        gameObject2->handleCollisionWith(gameObject1);
+                        
                     }
                 }
             }
         }
+    }
+    
+    for (Object* obj: this->getChildren()) {
+        GameObject* gameObj = dynamic_cast<GameObject*>(obj);
+        if(gameObj){
+            
+            if (gameObj->getScheduledForRemove()) {
+                this->removeChild(gameObj, true);
+                
+            }
+        }
+        
     }
 }
 
