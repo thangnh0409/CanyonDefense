@@ -28,10 +28,6 @@
 		4E4A038F18B4B1C80030D229 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A038C18B4B1C80030D229 /* Player.png */; };
 		4E4A039018B4B1C80030D229 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A038D18B4B1C80030D229 /* Projectile.png */; };
 		4E4A039118B4B1C80030D229 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A038E18B4B1C80030D229 /* Target.png */; };
-		4E4A039818B4B2720030D229 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816DF18B3485800BD2D93 /* GameObject.cpp */; };
-		4E4A039918B4B2720030D229 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E518B34FAB00BD2D93 /* Missile.cpp */; };
-		4E4A039A18B4B2720030D229 /* MissileTurret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816E818B34FC300BD2D93 /* MissileTurret.cpp */; };
-		4E4A039B18B4B2720030D229 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EB18B3526100BD2D93 /* Enemy.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -83,6 +79,8 @@
 		5F0816ED18B3526100BD2D93 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EB18B3526100BD2D93 /* Enemy.cpp */; };
 		5F0816F118B3563000BD2D93 /* LevelLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */; };
 		5F0816FA18B3633500BD2D93 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F818B3633500BD2D93 /* MenuScene.cpp */; };
+		5F0C45CC18B50B90009CE7C3 /* yulei1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C45CA18B50B90009CE7C3 /* yulei1.plist */; };
+		5F0C45CD18B50B90009CE7C3 /* yulei1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C45CB18B50B90009CE7C3 /* yulei1.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -327,6 +325,8 @@
 		5F0816F018B3563000BD2D93 /* LevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelLayer.h; path = ../Classes/LevelLayer.h; sourceTree = "<group>"; };
 		5F0816F818B3633500BD2D93 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/MenuScene.cpp; sourceTree = "<group>"; };
 		5F0816F918B3633500BD2D93 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/MenuScene.h; sourceTree = "<group>"; };
+		5F0C45CA18B50B90009CE7C3 /* yulei1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = yulei1.plist; sourceTree = "<group>"; };
+		5F0C45CB18B50B90009CE7C3 /* yulei1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yulei1.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -557,6 +557,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5F0C45CA18B50B90009CE7C3 /* yulei1.plist */,
+				5F0C45CB18B50B90009CE7C3 /* yulei1.png */,
 				4E4A038C18B4B1C80030D229 /* Player.png */,
 				4E4A038D18B4B1C80030D229 /* Projectile.png */,
 				4E4A038E18B4B1C80030D229 /* Target.png */,
@@ -782,6 +784,8 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				5F0C45CC18B50B90009CE7C3 /* yulei1.plist in Resources */,
+				5F0C45CD18B50B90009CE7C3 /* yulei1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

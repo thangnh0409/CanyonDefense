@@ -14,7 +14,8 @@
 class Enemy : public GameObject {
     
 public:
-    virtual void handleCollisonWith(GameObject *obj);
+    static Enemy * create(const char *filename);
+    virtual void handleCollisionWith(GameObject *obj);
     virtual void update();
 };
 

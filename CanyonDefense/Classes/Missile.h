@@ -14,7 +14,8 @@
 class Missile : public GameObject {
     
 public:
-    virtual void handleCollisonWith(GameObject *obj);
+    static Missile* create(const char *filename);
+    virtual void handleCollisionWith(GameObject* obj);
     virtual void update();
 };
 

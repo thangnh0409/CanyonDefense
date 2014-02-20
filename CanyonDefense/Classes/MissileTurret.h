@@ -14,7 +14,7 @@
 class MissileTurret : public GameObject {
     
 public:
-    virtual void handleCollisonWith(GameObject *obj);
+    virtual void handleCollisionWith(GameObject* obj);
     virtual void update();
 };
 

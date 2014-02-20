@@ -16,7 +16,7 @@ USING_NS_CC;
 
 class GameObject : public Sprite {
 public:
-    virtual void handleCollisonWith(GameObject *obj);
+    virtual void handleCollisionWith(GameObject* obj);
     virtual void update();
 };
 

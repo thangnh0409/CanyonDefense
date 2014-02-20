@@ -23,6 +23,10 @@ public:
     static Scene *scene();
     virtual bool init();
     void update (float delta);
+    
+    void onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event);
+    void spriteMoveFinish(Node *sender);
+    
     CREATE_FUNC(LevelLayer);
 };
 
