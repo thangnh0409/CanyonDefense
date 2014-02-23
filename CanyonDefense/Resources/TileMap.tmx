@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="10" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <image source="tmw_desert_spacing.png" width="265" height="199"/>
+ </tileset>
+ <tileset firstgid="49" name="TilesBroken0027_M" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <image source="TilesBroken0027_M.jpg" width="1600" height="1126"/>
+ </tileset>
+ <tileset firstgid="1681" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <image source="meta_tiles.png" width="67" height="34"/>
+ </tileset>
+ <layer name="background" width="15" height="10">
+  <data encoding="base64" compression="zlib">
+   eJzjYmBg4IdiLhKxHg69clgwLjP4CejDp18ehz5080BsDRxmoOtVg2Js9hJyGz43E+MnfOL8aBiXXg08fiXkfzUkDJPHZhbMHnx+AQDzOAth
+  </data>
+ </layer>
+ <layer name="meta" width="15" height="10">
+  <properties>
+   <property name="Collidable" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYECAiWzEYWyAWHli5LCZhU8vNnNw6cXmF3x+xGUvujw2/5GrF194EKOWWECqe0nRCwDpVSGg
+  </data>
+ </layer>
+ <objectgroup name="objects" width="15" height="10">
+  <object name="rootPoint" x="10" y="181"/>
+ </objectgroup>
+</map>

@@ -11,6 +11,8 @@
 #include "Missile.h"
 #include "Enemy.h"
 
+#define kMapTag 3
+
 Scene* LevelLayer::scene()
 {
     auto scene = Scene::create();
@@ -39,25 +41,41 @@ bool LevelLayer::init()
     
     // add sprite to screen
     
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+    //add map background
     
-    // position the sprite on the center of the screen
-    sprite->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    Director *director = Director::getInstance();
-    sprite->setScale(director->getContentScaleFactor());
-    
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    map = TMXTiledMap::create("TileMap.tmx");
+    metaLayer = map->getLayer("meta");
+    addChild(map, -1 , 1);
+    Size CC_UNUSED s = map->getContentSize();
+    CCLOG("Contentsize: %f, %f", s.width, s.height);
     
     auto missile = Missile::create("Player.png");
     missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
     this->addChild(missile, 1);
     
-    Enemy *enemy = Enemy::create("Target.png");
-    enemy->setPosition(Point(visibleSize.width/2+ 100, visibleSize.height - 100));
-    this->addChild(enemy);
-    enemyArray->addObject(enemy);
+    Enemy* enemy = Enemy::create("tank07_07.png");
+    
+    auto objectGroup = map->getObjectGroup("objects");
+    auto& rootObj = objectGroup->getObjects();
+    
+    Value objectsVal = Value(rootObj);
+    CCLOG("%s", objectsVal.getDescription().c_str());
+    
+    for (auto& obj : rootObj)
+    {
+        ValueMap& dict = obj.asValueMap();
+        float x = dict["x"].asFloat();
+        float y = dict["y"].asFloat();
+        enemy->setPosition(Point(x, y));
+        //enemy->setScale(0.3);
+        addChild(enemy, 1);
+        enemy->setAnchorPoint(Point(0.5, 0.5));
+        enemyArray->addObject(enemy);
+    }
+    Enemy *enemy1 = Enemy::create("Target.png");
+    enemy1->setPosition(Point(visibleSize.width/2+ 100, visibleSize.height - 100));
+    this->addChild(enemy1);
+   // enemyArray->addObject(enemy1);
     
     //load textTure
     
@@ -91,7 +109,7 @@ void LevelLayer::update(float delta)
         GameObject* gameObject1 = dynamic_cast<GameObject*>(child1);
         if (gameObject1 != NULL) {
             //call update object
-            //gameObject->update();
+            gameObject1->update();
             
            // log("detect object 1");
             
@@ -112,6 +130,20 @@ void LevelLayer::update(float delta)
                     }
                 }
             }
+            
+            Enemy* enemy = dynamic_cast<Enemy*>(gameObject1);
+            if (enemy) {
+                Point pos = enemy->getPosition();
+                //log("pos : x = %f, y = %f", pos.x, pos.y);
+                int x = (pos.x) / map->getTileSize().width;
+                int y = ((map->getMapSize().height * map->getTileSize().height) - pos.y) / map->getTileSize().height;
+                log("x = %d, y = %d", y, x);
+                enemy->getNextDirection(maptrix, y, x);
+                /*
+                if( collisionWithTile(pos) ){
+                    //enemy->handleCollisionWithTile(true);
+                }*/
+            }
         }
     }
     
@@ -127,7 +159,26 @@ void LevelLayer::update(float delta)
         
     }
 }
+/*
+bool LevelLayer::collisionWithTile(cocos2d::Point pos)
+{
+    int x = pos.x / map->getTileSize().width;
+    int y = ((map->getMapSize().height * map->getTileSize().height) - pos.y) / map->getTileSize().height;
+    Point tileCoord = Point(x, y);
+    int tileGID = metaLayer->getTileGIDAt(tileCoord);
 
+    if (tileGID) {
+        //const auto& value = map->getPropertiesForGID(tileGID).asValueMap();
+        log("GID:%i, Properties:%s", tileGID, map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString().c_str());
+        std::string collidable = map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString();
+        if (collidable.compare("true") == 0) {
+            log("collision true");
+            return true;
+        }
+    }
+    return false;
+}
+*/
 void LevelLayer::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {
     for( auto& touch : touches)

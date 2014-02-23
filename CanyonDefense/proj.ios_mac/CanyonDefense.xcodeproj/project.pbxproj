@@ -81,6 +81,17 @@
 		5F0816FA18B3633500BD2D93 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F818B3633500BD2D93 /* MenuScene.cpp */; };
 		5F0C45CC18B50B90009CE7C3 /* yulei1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C45CA18B50B90009CE7C3 /* yulei1.plist */; };
 		5F0C45CD18B50B90009CE7C3 /* yulei1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C45CB18B50B90009CE7C3 /* yulei1.png */; };
+		5F0C695218B7C22900F66A3F /* tank01_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C694A18B7C22900F66A3F /* tank01_01.png */; };
+		5F0C695318B7C22900F66A3F /* tank02_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C694B18B7C22900F66A3F /* tank02_02.png */; };
+		5F0C695418B7C22900F66A3F /* tank03_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C694C18B7C22900F66A3F /* tank03_03.png */; };
+		5F0C695518B7C22900F66A3F /* tank04_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C694D18B7C22900F66A3F /* tank04_04.png */; };
+		5F0C695618B7C22900F66A3F /* tank05_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C694E18B7C22900F66A3F /* tank05_05.png */; };
+		5F0C695718B7C22900F66A3F /* tank06_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C694F18B7C22900F66A3F /* tank06_06.png */; };
+		5F0C695818B7C22900F66A3F /* tank07_07.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C695018B7C22900F66A3F /* tank07_07.png */; };
+		5F0C695918B7C22900F66A3F /* tank08_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C695118B7C22900F66A3F /* tank08_08.png */; };
+		5F0C696218B7C84B00F66A3F /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0C696118B7C84B00F66A3F /* meta_tiles.png */; };
+		5F52136718B78DAC00B5F31D /* TileMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5F52136618B78DAC00B5F31D /* TileMap.tmx */; };
+		5F52136F18B7910D00B5F31D /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52136E18B7910D00B5F31D /* tmw_desert_spacing.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -327,6 +338,17 @@
 		5F0816F918B3633500BD2D93 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/MenuScene.h; sourceTree = "<group>"; };
 		5F0C45CA18B50B90009CE7C3 /* yulei1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = yulei1.plist; sourceTree = "<group>"; };
 		5F0C45CB18B50B90009CE7C3 /* yulei1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yulei1.png; sourceTree = "<group>"; };
+		5F0C694A18B7C22900F66A3F /* tank01_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank01_01.png; sourceTree = "<group>"; };
+		5F0C694B18B7C22900F66A3F /* tank02_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank02_02.png; sourceTree = "<group>"; };
+		5F0C694C18B7C22900F66A3F /* tank03_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank03_03.png; sourceTree = "<group>"; };
+		5F0C694D18B7C22900F66A3F /* tank04_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank04_04.png; sourceTree = "<group>"; };
+		5F0C694E18B7C22900F66A3F /* tank05_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank05_05.png; sourceTree = "<group>"; };
+		5F0C694F18B7C22900F66A3F /* tank06_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank06_06.png; sourceTree = "<group>"; };
+		5F0C695018B7C22900F66A3F /* tank07_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank07_07.png; sourceTree = "<group>"; };
+		5F0C695118B7C22900F66A3F /* tank08_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank08_08.png; sourceTree = "<group>"; };
+		5F0C696118B7C84B00F66A3F /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meta_tiles.png; sourceTree = "<group>"; };
+		5F52136618B78DAC00B5F31D /* TileMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TileMap.tmx; sourceTree = "<group>"; };
+		5F52136E18B7910D00B5F31D /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -557,6 +579,17 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5F0C696118B7C84B00F66A3F /* meta_tiles.png */,
+				5F0C694A18B7C22900F66A3F /* tank01_01.png */,
+				5F0C694B18B7C22900F66A3F /* tank02_02.png */,
+				5F0C694C18B7C22900F66A3F /* tank03_03.png */,
+				5F0C694D18B7C22900F66A3F /* tank04_04.png */,
+				5F0C694E18B7C22900F66A3F /* tank05_05.png */,
+				5F0C694F18B7C22900F66A3F /* tank06_06.png */,
+				5F0C695018B7C22900F66A3F /* tank07_07.png */,
+				5F0C695118B7C22900F66A3F /* tank08_08.png */,
+				5F52136E18B7910D00B5F31D /* tmw_desert_spacing.png */,
+				5F52136618B78DAC00B5F31D /* TileMap.tmx */,
 				5F0C45CA18B50B90009CE7C3 /* yulei1.plist */,
 				5F0C45CB18B50B90009CE7C3 /* yulei1.png */,
 				4E4A038C18B4B1C80030D229 /* Player.png */,
@@ -786,6 +819,17 @@
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				5F0C45CC18B50B90009CE7C3 /* yulei1.plist in Resources */,
 				5F0C45CD18B50B90009CE7C3 /* yulei1.png in Resources */,
+				5F52136718B78DAC00B5F31D /* TileMap.tmx in Resources */,
+				5F52136F18B7910D00B5F31D /* tmw_desert_spacing.png in Resources */,
+				5F0C695218B7C22900F66A3F /* tank01_01.png in Resources */,
+				5F0C695318B7C22900F66A3F /* tank02_02.png in Resources */,
+				5F0C695418B7C22900F66A3F /* tank03_03.png in Resources */,
+				5F0C695518B7C22900F66A3F /* tank04_04.png in Resources */,
+				5F0C695618B7C22900F66A3F /* tank05_05.png in Resources */,
+				5F0C695718B7C22900F66A3F /* tank06_06.png in Resources */,
+				5F0C695818B7C22900F66A3F /* tank07_07.png in Resources */,
+				5F0C695918B7C22900F66A3F /* tank08_08.png in Resources */,
+				5F0C696218B7C84B00F66A3F /* meta_tiles.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
