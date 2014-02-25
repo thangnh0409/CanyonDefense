@@ -105,6 +105,8 @@
 		5F86808418BAFD1B00A95253 /* Tower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F86808118BAFD1A00A95253 /* Tower.cpp */; };
 		5F86808D18BB040700A95253 /* GameMediator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F86808B18BB040700A95253 /* GameMediator.cpp */; };
 		5F86808E18BB040700A95253 /* GameMediator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F86808B18BB040700A95253 /* GameMediator.cpp */; };
+		5FCC274618BCF93100348E3C /* Wave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FCC274418BCF93100348E3C /* Wave.cpp */; };
+		5FCC274718BCF93100348E3C /* Wave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FCC274418BCF93100348E3C /* Wave.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -372,6 +374,8 @@
 		5F86808218BAFD1A00A95253 /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tower.h; path = ../Classes/Tower.h; sourceTree = "<group>"; };
 		5F86808B18BB040700A95253 /* GameMediator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameMediator.cpp; path = ../Classes/GameMediator.cpp; sourceTree = "<group>"; };
 		5F86808C18BB040700A95253 /* GameMediator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameMediator.h; path = ../Classes/GameMediator.h; sourceTree = "<group>"; };
+		5FCC274418BCF93100348E3C /* Wave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Wave.cpp; path = ../Classes/Wave.cpp; sourceTree = "<group>"; };
+		5FCC274518BCF93100348E3C /* Wave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wave.h; path = ../Classes/Wave.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -586,6 +590,8 @@
 				5F86808218BAFD1A00A95253 /* Tower.h */,
 				5F0CB3F118BB36D700D5C65B /* Projectile.cpp */,
 				5F0CB3F218BB36D700D5C65B /* Projectile.h */,
+				5FCC274418BCF93100348E3C /* Wave.cpp */,
+				5FCC274518BCF93100348E3C /* Wave.h */,
 			);
 			name = GameObject;
 			sourceTree = "<group>";
@@ -906,6 +912,7 @@
 				5F86808318BAFD1B00A95253 /* Tower.cpp in Sources */,
 				5F86808D18BB040700A95253 /* GameMediator.cpp in Sources */,
 				5F0CB3F318BB36D700D5C65B /* Projectile.cpp in Sources */,
+				5FCC274618BCF93100348E3C /* Wave.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,6 +933,7 @@
 				5F86808418BAFD1B00A95253 /* Tower.cpp in Sources */,
 				5F86808E18BB040700A95253 /* GameMediator.cpp in Sources */,
 				5F0CB3F418BB36D700D5C65B /* Projectile.cpp in Sources */,
+				5FCC274718BCF93100348E3C /* Wave.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

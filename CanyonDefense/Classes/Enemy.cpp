@@ -29,85 +29,27 @@ Enemy::Enemy()
     velocity = 1 / 1; //480 fs/ second
     direction = RIGHT;
 }
-Enemy* Enemy::create(const char *filename)
+Enemy::~Enemy()
 {
-    Enemy *sprite = new Enemy();
-    if (sprite && sprite->initWithFile(filename))
-    {
-        sprite->autorelease();
-        return sprite;
-    }
-    CC_SAFE_DELETE(sprite);
-    return NULL;
+    
 }
-Rect Enemy::getRect()
+bool Enemy::initWithFile(const char *filename)
 {
-    Size s = this->getContentSize();
-    return Rect(this->getPositionX() - s.width/2, this->getPositionY() - s.height/2, s.width, s.height);
+    bool bRet= false;
+    do {
+        sprite = Sprite::create(filename);
+        this->addChild(sprite);
+        //add schedule update enemy
+        //schedule(schedule_selector(Enemy::enemyLogic), 0.1f);
+        
+        scheduleUpdate();
+        
+        bRet = true;
+    } while (0);
+    return bRet;
 }
-void Enemy::handleCollisionWith(GameObject *obj)
+void Enemy::update(float dt)
 {
-    Missile *missile = dynamic_cast<Missile*>(obj);
-    if (missile) {
-        // occur collision
-        log("occur collison2");
-    }
-}
-void Enemy::handleCollisionWithTile(bool collision)
-{
-    if(collision){
-        switch (direction) {
-            case RIGHT:
-                direction = TOP;
-                break;
-            case TOP:
-                direction = RIGHT;
-                break;
-            
-            default:
-                break;
-        }
-    }
-}
-void Enemy::getNextDirection(int matrix[10][15], int x, int y)
-{
-    //log("matrix[%d][%d]= %d",x,y, matrix[1][0]);
-    /*if (direction != BOTTOM) {
-        if (matrix[x][y+1] == 1) {
-            direction = RIGHT;
-        }else
-            if (matrix[x-1][y] == 1) {
-                log("matrix = %d ", matrix[x][y-1]);
-                direction = TOP;
-            }else
-                if (matrix[x+1][y] == 1) {
-                    direction = BOTTOM;
-                }
-    }else
-        direction = LEFT;*/
-    if (matrix[x][y] != 0) {
-        direction = matrix[x][y] - 1;
-        switch (direction) {
-            case TOP:
-                this->setTexture("tank03_03.png");
-                break;
-            case RIGHT:
-                this->setTexture("tank07_07.png");
-                break;
-            case LEFT:
-                this->setTexture("tank05_05.png");
-                break;
-            case BOTTOM:
-                this->setTexture("tank01_01.png");
-                break;
-            default:
-                break; 
-        }
-    }
-}
-void Enemy::update()
-{
-    //this->runAction(MoveTo::create( TITLE_WIDTH / velocity, Point(getPositionX() + TITLE_WIDTH, getPositionY())));
     switch (direction) {
         case TOP:
             realSpeedX = 0;
@@ -130,4 +72,117 @@ void Enemy::update()
             break;
     }
     this->setPosition(getPositionX() + realSpeedX, getPositionY() + realSpeedY);
+    
+    Point pos = this->getPosition();
+    //log("pos : x = %f, y = %f", pos.x, pos.y);
+    int x = (pos.x) / 32;
+    int y = ((10 * 32) - pos.y) / 32;
+    //log("x = %d, y = %d", y, x);
+    this->getNextDirection(maptrix, y, x);
+
+
+}
+Rect Enemy::getRect()
+{
+    Size s = this->getContentSize();
+    return Rect(this->getPositionX() - s.width/2, this->getPositionY() - s.height/2, s.width, s.height);
+}
+
+void Enemy::handleCollisionWithTile(bool collision)
+{
+    if(collision){
+        switch (direction) {
+            case RIGHT:
+                direction = TOP;
+                break;
+            case TOP:
+                direction = RIGHT;
+                break;
+            
+            default:
+                break;
+        }
+    }
+}
+void Enemy::getNextDirection(int matrix[10][15], int x, int y)
+{
+    if (matrix[x][y] != 0) {
+        direction = matrix[x][y] - 1;
+        switch (direction) {
+            case TOP:
+                sprite->setTexture("tank03_03.png");
+                break;
+            case RIGHT:
+                sprite->setTexture("tank07_07.png");
+                break;
+            case LEFT:
+                sprite->setTexture("tank05_05.png");
+                break;
+            case BOTTOM:
+                sprite->setTexture("tank01_01.png");
+                break;
+            default:
+                break; 
+        }
+    }
+}
+
+SmallCarEnemy* SmallCarEnemy::create()
+{
+    SmallCarEnemy* smallCar = new SmallCarEnemy();
+    if (smallCar && smallCar->initWithFile("tank07_07.png")) {
+        smallCar->autorelease();
+        return smallCar;
+    }
+    CC_SAFE_DELETE(smallCar);
+    return NULL;
+}
+bool SmallCarEnemy::initWithFile(const char *filename)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Enemy::initWithFile(filename));
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+
+MediumCarEnemy* MediumCarEnemy::create()
+{
+    MediumCarEnemy* mediumCar = new MediumCarEnemy();
+    if (mediumCar && mediumCar->initWithFile("")) {
+        mediumCar->autorelease();
+        return mediumCar;
+    }
+    CC_SAFE_DELETE(mediumCar);
+    return NULL;
+}
+bool MediumCarEnemy::initWithFile(const char *filename)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Enemy::initWithFile(filename));
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+
+BigCarEnemy* BigCarEnemy::create()
+{
+    BigCarEnemy* bigCar = new BigCarEnemy();
+    if (bigCar && bigCar->initWithFile("")) {
+        bigCar->autorelease();
+        return bigCar;
+    }
+    CC_SAFE_DELETE(bigCar);
+    return NULL;
+}
+bool BigCarEnemy::initWithFile(const char *filename)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Enemy::initWithFile(filename));
+        bRet = true;
+    } while (0);
+    return bRet;
 }

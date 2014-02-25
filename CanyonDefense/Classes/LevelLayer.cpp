@@ -32,7 +32,6 @@ bool LevelLayer::init()
         return false;
     }
     this->setTouchEnabled(true);
-    this->scheduleUpdate();
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -46,7 +45,7 @@ bool LevelLayer::init()
     Size CC_UNUSED s = map->getContentSize();
     CCLOG("Contentsize: %f, %f", s.width, s.height);
     
-    Enemy* enemy = Enemy::create("tank07_07.png");
+    SmallCarEnemy* enemy = SmallCarEnemy::create();
     
     auto objectGroup = map->getObjectGroup("objects");
     auto& rootObj = objectGroup->getObjects();
@@ -98,7 +97,7 @@ bool LevelLayer::init()
     
     return true;
 }
-void LevelLayer::update(float delta)
+/*void LevelLayer::update(float delta)
 {
     for (Object* child1 : this->getChildren()){
         GameObject* gameObject1 = dynamic_cast<GameObject*>(child1);
@@ -164,6 +163,7 @@ void LevelLayer::update(float delta)
         
     }
 }
+ */
 /*
 bool LevelLayer::collisionWithTile(cocos2d::Point pos)
 {

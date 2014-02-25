@@ -49,7 +49,6 @@ private:
 public:
     static Scene *scene();
     virtual bool init();
-    void update (float delta);
     bool collisionWithTile(Point pos);
     
     void onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event);
