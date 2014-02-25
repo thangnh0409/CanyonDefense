@@ -40,7 +40,11 @@ Enemy* Enemy::create(const char *filename)
     CC_SAFE_DELETE(sprite);
     return NULL;
 }
-
+Rect Enemy::getRect()
+{
+    Size s = this->getContentSize();
+    return Rect(this->getPositionX() - s.width/2, this->getPositionY() - s.height/2, s.width, s.height);
+}
 void Enemy::handleCollisionWith(GameObject *obj)
 {
     Missile *missile = dynamic_cast<Missile*>(obj);

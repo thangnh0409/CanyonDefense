@@ -35,6 +35,7 @@ public:
     static Enemy * create(const char *filename);
     virtual void handleCollisionWith(GameObject *obj);
     virtual void update();
+    virtual Rect getRect();
     void handleCollisionWithTile(bool collision);
     void getNextDirection(int matrix[10][15], int x, int y);
 };

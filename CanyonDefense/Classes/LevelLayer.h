@@ -16,8 +16,6 @@ USING_NS_CC;
 class LevelLayer : public Layer {
     
 private:
-    Array *enemyArray;
-    Array *projectileArray;
     TMXTiledMap *map;
     TMXLayer* metaLayer;
     int maptrix[10][15] = {

@@ -9,7 +9,10 @@
 #include "LevelLayer.h"
 #include "GameObject.h"
 #include "Missile.h"
+#include "MissileTurret.h"
 #include "Enemy.h"
+#include "GameMediator.h"
+#include "Tower.h"
 
 #define kMapTag 3
 
@@ -17,6 +20,9 @@ Scene* LevelLayer::scene()
 {
     auto scene = Scene::create();
     auto layer = LevelLayer::create();
+    GameMediator *gm = GameMediator::shareInstance();
+    gm->setGameLayer(layer);
+    
     scene->addChild(layer);
     return scene;
 }
@@ -29,15 +35,6 @@ bool LevelLayer::init()
     this->scheduleUpdate();
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();
-    
-    //init array
-    
-    enemyArray = new Array();
-    enemyArray->init();
-    projectileArray = new Array();
-    projectileArray->init();
-    
     
     // add sprite to screen
     
@@ -48,10 +45,6 @@ bool LevelLayer::init()
     addChild(map, -1 , 1);
     Size CC_UNUSED s = map->getContentSize();
     CCLOG("Contentsize: %f, %f", s.width, s.height);
-    
-    auto missile = Missile::create("Player.png");
-    missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
-    this->addChild(missile, 1);
     
     Enemy* enemy = Enemy::create("tank07_07.png");
     
@@ -69,27 +62,18 @@ bool LevelLayer::init()
         enemy->setPosition(Point(x, y));
         //enemy->setScale(0.3);
         addChild(enemy, 1);
-        enemy->setAnchorPoint(Point(0.5, 0.5));
-        enemyArray->addObject(enemy);
+        GameMediator::shareInstance()->getTargets()->addObject(enemy);
     }
-    Enemy *enemy1 = Enemy::create("Target.png");
-    enemy1->setPosition(Point(visibleSize.width/2+ 100, visibleSize.height - 100));
-    this->addChild(enemy1);
-   // enemyArray->addObject(enemy1);
     
     //load textTure
-    
     
     Vector<SpriteFrame*> aniFrame(6);
     SpriteFrameCache* cache = SpriteFrameCache::getInstance();
     cache->addSpriteFramesWithFile("yulei1.plist", "yulei1.png");
     
-    Sprite* sprite1 = Sprite::createWithSpriteFrameName("yulei1_01.png");
-    sprite1->setPosition(Point(200, 200));
-    auto spriteBacth = SpriteBatchNode::create("yulei1.png");
-    spriteBacth->addChild(sprite1);
-    addChild(spriteBacth);
-    
+    auto missile = Sprite::create("Player.png");
+    missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
+    this->addChild(missile, 1);
     char str[100] = {0};
     for (int i = 1; i < 6; i++) {
         sprintf(str, "yulei1_0%d.png", i);
@@ -99,13 +83,24 @@ bool LevelLayer::init()
     Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.3f);
     missile->runAction(RepeatForever::create(Animate::create(animation)));
     
+    //add sample MissileTurret
+    
+    auto missileTurret = MissileTurret::create("Player.png");
+    missileTurret->setPosition(Point(100, 100));
+    this->addChild(missileTurret);
+    
+    // add Tower
+    
+    Tower* tower = MissileTurretTower::create();
+    tower->setPosition(Point(150, 100));
+    this->addChild(tower, 2);
+    GameMediator::shareInstance()->getTowers()->addObject(tower);
+    
     return true;
 }
 void LevelLayer::update(float delta)
 {
-    Object* child1 = NULL;
-    Object* child2 = NULL;
-    CCARRAY_FOREACH( enemyArray, child1){
+    for (Object* child1 : this->getChildren()){
         GameObject* gameObject1 = dynamic_cast<GameObject*>(child1);
         if (gameObject1 != NULL) {
             //call update object
@@ -117,7 +112,7 @@ void LevelLayer::update(float delta)
                                      gameObject1->getPositionY() - gameObject1->getContentSize().height/2,
                                      gameObject1->getContentSize().width, gameObject1->getContentSize().height);
             
-            CCARRAY_FOREACH( projectileArray, child2){
+            for ( Object* child2 : this->getChildren()){
                 auto gameObject2 = dynamic_cast<GameObject*>(child2);
                 if (gameObject2) {
                     auto gameObj2Rect = Rect(gameObject2->getPositionX() - gameObject2->getContentSize().width/2,
@@ -137,12 +132,22 @@ void LevelLayer::update(float delta)
                 //log("pos : x = %f, y = %f", pos.x, pos.y);
                 int x = (pos.x) / map->getTileSize().width;
                 int y = ((map->getMapSize().height * map->getTileSize().height) - pos.y) / map->getTileSize().height;
-                log("x = %d, y = %d", y, x);
+                //log("x = %d, y = %d", y, x);
                 enemy->getNextDirection(maptrix, y, x);
-                /*
-                if( collisionWithTile(pos) ){
-                    //enemy->handleCollisionWithTile(true);
-                }*/
+               
+                // xac dinh thuoc co thuoc pham vi anh huong cua sung ko
+                for (Object* child : this->getChildren()) {
+                    MissileTurret* missileTurret = dynamic_cast<MissileTurret*>(child);
+                    if (missileTurret) {
+                        if(missileTurret->detectIntrusion(enemy->getPosition())){
+                            Missile* missile = Missile::create("Projectile.png");
+                            missile->setPosition(missileTurret->getPosition());
+                            missile->runAction(MoveTo::create(0.5, enemy->getPosition()));
+                            this->addChild(missile);
+                            GameMediator::shareInstance()->getProjectiles()->addObject(missile);
+                        }
+                    }
+                }
             }
         }
     }
@@ -188,7 +193,7 @@ void LevelLayer::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Ev
         Missile* missile = Missile::create("Projectile.png");
         missile->setPosition(Point(visibleSize.width/2, 0));
         this->addChild(missile);
-        projectileArray->addObject(missile);
+        //projectileArray->addObject(missile);
         
         // calculate target
         int offX = location.x - missile->getPositionX();
