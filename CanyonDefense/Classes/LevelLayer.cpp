@@ -8,22 +8,29 @@
 
 #include "LevelLayer.h"
 #include "GameObject.h"
+#include "MapManager.h"
 #include "Missile.h"
 #include "MissileTurret.h"
 #include "Enemy.h"
 #include "GameMediator.h"
 #include "Tower.h"
+#include "GameHUD.h"
 
 #define kMapTag 3
 
 Scene* LevelLayer::scene()
 {
     auto scene = Scene::create();
-    auto layer = LevelLayer::create();
+    
     GameMediator *gm = GameMediator::shareInstance();
+    auto layer = LevelLayer::create();
     gm->setGameLayer(layer);
     
+    GameHUD* gh = GameHUD::shareInstance();
+    gm->setGameHUD(gh);
+    
     scene->addChild(layer);
+    scene->addChild(gh, 2);
     return scene;
 }
 bool LevelLayer::init()
@@ -31,16 +38,13 @@ bool LevelLayer::init()
     if (!Layer::init()) {
         return false;
     }
-    this->setTouchEnabled(true);
-    
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    
-    // add sprite to screen
     
     //add map background
     
-    map = TMXTiledMap::create("TileMap.tmx");
-    metaLayer = map->getLayer("meta");
+    TMXTiledMap* map = MapManager::shareMap()->getTileMap();
+    TMXLayer* metaLayer = map->getLayer("meta");
+    metaLayer->setVisible(false);
     addChild(map, -1 , 1);
     Size CC_UNUSED s = map->getContentSize();
     CCLOG("Contentsize: %f, %f", s.width, s.height);
@@ -95,126 +99,28 @@ bool LevelLayer::init()
     this->addChild(tower, 2);
     GameMediator::shareInstance()->getTowers()->addObject(tower);
     
+    Tower* tower2 = MissileTurretTower::create();
+    tower2->setPosition(Point(250, 100));
+    this->addChild(tower2, 2);
+    GameMediator::shareInstance()->getTowers()->addObject(tower2);
+    
     return true;
 }
-/*void LevelLayer::update(float delta)
-{
-    for (Object* child1 : this->getChildren()){
-        GameObject* gameObject1 = dynamic_cast<GameObject*>(child1);
-        if (gameObject1 != NULL) {
-            //call update object
-            gameObject1->update();
-            
-           // log("detect object 1");
-            
-            auto gameObj1Rect = Rect(gameObject1->getPositionX() - gameObject1->getContentSize().width/2,
-                                     gameObject1->getPositionY() - gameObject1->getContentSize().height/2,
-                                     gameObject1->getContentSize().width, gameObject1->getContentSize().height);
-            
-            for ( Object* child2 : this->getChildren()){
-                auto gameObject2 = dynamic_cast<GameObject*>(child2);
-                if (gameObject2) {
-                    auto gameObj2Rect = Rect(gameObject2->getPositionX() - gameObject2->getContentSize().width/2,
-                                             gameObject2->getPositionY() - gameObject2->getContentSize().height/2,
-                                             gameObject2->getContentSize().width, gameObject2->getContentSize().height);
-                    
-                    if (gameObj1Rect.intersectsRect(gameObj2Rect)) {
-                        gameObject2->handleCollisionWith(gameObject1);
-                        
-                    }
-                }
-            }
-            
-            Enemy* enemy = dynamic_cast<Enemy*>(gameObject1);
-            if (enemy) {
-                Point pos = enemy->getPosition();
-                //log("pos : x = %f, y = %f", pos.x, pos.y);
-                int x = (pos.x) / map->getTileSize().width;
-                int y = ((map->getMapSize().height * map->getTileSize().height) - pos.y) / map->getTileSize().height;
-                //log("x = %d, y = %d", y, x);
-                enemy->getNextDirection(maptrix, y, x);
-               
-                // xac dinh thuoc co thuoc pham vi anh huong cua sung ko
-                for (Object* child : this->getChildren()) {
-                    MissileTurret* missileTurret = dynamic_cast<MissileTurret*>(child);
-                    if (missileTurret) {
-                        if(missileTurret->detectIntrusion(enemy->getPosition())){
-                            Missile* missile = Missile::create("Projectile.png");
-                            missile->setPosition(missileTurret->getPosition());
-                            missile->runAction(MoveTo::create(0.5, enemy->getPosition()));
-                            this->addChild(missile);
-                            GameMediator::shareInstance()->getProjectiles()->addObject(missile);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    for (Object* obj: this->getChildren()) {
-        GameObject* gameObj = dynamic_cast<GameObject*>(obj);
-        if(gameObj){
-            
-            if (gameObj->getScheduledForRemove()) {
-                this->removeChild(gameObj, true);
-                
-            }
-        }
-        
-    }
-}
- */
-/*
-bool LevelLayer::collisionWithTile(cocos2d::Point pos)
-{
-    int x = pos.x / map->getTileSize().width;
-    int y = ((map->getMapSize().height * map->getTileSize().height) - pos.y) / map->getTileSize().height;
-    Point tileCoord = Point(x, y);
-    int tileGID = metaLayer->getTileGIDAt(tileCoord);
 
-    if (tileGID) {
-        //const auto& value = map->getPropertiesForGID(tileGID).asValueMap();
-        log("GID:%i, Properties:%s", tileGID, map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString().c_str());
-        std::string collidable = map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString();
-        if (collidable.compare("true") == 0) {
-            log("collision true");
-            return true;
+void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
+{
+    switch (towerTag) {
+        case 1:{
+            Tower* tower = MissileTurretTower::create();
+            tower->setPosition(pos);
+            this->addChild(tower, 2);
+            GameMediator::shareInstance()->getTowers()->addObject(tower);
+            break;
         }
+        case 2:
+            
+            break;
+        default:
+            break;
     }
-    return false;
-}
-*/
-void LevelLayer::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
-{
-    for( auto& touch : touches)
-    {
-        auto location = touch->getLocation();
-        Size visibleSize = Director::getInstance()->getVisibleSize();
-        Missile* missile = Missile::create("Projectile.png");
-        missile->setPosition(Point(visibleSize.width/2, 0));
-        this->addChild(missile);
-        //projectileArray->addObject(missile);
-        
-        // calculate target
-        int offX = location.x - missile->getPositionX();
-        int offY = location.y - missile->getPositionY();
-        int realX = visibleSize.width + missile->getContentSize().width/2;
-        //tanx
-        float ratio = (float)offY / (float)offX;
-        int realY = realX*ratio + missile->getPositionY();
-        // distance calculate
-        float distance = sqrtf(realX*realX + realY*realY);
-        // velocity = 480 frs/ 1sec
-        int velocity = 480/1;
-        float duration = distance / velocity;
-        
-        missile->runAction(Sequence::create(MoveTo::create(duration, Point(realX, realY)), CallFuncN::create(this, callfuncN_selector(LevelLayer::spriteMoveFinish)), NULL));
-        
-    }
-}
-void LevelLayer::spriteMoveFinish(Node *sender)
-{
-    Sprite *sprite = (Sprite*)sender;
-    this->removeChild(sprite, true);
-    log("remove bullet");
 }

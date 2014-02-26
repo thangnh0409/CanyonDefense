@@ -76,7 +76,7 @@ void Tower::towerLogic(float dt)
 MissileTurretTower* MissileTurretTower::create()
 {
     MissileTurretTower* mtt = new MissileTurretTower;
-    if (mtt && mtt->initWithFileAndRange("CannonTurret.png", 400)) {
+    if (mtt && mtt->initWithFileAndRange("CannonTurret.png", 100)) {
         mtt->autorelease();
         
         return mtt;

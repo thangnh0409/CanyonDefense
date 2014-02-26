@@ -21,6 +21,7 @@ GameMediator* GameMediator::shareInstance()
 }
 GameMediator::~GameMediator(){
 	CC_SAFE_RELEASE_NULL(_gameLayer);
+    CC_SAFE_RELEASE_NULL(_mapGame);
 	CC_SAFE_RELEASE_NULL(_targets);
 	
 	//CC_SAFE_RELEASE_NULL(_waves);
@@ -34,6 +35,7 @@ bool GameMediator::init()
     bool bRet = false;
     do {
         _gameLayer = NULL;
+        _mapGame = NULL;
         _targets = Array::create();
         _targets->retain();
         _projectiles = Array::create();
