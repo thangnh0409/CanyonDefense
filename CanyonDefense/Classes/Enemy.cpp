@@ -20,6 +20,9 @@ enum{
 #define TITLE_HEIGHT 32
 #define kSpeedX         0.5
 #define kSpeedY         0.5
+#define kEnergySmallCar     3
+#define kEnergyMediumCar    4
+#define kEnergyBigCar       5
 /*
  construction method
  **/
@@ -142,6 +145,8 @@ bool SmallCarEnemy::initWithFile(const char *filename)
     bool bRet = false;
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
+        setEnergy(kEnergySmallCar);
+        setEnemyType(GROUND);
         bRet = true;
     } while (0);
     return bRet;
@@ -150,7 +155,7 @@ bool SmallCarEnemy::initWithFile(const char *filename)
 MediumCarEnemy* MediumCarEnemy::create()
 {
     MediumCarEnemy* mediumCar = new MediumCarEnemy();
-    if (mediumCar && mediumCar->initWithFile("")) {
+    if (mediumCar && mediumCar->initWithFile("tank08_08.png")) {
         mediumCar->autorelease();
         return mediumCar;
     }
@@ -162,6 +167,8 @@ bool MediumCarEnemy::initWithFile(const char *filename)
     bool bRet = false;
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
+        setEnergy(kEnergyMediumCar);
+        setEnemyType(GROUND);
         bRet = true;
     } while (0);
     return bRet;
@@ -170,7 +177,7 @@ bool MediumCarEnemy::initWithFile(const char *filename)
 BigCarEnemy* BigCarEnemy::create()
 {
     BigCarEnemy* bigCar = new BigCarEnemy();
-    if (bigCar && bigCar->initWithFile("")) {
+    if (bigCar && bigCar->initWithFile("tank06_06.png")) {
         bigCar->autorelease();
         return bigCar;
     }
@@ -182,6 +189,8 @@ bool BigCarEnemy::initWithFile(const char *filename)
     bool bRet = false;
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
+        setEnergy(kEnergyBigCar);
+        setEnemyType(GROUND);
         bRet = true;
     } while (0);
     return bRet;

@@ -19,17 +19,6 @@ MapManager* MapManager::shareMap()
     return _sharedContext;
 }
 
-MapManager* MapManager::createMap()
-{
-    MapManager* map = new MapManager;
-    if (map) {
-        map->initMapWithMapId(1);
-        map->autorelease();
-        return map;
-    }
-    CC_SAFE_DELETE(map);
-    return NULL;
-}
 
 void MapManager::initMapWithMapId(int mapId)
 {
@@ -47,7 +36,7 @@ void MapManager::setMapTileForGame()
             log("set tile map");
             break;
         case 2:
-            mapTile = TMXTiledMap::create("TileMap2.tmx");
+            mapTile = TMXTiledMap::create("TileMap.tmx");
             setTileMap(mapTile);
             break;
             

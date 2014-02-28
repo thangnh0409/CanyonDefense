@@ -24,7 +24,7 @@ GameMediator::~GameMediator(){
     CC_SAFE_RELEASE_NULL(_mapGame);
 	CC_SAFE_RELEASE_NULL(_targets);
 	
-	//CC_SAFE_RELEASE_NULL(_waves);
+	CC_SAFE_RELEASE_NULL(_waves);
 	CC_SAFE_RELEASE_NULL(_towers);
 	CC_SAFE_RELEASE_NULL(_projectiles);
 }
@@ -42,6 +42,8 @@ bool GameMediator::init()
         _projectiles->retain();
         _towers = Array::create();
         _towers->retain();
+        _waves = Array::create();
+        _waves->retain();
         
         bRet = true;
     } while (0);

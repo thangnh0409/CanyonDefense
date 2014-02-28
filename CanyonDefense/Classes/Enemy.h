@@ -13,6 +13,11 @@
 
 USING_NS_CC;
 
+enum ENEMY_TYPE {
+    GROUND = 0,
+    AIR = 1
+    };
+
 class Enemy : public Node {
 private:
     /*
@@ -46,6 +51,15 @@ private:
     Sprite* sprite;
     
 public:
+    /**
+     Variable for energy of enemy
+     */
+    CC_SYNTHESIZE(float, _energy, Energy);
+    /*
+     type of enemy, ex Ground, Air..
+     **/
+    CC_SYNTHESIZE(int, _enemyType, EnemyType);
+    
     Enemy();
     virtual ~Enemy();
     virtual bool initWithFile(const char* filename);
@@ -54,6 +68,7 @@ public:
     Rect getRect();
     void handleCollisionWithTile(bool collision);
     void getNextDirection(int matrix[10][15], int x, int y);
+    
 };
 
 /*

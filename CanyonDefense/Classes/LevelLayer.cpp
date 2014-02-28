@@ -7,7 +7,6 @@
 //
 
 #include "LevelLayer.h"
-#include "GameObject.h"
 #include "MapManager.h"
 #include "Missile.h"
 #include "MissileTurret.h"
@@ -39,6 +38,8 @@ bool LevelLayer::init()
         return false;
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    this->setLevelType(NORMAL);
+    this->addWave();
     
     //add map background
     
@@ -63,6 +64,7 @@ bool LevelLayer::init()
         float x = dict["x"].asFloat();
         float y = dict["y"].asFloat();
         enemy->setPosition(Point(x, y));
+        setRootPoint(Point(x, y));
         //enemy->setScale(0.3);
         addChild(enemy, 1);
         GameMediator::shareInstance()->getTargets()->addObject(enemy);
@@ -104,9 +106,20 @@ bool LevelLayer::init()
     this->addChild(tower2, 2);
     GameMediator::shareInstance()->getTowers()->addObject(tower2);
     
+    schedule(schedule_selector(LevelLayer::levelLogic), 60.0f, 1, 0);
+    schedule(schedule_selector(LevelLayer::addEnemy), 2.5f);
+    
     return true;
 }
 
+void LevelLayer::levelLogic(float dt)
+{
+    Wave* wave = this->getCurrentWave();
+    if ( wave && wave->getNumSmallCar() <= 0 && wave->getNumMediumCar() <= 0 && wave->getNumBigCar() <= 0) {
+        this->getNextWave();
+        log("call get next wave");
+    }
+}
 void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 {
     switch (towerTag) {
@@ -122,5 +135,53 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
             break;
         default:
             break;
+    }
+}
+
+void LevelLayer::addWave()
+{
+    GameMediator* gm = GameMediator::shareInstance();
+    Wave* wave1 = Wave::create(1, 4, 2, 0);
+    gm->getWaves()->addObject(wave1);
+    Wave* wave2 = Wave::create(1, 4, 4, 2);
+    gm->getWaves()->addObject(wave2);
+    Wave* wave3 = Wave::create(1, 4, 5, 4);
+    gm->getWaves()->addObject(wave3);
+    Wave* wave4 = Wave::create(1, 2, 4, 5);
+    gm->getWaves()->addObject(wave4);
+
+}
+Wave* LevelLayer::getCurrentWave()
+{
+    Wave* currentWave = (Wave*)GameMediator::shareInstance()->getWaves()->getObjectAtIndex(getCurrentWaveCount());
+    return currentWave;
+}
+void LevelLayer::getNextWave()
+{
+    setCurrentWaveCount(_currentWaveCount + 1);
+    
+}
+void LevelLayer::addEnemy(float dt)
+{
+    //log("call add enemy");
+    GameMediator* gm = GameMediator::shareInstance();
+    Wave* wave = this->getCurrentWave();
+    Enemy* target = NULL;
+    if (wave) {
+        if (wave->getNumSmallCar() > 0) {
+            target = SmallCarEnemy::create();
+            wave->setNumSmallCar(wave->getNumSmallCar() - 1);
+        }else
+        if (wave->getNumMediumCar() > 0) {
+            target = MediumCarEnemy::create();
+            wave->setNumMediumCar(wave->getNumMediumCar() - 1);
+        }else
+        if (wave->getNumBigCar() > 0){
+            target = BigCarEnemy::create();
+            wave->setNumBigCar(wave->getNumBigCar() - 1);
+        }
+        target->setPosition(getRootPoint());
+        gm->getTargets()->addObject(target);
+        this->addChild(target, 1);
     }
 }

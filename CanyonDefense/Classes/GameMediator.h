@@ -29,6 +29,7 @@ public:
     CC_SYNTHESIZE_RETAIN(GameHUD*, _gameHUD, GameHUD);
     CC_SYNTHESIZE_RETAIN(Array*, _targets, Targets);
     CC_SYNTHESIZE_RETAIN(Array*, _towers, Towers);
+    CC_SYNTHESIZE_RETAIN(Array*, _waves, Waves);
     CC_SYNTHESIZE_RETAIN(Array*, _projectiles, Projectiles);
 };
 

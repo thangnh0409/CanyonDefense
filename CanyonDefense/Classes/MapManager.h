@@ -42,7 +42,6 @@ private:
 
 public:
     static MapManager* shareMap();
-    static MapManager* createMap();
     void initMapWithMapId(int mapId);
     void setMapTileForGame();
     CC_SYNTHESIZE(int, _mapId, MapId);
