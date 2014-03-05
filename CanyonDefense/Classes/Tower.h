@@ -21,7 +21,10 @@ public:
 	virtual bool initWithFileAndRange(const char *pszFilename, int range);
     
     void towerLogic(float dt);
+    Rect getRect();
     Enemy* getClosestTarget();
+    
+    Sprite* twSprite;
     
 	CC_SYNTHESIZE(int, _range,  Range);
     

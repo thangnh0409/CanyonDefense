@@ -10,6 +10,7 @@
 #define __CanyonDefense__Enemy__
 
 #include "cocos2d.h"
+#include "GameMediator.h"
 
 USING_NS_CC;
 
@@ -19,7 +20,7 @@ enum ENEMY_TYPE {
     };
 
 class Enemy : public Node {
-private:
+public:
     /*
      speedX of enemy
      **/
@@ -51,7 +52,7 @@ private:
     Sprite* sprite;
     Sprite* energySprite;
     
-public:
+    GameMediator* gm;
     /**
      Variable for energy of enemy
      */
@@ -65,7 +66,7 @@ public:
     Enemy();
     virtual ~Enemy();
     virtual bool initWithFile(const char* filename);
-    void update(float dt);
+    virtual void update(float dt);
     void removeSelf();
     void updateEnergy();
     Rect getRect();
@@ -81,6 +82,7 @@ class SmallCarEnemy : public Enemy {
 public:
     static SmallCarEnemy* create();
     bool initWithFile(const char* filename);
+    void update(float dt);
     
 };
 

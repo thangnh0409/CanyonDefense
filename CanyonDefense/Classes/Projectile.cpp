@@ -78,7 +78,7 @@ void MissileProjectile::moveToTargetPos()
     // Determinie offset of location to projectile
 	float offX = getTargetPos().x - this->getPosition().x;
 	float offY = getTargetPos().y - this->getPosition().y;
-    log("targetX=%f , thiX = %f, offX = %f, offY = %f", getTargetPos().x, this->getPositionX(), offX, offY);
+    //log("targetX=%f , thiX = %f, offX = %f, offY = %f", getTargetPos().x, this->getPositionX(), offX, offY);
     float tmp = offX;
     
 	// Determine where we wish to shoot the projectile to
@@ -91,7 +91,7 @@ void MissileProjectile::moveToTargetPos()
     }
     
 	Point realDest = Point(realX, realY);
-    log("real X = %f, realY=%f",realX, realY);
+    //log("real X = %f, realY=%f",realX, realY);
     
 	// Determine the length of how far we're shooting
 	float offRealX = realX - this->getPosition().x;

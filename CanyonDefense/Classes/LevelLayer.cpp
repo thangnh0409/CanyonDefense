@@ -89,23 +89,10 @@ bool LevelLayer::init()
     Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.3f);
     missile->runAction(RepeatForever::create(Animate::create(animation)));
     
-    //add sample MissileTurret
-    
-    auto missileTurret = MissileTurret::create("Player.png");
-    missileTurret->setPosition(Point(100, 100));
-    this->addChild(missileTurret);
-    
-    // add Tower
-    
-    /*Tower* tower = MissileTurretTower::create();
-    tower->setPosition(Point(150, 100));
-    this->addChild(tower, 2);
-    GameMediator::shareInstance()->getTowers()->addObject(tower);
-    
-    Tower* tower2 = MissileTurretTower::create();
-    tower2->setPosition(Point(250, 100));
-    this->addChild(tower2, 2);
-    GameMediator::shareInstance()->getTowers()->addObject(tower2);*/
+    auto dispatcher = Director::getInstance()->getEventDispatcher();
+    auto listener = EventListenerTouchAllAtOnce::create();
+    listener->onTouchesBegan = CC_CALLBACK_2(LevelLayer::onTouchesBegan, this);
+    dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
     schedule(schedule_selector(LevelLayer::levelLogic), 60.0f, 1, 0);
     schedule(schedule_selector(LevelLayer::addEnemy), 2.5f);
@@ -193,5 +180,22 @@ void LevelLayer::addEnemy(float dt)
             this->addChild(target, 1);
         }
 
+    }
+}
+
+void LevelLayer::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
+{
+    GameMediator* gm = GameMediator::shareInstance();
+    Touch* touch = touches[0];
+	Point location = touch->getLocation();
+    Object* child = NULL;
+    CCARRAY_FOREACH(gm->getTowers(), child){
+        Tower* tower = (Tower*)child;
+        if (tower) {
+            Rect twRect = tower->getRect();
+            if (twRect.containsPoint(location)) {
+                
+            }
+        }
     }
 }

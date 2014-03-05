@@ -57,6 +57,11 @@ public:
     
     void spriteMoveFinish(Node *sender);
     
+    /*
+     detect touch began
+     **/
+    void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
+    
     Point rootPoint;
     /*
      variable for get level type

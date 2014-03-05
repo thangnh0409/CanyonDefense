@@ -21,8 +21,8 @@ bool Tower::initWithFileAndRange(const char *pszFilename, int range)
     do {
         // add somethings
         
-        auto sprite = Sprite::create(pszFilename);
-        this->addChild(sprite);
+        twSprite = Sprite::create(pszFilename);
+        this->addChild(twSprite);
         
         this->setRange(range);
         _target = NULL;
@@ -62,7 +62,7 @@ void Tower::towerLogic(float dt)
         }
     }
     if(this->getTarget() != NULL){
-		CCPoint shootVector = ccpSub(this->getTarget()->getPosition(), this->getPosition());
+		Point shootVector = ccpSub(this->getTarget()->getPosition(), this->getPosition());
 		float shootAngle = ccpToAngle(shootVector);
 		float cocosAngle = CC_RADIANS_TO_DEGREES(-1 * shootAngle);
         
@@ -71,6 +71,11 @@ void Tower::towerLogic(float dt)
 		this->runAction(CCRotateTo::create(rotateDuration, cocosAngle));
 	}
 
+}
+Rect Tower::getRect()
+{
+    Size s = twSprite->getContentSize();
+    return Rect(this->getPositionX() - s.width/2, this->getPositionY() - s.height/2, s.width, s.height);
 }
 
 MissileTurretTower* MissileTurretTower::create()

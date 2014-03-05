@@ -18,7 +18,11 @@ private:
     Sprite* hudBackground;
     Sprite* hudChildBackground;
     Sprite* towerSprite;
+    Sprite* rangeSprite;
     Array* moveableSprite;
+    LabelTTF* resourceLabel;
+    LabelTTF* liveLabel;
+    Menu* btnPlay;
 public:
     static GameHUD* shareInstance();
     bool init();
@@ -26,10 +30,20 @@ public:
     void onButtonBasicClick(Object* sender);
     void onButtonAdvanceClick(Object* sender);
     void onButtonBuildingClick(Object* sender);
+    void onButtonPauseClick(Object* senser);
+    void onButtonPlayClick(Object* sender);
     bool canBuilderInMap(Point pos);
     void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesMoved(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event);
+    
+    void updateResource(int value);
+    void updateLive();
+
+    
+    CC_SYNTHESIZE(int, resources, Resources);
+    CC_SYNTHESIZE(int, lives, Lives);
+    
 };
 
 #endif /* defined(__CanyonDefense__GameHUD__) */

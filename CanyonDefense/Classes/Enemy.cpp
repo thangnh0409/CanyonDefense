@@ -24,6 +24,9 @@ enum{
 #define kEnergySmallCar     6
 #define kEnergyMediumCar    4
 #define kEnergyBigCar       5
+#define kResourceSmallCar   20
+#define kResourceMediumCar  40
+#define kResourceBigCar     100
 /*
  construction method
  **/
@@ -47,6 +50,8 @@ bool Enemy::initWithFile(const char *filename)
         energySprite = Sprite::create("energy.png");
         energySprite->setPosition(this->getPosition() + Point(10, 25));
         this->addChild(energySprite);
+        
+        gm = GameMediator::shareInstance();
         //add schedule update enemy
         //schedule(schedule_selector(Enemy::enemyLogic), 0.1f);
         
@@ -173,6 +178,49 @@ bool SmallCarEnemy::initWithFile(const char *filename)
     return bRet;
 }
 
+void SmallCarEnemy::update(float dt)
+{
+    switch (direction) {
+        case TOP:
+            realSpeedX = 0;
+            realSpeedY = kSpeedY;
+            //this->setRotation(45);
+            break;
+        case BOTTOM:
+            realSpeedX = 0;
+            realSpeedY = -kSpeedY;
+            break;
+        case RIGHT:
+            realSpeedX = kSpeedX;
+            realSpeedY = 0;
+            break;
+        case LEFT:
+            realSpeedX = -kSpeedX;
+            realSpeedY = 0;
+            break;
+        default:
+            break;
+    }
+    this->setPosition(getPositionX() + realSpeedX, getPositionY() + realSpeedY);
+    
+    Point pos = this->getPosition();
+    //log("pos : x = %f, y = %f", pos.x, pos.y);
+    int x = (pos.x) / 32;
+    int y = ((10 * 32) - pos.y) / 32;
+    //log("x = %d, y = %d", y, x);
+    this->getNextDirection(maptrix, y, x);
+    
+    if (this->getEnergy() <= 0) {
+        removeSelf();
+        gm->getGameHUD()->updateResource(kResourceSmallCar);
+    }else
+        updateEnergy();
+    if (pos.y <= 0) {
+        removeSelf();
+        gm->getGameHUD()->updateLive();
+    }
+
+}
 MediumCarEnemy* MediumCarEnemy::create()
 {
     MediumCarEnemy* mediumCar = new MediumCarEnemy();

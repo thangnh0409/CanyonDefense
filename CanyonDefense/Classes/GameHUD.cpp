@@ -30,6 +30,17 @@ bool GameHUD::init()
     startMenu->setPosition(Point(20, 20));
     startMenu->setAnchorPoint(Point::ZERO);
     this->addChild(startMenu);
+    
+    auto btnPauseItem = MenuItemImage::create("pause2.png", "pause1.png", CC_CALLBACK_1(GameHUD::onButtonPauseClick, this));
+    auto btnPause = Menu::create(btnPauseItem, NULL);
+    btnPause->setPosition(Point(visibleSize.width - btnPauseItem->getContentSize().width/2, visibleSize.height - btnPauseItem->getContentSize().height/2));
+    this->addChild(btnPause);
+    
+    auto playItem = MenuItemImage::create("play1.png", "play2.png", CC_CALLBACK_1(GameHUD::onButtonPlayClick, this));
+    btnPlay = Menu::create(playItem, NULL);
+    btnPlay->setPosition(Point(visibleSize.width - playItem->getContentSize().width/2 , playItem->getContentSize().height));
+    this->addChild(btnPlay);
+    
     moveableSprite = Array::create();
     moveableSprite->retain();
     hudBackground = Sprite::create("hud.png");
@@ -53,20 +64,32 @@ bool GameHUD::init()
     moveableSprite->addObject(sprite1);
     //add tower sprite
     
-    towerSprite = Sprite::create();
-    this->addChild(towerSprite);
-    
     //add image resources
     
     auto resource = Sprite::create("resource.png");
     resource->setPosition(Point(visibleSize.width/2 - resource->getContentSize().width, visibleSize.height - resource->getContentSize().height));
     this->addChild(resource);
-    auto lives = Sprite::create("live.png");
-    lives->setPosition(Point(visibleSize.width/2 - 15 + lives->getContentSize().width/2, resource->getPositionY()));
-    this->addChild(lives);
+    auto livesSpr = Sprite::create("live.png");
+    livesSpr->setPosition(Point(visibleSize.width/2 - 15 + livesSpr->getContentSize().width/2, resource->getPositionY()));
+    this->addChild(livesSpr);
     auto score = Sprite::create("scores.png");
-    score->setPosition(Point(visibleSize.width/2 + lives->getContentSize().width + 10 + score->getContentSize().width/2, resource->getPositionY()));
+    score->setPosition(Point(visibleSize.width/2 + livesSpr->getContentSize().width + 10 + score->getContentSize().width/2, resource->getPositionY()));
     this->addChild(score);
+    
+    // add label
+    
+    resources = 300;
+    resourceLabel = LabelTTF::create("300", "Marker Felt", 15);
+    resourceLabel->setPosition(Point(resource->getPositionX() + resource->getContentSize().width/2-10, resource->getPositionY()));
+    resourceLabel->setColor(Color3B(255, 80, 20));
+    this->addChild(resourceLabel, 1);
+    
+    lives = 10;
+    liveLabel = LabelTTF::create("10", "Marker Felt", 15);
+    liveLabel->setPosition(Point(livesSpr->getPositionX() + livesSpr->getContentSize().width/2 - 10 , livesSpr->getPositionY()));
+    liveLabel->setColor(Color3B(50, 80, 255));
+    this->addChild(liveLabel);
+    
     
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
@@ -144,6 +167,13 @@ void GameHUD::onButtonBuildingClick(cocos2d::Object *sender)
     hudChildBackground->setPosition(menuItem->getPosition() + Point(150, 20));
 
 }
+void GameHUD::onButtonPauseClick(cocos2d::Object *senser){
+    
+}
+void GameHUD::onButtonPlayClick(cocos2d::Object *sender)
+{
+    
+}
 void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {
     Touch* touch = touches[0];
@@ -159,6 +189,8 @@ void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event
                 newSprite = Sprite::createWithTexture(sprite->getTexture());
                 newSprite->setTag(sprite->getTag());
                 newSprite->setPosition(sprite->getPosition());
+                rangeSprite = Sprite::create("range.png");
+                this->addChild(rangeSprite);
                 towerSprite = newSprite;
                 this->addChild(newSprite);
             }
@@ -171,6 +203,7 @@ void GameHUD::onTouchesMoved(const std::vector<Touch *> &touches, cocos2d::Event
 	Point location = touch->getLocation();
     if (towerSprite) {
         towerSprite->setPosition(location);
+        rangeSprite->setPosition(location);
     }
 
 }
@@ -180,12 +213,26 @@ void GameHUD::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event
 	Point location = touch->getLocation();
     log("touch end: x= %f , y= %f", location.x, location.y);
     if (towerSprite) {
+        
         Rect hudBgRect = hudBackground->getBoundingBox();
         if (!hudBgRect.containsPoint(location) && canBuilderInMap(location)) {
             GameMediator::shareInstance()->getGameLayer()->addTower(location, towerSprite->getTag());
         }
-        
+        if (rangeSprite) {
+            this->removeChild(rangeSprite);
+        }
         this->removeChild(towerSprite, true);
+        
         towerSprite = NULL;
     }
+}
+void GameHUD::updateResource(int value)
+{
+    resources = resources + value;
+    resourceLabel->setString(String::createWithFormat("%d", resources)->getCString());
+}
+void GameHUD::updateLive()
+{
+    lives --;
+    liveLabel->setString(String::createWithFormat("%d", lives)->getCString());
 }
