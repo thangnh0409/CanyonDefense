@@ -57,7 +57,7 @@ void Tower::towerLogic(float dt)
         this->setTarget(this->getClosestTarget());
     }else{
         double currDistance = ccpDistance(this->getPosition(), this->getTarget()->getPosition());
-        if (currDistance > this->getRange()) {
+        if (currDistance > this->getRange() || this->getTarget()->getEnergy() <= 0) {
             this->setTarget(this->getClosestTarget());
         }
     }
@@ -90,7 +90,7 @@ bool MissileTurretTower::initWithFileAndRange(const char *pszFilename, int range
     bool bRet = false;
     do {
         CC_BREAK_IF(!Tower::initWithFileAndRange(pszFilename, range));
-        this->schedule(schedule_selector(MissileTurretTower::fire), 0.5f);
+        this->schedule(schedule_selector(MissileTurretTower::fire), 1.0f);
         bRet = true;
     } while (0);
     return bRet;
@@ -105,8 +105,7 @@ void MissileTurretTower::fire(float dt)
 		Point overshotVector = ccpMult(normalizedShootVector, this->getRange());
 		Point offscreenPoint = ccpAdd(this->getPosition(), overshotVector);
         
-		MissileProjectile* projectile = MissileProjectile::create(offscreenPoint);
-		projectile->setPosition(this->getPosition());
+		MissileProjectile* projectile = MissileProjectile::create(offscreenPoint, this->getPosition());
 		m->getGameLayer()->addChild(projectile);
 	}
 }

@@ -28,19 +28,22 @@ void MapManager::initMapWithMapId(int mapId)
 
 void MapManager::setMapTileForGame()
 {
-    TMXTiledMap* mapTile = NULL;
+
     switch (getMapId()) {
         case 1:
-            mapTile = TMXTiledMap::create("TileMap.tmx");
-            setTileMap(mapTile);
+            _tileMap = TMXTiledMap::create("TileMap.tmx");
+
             log("set tile map");
             break;
         case 2:
-            mapTile = TMXTiledMap::create("TileMap.tmx");
-            setTileMap(mapTile);
+            _tileMap = TMXTiledMap::create("TileMap.tmx");
             break;
             
         default:
             break;
     }
+}
+TMXTiledMap* MapManager::getTileMap()
+{
+    return _tileMap;
 }

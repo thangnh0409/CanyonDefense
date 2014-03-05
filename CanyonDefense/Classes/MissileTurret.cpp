@@ -47,6 +47,5 @@ bool MissileTurret::detectIntrusion(Point pos)
 }
 void MissileTurret::fire(float dt)
 {
-    log("call fire after 1 s");
     
 }

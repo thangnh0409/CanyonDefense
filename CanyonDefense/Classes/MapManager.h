@@ -42,10 +42,13 @@ private:
 
 public:
     static MapManager* shareMap();
+    
+    TMXTiledMap* _tileMap;
     void initMapWithMapId(int mapId);
     void setMapTileForGame();
     CC_SYNTHESIZE(int, _mapId, MapId);
-    CC_SYNTHESIZE_RETAIN(TMXTiledMap*, _tileMap, TileMap);
+    
+    TMXTiledMap* getTileMap();
     
 };
 

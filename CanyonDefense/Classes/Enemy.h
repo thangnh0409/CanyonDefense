@@ -49,12 +49,14 @@ private:
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,}
     };
     Sprite* sprite;
+    Sprite* energySprite;
     
 public:
     /**
      Variable for energy of enemy
      */
     CC_SYNTHESIZE(float, _energy, Energy);
+    CC_SYNTHESIZE(float, _maxEnergy, MaxEnergy);
     /*
      type of enemy, ex Ground, Air..
      **/
@@ -64,7 +66,8 @@ public:
     virtual ~Enemy();
     virtual bool initWithFile(const char* filename);
     void update(float dt);
-    
+    void removeSelf();
+    void updateEnergy();
     Rect getRect();
     void handleCollisionWithTile(bool collision);
     void getNextDirection(int matrix[10][15], int x, int y);

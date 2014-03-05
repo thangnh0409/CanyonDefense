@@ -37,6 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // this can make sure that the resource's height could fit for the height of design resolution.
     
     // if the frame's height is larger than the height of medium resource size, select large resource.
+    log("framesize height: %f", frameSize.height);
 	if (frameSize.height > mediumResource.size.height)
 	{
         searchPath.push_back(largeResource.directory);

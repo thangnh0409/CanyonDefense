@@ -8,6 +8,7 @@
 
 #include "Enemy.h"
 #include "Missile.h"
+#include "GameMediator.h"
 
 enum{
     TOP,
@@ -18,9 +19,9 @@ enum{
 
 #define TITLE_WIDTH 32
 #define TITLE_HEIGHT 32
-#define kSpeedX         0.5
-#define kSpeedY         0.5
-#define kEnergySmallCar     3
+#define kSpeedX         0.3
+#define kSpeedY         0.3
+#define kEnergySmallCar     6
 #define kEnergyMediumCar    4
 #define kEnergyBigCar       5
 /*
@@ -41,7 +42,11 @@ bool Enemy::initWithFile(const char *filename)
     bool bRet= false;
     do {
         sprite = Sprite::create(filename);
+        sprite->setAnchorPoint(Point::ZERO);
         this->addChild(sprite);
+        energySprite = Sprite::create("energy.png");
+        energySprite->setPosition(this->getPosition() + Point(10, 25));
+        this->addChild(energySprite);
         //add schedule update enemy
         //schedule(schedule_selector(Enemy::enemyLogic), 0.1f);
         
@@ -82,8 +87,23 @@ void Enemy::update(float dt)
     int y = ((10 * 32) - pos.y) / 32;
     //log("x = %d, y = %d", y, x);
     this->getNextDirection(maptrix, y, x);
+    
+    if (this->getEnergy() <= 0) {
+        removeSelf();
+    }else
+        updateEnergy();
 
-
+}
+void Enemy::removeSelf()
+{
+    this->unscheduleUpdate();
+    this->stopAllActions();
+    this->removeFromParentAndCleanup(true);
+    GameMediator::shareInstance()->getTargets()->removeObject(this);
+}
+void Enemy::updateEnergy()
+{
+    energySprite->setScaleX(this->getEnergy() / this->getMaxEnergy());
 }
 Rect Enemy::getRect()
 {
@@ -146,6 +166,7 @@ bool SmallCarEnemy::initWithFile(const char *filename)
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
         setEnergy(kEnergySmallCar);
+        setMaxEnergy(kEnergySmallCar);
         setEnemyType(GROUND);
         bRet = true;
     } while (0);
@@ -168,6 +189,7 @@ bool MediumCarEnemy::initWithFile(const char *filename)
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
         setEnergy(kEnergyMediumCar);
+        setMaxEnergy(kEnergyMediumCar);
         setEnemyType(GROUND);
         bRet = true;
     } while (0);
@@ -190,6 +212,7 @@ bool BigCarEnemy::initWithFile(const char *filename)
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
         setEnergy(kEnergyBigCar);
+        setMaxEnergy(kEnergyBigCar);
         setEnemyType(GROUND);
         bRet = true;
     } while (0);

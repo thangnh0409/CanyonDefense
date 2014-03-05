@@ -44,6 +44,7 @@ bool LevelLayer::init()
     //add map background
     
     TMXTiledMap* map = MapManager::shareMap()->getTileMap();
+    //TMXTiledMap* map = TMXTiledMap::create("TileMap.tmx");
     TMXLayer* metaLayer = map->getLayer("meta");
     metaLayer->setVisible(false);
     addChild(map, -1 , 1);
@@ -64,7 +65,7 @@ bool LevelLayer::init()
         float x = dict["x"].asFloat();
         float y = dict["y"].asFloat();
         enemy->setPosition(Point(x, y));
-        setRootPoint(Point(x, y));
+        rootPoint = Point(x, y);
         //enemy->setScale(0.3);
         addChild(enemy, 1);
         GameMediator::shareInstance()->getTargets()->addObject(enemy);
@@ -96,7 +97,7 @@ bool LevelLayer::init()
     
     // add Tower
     
-    Tower* tower = MissileTurretTower::create();
+    /*Tower* tower = MissileTurretTower::create();
     tower->setPosition(Point(150, 100));
     this->addChild(tower, 2);
     GameMediator::shareInstance()->getTowers()->addObject(tower);
@@ -104,7 +105,7 @@ bool LevelLayer::init()
     Tower* tower2 = MissileTurretTower::create();
     tower2->setPosition(Point(250, 100));
     this->addChild(tower2, 2);
-    GameMediator::shareInstance()->getTowers()->addObject(tower2);
+    GameMediator::shareInstance()->getTowers()->addObject(tower2);*/
     
     schedule(schedule_selector(LevelLayer::levelLogic), 60.0f, 1, 0);
     schedule(schedule_selector(LevelLayer::addEnemy), 2.5f);
@@ -130,9 +131,15 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
             GameMediator::shareInstance()->getTowers()->addObject(tower);
             break;
         }
-        case 2:
-            
+        case 2:{
+            Tower* tower = MissileTurretTower::create();
+            tower->setPosition(pos);
+            this->addChild(tower, 2);
+            GameMediator::shareInstance()->getTowers()->addObject(tower);
             break;
+        }
+            
+           
         default:
             break;
     }
@@ -180,8 +187,11 @@ void LevelLayer::addEnemy(float dt)
             target = BigCarEnemy::create();
             wave->setNumBigCar(wave->getNumBigCar() - 1);
         }
-        target->setPosition(getRootPoint());
-        gm->getTargets()->addObject(target);
-        this->addChild(target, 1);
+        if(target){
+            target->setPosition(rootPoint);
+            gm->getTargets()->addObject(target);
+            this->addChild(target, 1);
+        }
+
     }
 }

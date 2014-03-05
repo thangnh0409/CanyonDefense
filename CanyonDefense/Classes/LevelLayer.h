@@ -57,12 +57,12 @@ public:
     
     void spriteMoveFinish(Node *sender);
     
+    Point rootPoint;
     /*
      variable for get level type
      **/
     CC_SYNTHESIZE(int, _levelType, LevelType);
     CC_SYNTHESIZE(int, _currentWaveCount, CurrentWaveCount);
-    CC_SYNTHESIZE(Point, _rootPoint, RootPoint);
     
     CREATE_FUNC(LevelLayer);
 };
