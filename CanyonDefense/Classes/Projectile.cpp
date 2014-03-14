@@ -29,6 +29,13 @@ void Projectile::projectileMoveFinish(cocos2d::Node *sender)
     log("remove self");
     removeSelf();
 }
+
+Rect Projectile::getRect()
+{
+    Size s = mySprite->getContentSize();
+    return Rect(this->getPositionX() - s.width/2, this->getPositionY() - s.height/2, s.width, s.height);
+}
+
 MissileProjectile* MissileProjectile::create(Point targetPos, Point selfPos)
 {
     MissileProjectile* mp = new MissileProjectile();
@@ -54,11 +61,7 @@ bool MissileProjectile::initWithTargetPos(cocos2d::Point pos, Point selfPos)
     } while (0);
     return bRet;
 }
-Rect Projectile::getRect()
-{
-    Size s = mySprite->getContentSize();
-    return Rect(this->getPositionX() - s.width/2, this->getPositionY() - s.height/2, s.width, s.height);
-}
+
 void MissileProjectile::update(float dt)
 {
     GameMediator* gm = GameMediator::shareInstance();
@@ -101,5 +104,60 @@ void MissileProjectile::moveToTargetPos()
 	float realMoveDuration = length/ getSpeed();
 	auto moveTo = CCMoveTo::create(realMoveDuration, realDest);
 	//auto moveDone = CCCallFunc::create(this, callfunc_selector(MachineProjectTile::removeSelf));
+	this->runAction(CCSequence::create(moveTo, CallFuncN::create( CC_CALLBACK_1(Projectile::projectileMoveFinish, this)), NULL));
+}
+
+/**
+ Mui ten ban ra tu Hut Basic
+ */
+
+ArcheryProjectile* ArcheryProjectile::create(Point targetPos, Point selfPos)
+{
+    ArcheryProjectile* mp = new ArcheryProjectile();
+    if (mp && mp->initWithTargetPos(targetPos, selfPos)) {
+        mp->autorelease();
+        return mp;
+    }
+    CC_SAFE_DELETE(mp);
+    return NULL;
+}
+bool ArcheryProjectile::initWithTargetPos(cocos2d::Point pos, Point selfPos)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Projectile::initWithFileName("mui_ten_1.png"));
+        this->setPosition(selfPos);
+        setTargetPos(pos);
+        moveToTargetPos();
+        this->setDamage(1);
+        scheduleUpdate();
+        
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+
+void ArcheryProjectile::update(float dt)
+{
+    GameMediator* gm = GameMediator::shareInstance();
+    Object* child = NULL;
+    CCARRAY_FOREACH(gm->getTargets(), child){
+        Enemy* enemy = (Enemy*)child;
+        if (this->getRect().intersectsRect(enemy->getRect())) {
+            enemy->setEnergy(enemy->getEnergy() - this->getDamage());
+            removeSelf();
+        }
+    }
+}
+void ArcheryProjectile::moveToTargetPos()
+{
+    Point shootVector = this->getTargetPos() - this->getPosition();
+    float shootAngle = shootVector.getAngle();
+    float cocosAngle = CC_RADIANS_TO_DEGREES(-1 * shootAngle);
+    this->runAction(CCRotateTo::create(0, cocosAngle));
+    
+    float length = this->getTargetPos().getDistance(this->getPosition());
+	float realMoveDuration = length/ getSpeed();
+	auto moveTo = CCMoveTo::create(realMoveDuration, this->getTargetPos());
 	this->runAction(CCSequence::create(moveTo, CallFuncN::create( CC_CALLBACK_1(Projectile::projectileMoveFinish, this)), NULL));
 }

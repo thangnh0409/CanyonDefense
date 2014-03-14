@@ -41,4 +41,22 @@ public:
     
 };
 
+class HutBasicTower: public Tower {
+    
+public:
+    static HutBasicTower* create();
+    bool initWithFileAndRange(const char *pszFilename, int range);
+    void fire(float dt);
+    
+};
+
+class HutAdvanceTower: public Tower {
+    
+public:
+    static HutAdvanceTower* create();
+    bool initWithFileAndRange(const char *pszFilename, int range);
+    void fire(float dt);
+    
+};
+
 #endif /* defined(__CanyonDefense__Tower__) */

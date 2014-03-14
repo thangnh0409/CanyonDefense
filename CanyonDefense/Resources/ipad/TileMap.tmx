@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="10" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <image source="meta_tiles.png" width="67" height="34"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3" name="tmw_desert_spacing" tilewidth="70" tileheight="70" spacing="1" margin="1">
+  <image source="tmw_desert_spacing.png" width="960" height="720"/>
+ </tileset>
+ <layer name="background" width="15" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAfMCPRuDA2dSDARIL56HpxiaPL4VKDywxs5hAyGxvAphebe7C5CZ+9+NSjqyPWrbjch4smhGEAALScAKU=
+  </data>
+ </layer>
+ <layer name="meta" width="15" height="10">
+  <properties>
+   <property name="Collidable" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAfMOIRR8fEmocL47Mfl1pGNDWk2omuB5cduMzCZw8+txDjRkJqiAWkhDcp7gEARvAAQA==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="15" height="10">
+  <object name="rootPoint" x="10" y="181"/>
+ </objectgroup>
+</map>

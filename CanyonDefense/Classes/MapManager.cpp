@@ -31,12 +31,12 @@ void MapManager::setMapTileForGame()
 
     switch (getMapId()) {
         case 1:
-            _tileMap = TMXTiledMap::create("TileMap.tmx");
+            _tileMap = TMXTiledMap::create("map1.tmx");
 
             log("set tile map");
             break;
         case 2:
-            _tileMap = TMXTiledMap::create("TileMap.tmx");
+            _tileMap = TMXTiledMap::create("map1.tmx");
             break;
             
         default:

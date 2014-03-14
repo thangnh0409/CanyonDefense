@@ -88,7 +88,7 @@ void Enemy::update(float dt)
     
     Point pos = this->getPosition();
     //log("pos : x = %f, y = %f", pos.x, pos.y);
-    int x = (pos.x) / 32;
+    int x = (pos.x) / 50;
     int y = ((10 * 32) - pos.y) / 32;
     //log("x = %d, y = %d", y, x);
     this->getNextDirection(maptrix, y, x);
@@ -204,7 +204,7 @@ void SmallCarEnemy::update(float dt)
     this->setPosition(getPositionX() + realSpeedX, getPositionY() + realSpeedY);
     
     Point pos = this->getPosition();
-    //log("pos : x = %f, y = %f", pos.x, pos.y);
+    ///log("pos : x = %f, y = %f", pos.x, pos.y);
     int x = (pos.x) / 32;
     int y = ((10 * 32) - pos.y) / 32;
     //log("x = %d, y = %d", y, x);

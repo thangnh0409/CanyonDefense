@@ -38,8 +38,20 @@ bool LevelLayer::init()
         return false;
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    auto glView = EGLView::getInstance();
+	Size frameSize = glView->getFrameSize();
+    
+    float scaleFactorX = frameSize.width / 800;
+    float scaleFactorY = frameSize.height / 480;
+    
     this->setLevelType(NORMAL);
     this->addWave();
+    //add test background
+    auto bgTest = Sprite::create("map1.png");
+    bgTest->setPosition(visibleSize.width/2, visibleSize.height/2);
+    //addChild(bgTest, 2);
+    
     
     //add map background
     
@@ -47,29 +59,43 @@ bool LevelLayer::init()
     //TMXTiledMap* map = TMXTiledMap::create("TileMap.tmx");
     TMXLayer* metaLayer = map->getLayer("meta");
     metaLayer->setVisible(false);
+    map->setAnchorPoint(Point(0.5, 0.5));
+    map->setScale(scaleFactorX, scaleFactorY);
+    map->setPosition(visibleSize.width/2, visibleSize.height/2);
     addChild(map, -1 , 1);
+    
     Size CC_UNUSED s = map->getContentSize();
     CCLOG("Contentsize: %f, %f", s.width, s.height);
     
-    SmallCarEnemy* enemy = SmallCarEnemy::create();
-    
+    //SmallCarEnemy* enemy = SmallCarEnemy::create();
+    auto enemySprite = Sprite::create("dragon_water_2.png");
+    enemySprite->setScale(0.15);
     auto objectGroup = map->getObjectGroup("objects");
     auto& rootObj = objectGroup->getObjects();
     
     Value objectsVal = Value(rootObj);
     CCLOG("%s", objectsVal.getDescription().c_str());
     
+    auto arrayPoint = PointArray::create(20);
+    
     for (auto& obj : rootObj)
     {
         ValueMap& dict = obj.asValueMap();
         float x = dict["x"].asFloat();
         float y = dict["y"].asFloat();
-        enemy->setPosition(Point(x, y));
-        rootPoint = Point(x, y);
+        log("obj: x = %f, y = %f", x, y);
+        rootPoint = Point(0, 150);
+        arrayPoint->addControlPoint(Point(x ,y));
         //enemy->setScale(0.3);
-        addChild(enemy, 1);
-        GameMediator::shareInstance()->getTargets()->addObject(enemy);
+        //addChild(enemy, 1);
     }
+    
+    enemySprite->setPosition(arrayPoint->getControlPointAtIndex(0));
+    auto action = CatmullRomTo::create(20, arrayPoint);
+    enemySprite->runAction(action);
+    addChild(enemySprite, 1);
+    //GameMediator::shareInstance()->getTargets()->addObject(enemy);
+    
     
     //load textTure
     
@@ -112,14 +138,14 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 {
     switch (towerTag) {
         case 1:{
-            Tower* tower = MissileTurretTower::create();
+            Tower* tower = HutBasicTower::create();
             tower->setPosition(pos);
             this->addChild(tower, 2);
             GameMediator::shareInstance()->getTowers()->addObject(tower);
             break;
         }
         case 2:{
-            Tower* tower = MissileTurretTower::create();
+            Tower* tower = HutBasicTower::create();
             tower->setPosition(pos);
             this->addChild(tower, 2);
             GameMediator::shareInstance()->getTowers()->addObject(tower);

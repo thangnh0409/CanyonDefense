@@ -41,4 +41,16 @@ public:
     
 };
 
+/**
+ Mui ten ban ra tu Hut Basic
+ */
+class ArcheryProjectile : public Projectile {
+public:
+    bool initWithTargetPos(Point pos, Point selfPos);
+    static ArcheryProjectile* create(Point targetPos, Point selfPos);
+    void update(float dt);
+    void moveToTargetPos();
+    
+};
+
 #endif /* defined(__CanyonDefense__Projectile__) */

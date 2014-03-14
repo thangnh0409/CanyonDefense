@@ -25,7 +25,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setOpenGLView(glView);
     
     // Set the design resolution
-    glView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    glView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
     
 	Size frameSize = glView->getFrameSize();
     
@@ -36,24 +36,27 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // We use the ratio of resource's height to the height of design resolution,
     // this can make sure that the resource's height could fit for the height of design resolution.
     
-    // if the frame's height is larger than the height of medium resource size, select large resource.
+    // if the frame's height is larger than the height of medium resource size, select large resource. height > 768
     log("framesize height: %f", frameSize.height);
 	if (frameSize.height > mediumResource.size.height)
 	{
-        searchPath.push_back(largeResource.directory);
+        log("large resource put back");
+        searchPath.push_back(smallResource.directory);
         
         director->setContentScaleFactor(MIN(largeResource.size.height/designResolutionSize.height, largeResource.size.width/designResolutionSize.width));
 	}
-    // if the frame's height is larger than the height of small resource size, select medium resource.
+    // if the frame's height is larger than the height of small resource size, select medium resource. height > 320
     else if (frameSize.height > smallResource.size.height)
     {
-        searchPath.push_back(mediumResource.directory);
+        log("medium resource put back");
+        searchPath.push_back(smallResource.directory);
         
         director->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height, mediumResource.size.width/designResolutionSize.width));
     }
-    // if the frame's height is smaller than the height of medium resource size, select small resource.
+    // if the frame's height is smaller than the height of medium resource size, select small resource. 320 x 480
 	else
     {
+        log("small resource put back");
         searchPath.push_back(smallResource.directory);
         
         director->setContentScaleFactor(MIN(smallResource.size.height/designResolutionSize.height, smallResource.size.width/designResolutionSize.width));

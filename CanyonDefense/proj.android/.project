@@ -44,22 +44,22 @@
 		<link>
 			<name>Classes</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/projects/CanyonDefense/Classes</locationURI>
+			<location>/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/Classes</location>
 		</link>
 		<link>
 			<name>cocos2dx</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/cocos2dx</locationURI>
+			<location>/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/cocos2d</location>
 		</link>
 		<link>
 			<name>extensions</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/extensions</locationURI>
+			<location>/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/cocos2d/extensions</location>
 		</link>
 		<link>
 			<name>scripting</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/scripting</locationURI>
+			<location>/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/cocos2d/cocos/scripting</location>
 		</link>
 	</linkedResources>
 </projectDescription>
