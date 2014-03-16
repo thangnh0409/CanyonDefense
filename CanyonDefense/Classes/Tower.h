@@ -50,6 +50,22 @@ public:
     
 };
 
+/**
+ Sung ban ten lua
+ */
+class CatapultTower: public Tower {
+    
+public:
+    static CatapultTower* create();
+    bool initWithFileAndRange(const char *pszFilename, int range);
+    void fire(float dt);
+    
+};
+
+/*********************
+ ADVANCE TOWER
+ **********************/
+
 class HutAdvanceTower: public Tower {
     
 public:
@@ -59,4 +75,17 @@ public:
     
 };
 
+/**
+ Sung cua than thanh
+ @chuc nang: ban rong bay tren khong
+ @dan: SacredOakProjectile
+ */
+class SacredOakTower: public Tower {
+    
+public:
+    static SacredOakTower* create();
+    bool initWithFileAndRange(const char *pszFilename, int range);
+    void fire(float dt);
+    
+};
 #endif /* defined(__CanyonDefense__Tower__) */

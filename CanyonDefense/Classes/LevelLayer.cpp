@@ -16,6 +16,14 @@
 #include "GameHUD.h"
 
 #define kMapTag 3
+#define HUT_BASIC_MONEY             200
+#define HUT_ADVANCE_MONEY           300
+#define CATAPULT_BASIC_MONEY        400
+#define SACRED_OAK_ADVANCE_MONEY    500
+
+extern int difficuld;
+extern int map;
+extern int selected;
 
 Scene* LevelLayer::scene()
 {
@@ -44,14 +52,9 @@ bool LevelLayer::init()
     
     float scaleFactorX = frameSize.width / 800;
     float scaleFactorY = frameSize.height / 480;
-    
+    //this->setScale(scaleFactorX, scaleFactorY);
     this->setLevelType(NORMAL);
     this->addWave();
-    //add test background
-    auto bgTest = Sprite::create("map1.png");
-    bgTest->setPosition(visibleSize.width/2, visibleSize.height/2);
-    //addChild(bgTest, 2);
-    
     
     //add map background
     
@@ -68,11 +71,11 @@ bool LevelLayer::init()
     CCLOG("Contentsize: %f, %f", s.width, s.height);
     
     //SmallCarEnemy* enemy = SmallCarEnemy::create();
-    auto enemySprite = Sprite::create("dragon_water_2.png");
-    enemySprite->setScale(0.15);
+    auto enemySprite = Sprite::create("dragon_1_1.png");
+    //enemySprite->setScale(0.15);
     auto objectGroup = map->getObjectGroup("objects");
     auto& rootObj = objectGroup->getObjects();
-    
+
     Value objectsVal = Value(rootObj);
     CCLOG("%s", objectsVal.getDescription().c_str());
     
@@ -91,11 +94,33 @@ bool LevelLayer::init()
     }
     
     enemySprite->setPosition(arrayPoint->getControlPointAtIndex(0));
-    auto action = CatmullRomTo::create(20, arrayPoint);
+    auto action = CatmullRomTo::create(40, arrayPoint);
     enemySprite->runAction(action);
     addChild(enemySprite, 1);
     //GameMediator::shareInstance()->getTargets()->addObject(enemy);
     
+    Animation* animationTest = Animation::create();
+    /*for (int i=1; i < 7; i++) {
+        char imgName[100] = {0};
+        sprintf(imgName, "dragon_1_%d.png", i);
+        animationTest->addSpriteFrameWithFile(imgName);
+    }*/
+    animationTest->addSpriteFrameWithFile("dragon_1_1.png");
+    animationTest->addSpriteFrameWithFile("dragon_1_2.png");
+    animationTest->addSpriteFrameWithFile("dragon_1_3.png");
+    animationTest->addSpriteFrameWithFile("hut_2.png");
+    animationTest->addSpriteFrameWithFile("dragon_1_5.png");
+    animationTest->addSpriteFrameWithFile("dragon_1_6.png"  );
+    
+    animationTest->setDelayPerUnit(4 / 6);
+    animationTest->setRestoreOriginalFrame(true);
+    animationTest->setLoops(1);
+
+    Sprite* spr = Sprite::create("dragon_1_1.png");
+    spr->setScale(1.5);
+    spr->setPosition(Point(150, 170));
+    this->addChild(spr, 3);
+    spr->runAction(RepeatForever::create(Animate::create(animationTest)));
     
     //load textTure
     
@@ -103,22 +128,27 @@ bool LevelLayer::init()
     SpriteFrameCache* cache = SpriteFrameCache::getInstance();
     cache->addSpriteFramesWithFile("yulei1.plist", "yulei1.png");
     
-    auto missile = Sprite::create("Player.png");
-    missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
-    this->addChild(missile, 1);
-    char str[100] = {0};
-    for (int i = 1; i < 6; i++) {
-        sprintf(str, "yulei1_0%d.png", i);
-        auto frame = cache->getSpriteFrameByName(str);
-        aniFrame.pushBack(frame);
-    }
-    Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.3f);
-    missile->runAction(RepeatForever::create(Animate::create(animation)));
+//    auto missile = Sprite::create("Player.png");
+//    missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
+//    this->addChild(missile, 1);
+//    char str[100] = {0};
+//    for (int i = 1; i < 6; i++) {
+//        sprintf(str, "yulei1_0%d.png", i);
+//        auto frame = cache->getSpriteFrameByName(str);
+//        aniFrame.pushBack(frame);
+//    }
+//    Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.3f);
+//    missile->runAction(RepeatForever::create(Animate::create(animation)));
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchAllAtOnce::create();
     listener->onTouchesBegan = CC_CALLBACK_2(LevelLayer::onTouchesBegan, this);
     dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
+    /**
+     cap nhat resource de set opacity cua tower image
+     */
+    GameHUD::shareInstance()->updateResource(0);
     
     schedule(schedule_selector(LevelLayer::levelLogic), 60.0f, 1, 0);
     schedule(schedule_selector(LevelLayer::addEnemy), 2.5f);
@@ -137,20 +167,39 @@ void LevelLayer::levelLogic(float dt)
 void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 {
     switch (towerTag) {
-        case 1:{
+        case HUT_BASIC_MONEY:{
             Tower* tower = HutBasicTower::create();
             tower->setPosition(pos);
             this->addChild(tower, 2);
             GameMediator::shareInstance()->getTowers()->addObject(tower);
+            GameHUD::shareInstance()->updateResource(- HUT_BASIC_MONEY);
             break;
         }
-        case 2:{
-            Tower* tower = HutBasicTower::create();
+        case HUT_ADVANCE_MONEY:{
+            Tower* tower = HutAdvanceTower::create();
             tower->setPosition(pos);
             this->addChild(tower, 2);
             GameMediator::shareInstance()->getTowers()->addObject(tower);
+            GameHUD::shareInstance()->updateResource(- HUT_ADVANCE_MONEY);
             break;
         }
+        case CATAPULT_BASIC_MONEY:{
+            Tower* tower = CatapultTower::create();
+            tower->setPosition(pos);
+            this->addChild(tower, 2);
+            GameMediator::shareInstance()->getTowers()->addObject(tower);
+            GameHUD::shareInstance()->updateResource(- CATAPULT_BASIC_MONEY);
+            break;
+        }
+        case SACRED_OAK_ADVANCE_MONEY:{
+            Tower* tower = SacredOakTower::create();
+            tower->setPosition(pos);
+            this->addChild(tower, 2);
+            GameMediator::shareInstance()->getTowers()->addObject(tower);
+            GameHUD::shareInstance()->updateResource(- SACRED_OAK_ADVANCE_MONEY);
+            break;
+        }
+            
             
            
         default:
@@ -163,11 +212,11 @@ void LevelLayer::addWave()
     GameMediator* gm = GameMediator::shareInstance();
     Wave* wave1 = Wave::create(1, 4, 2, 0);
     gm->getWaves()->addObject(wave1);
-    Wave* wave2 = Wave::create(1, 4, 4, 2);
+    Wave* wave2 = Wave::create(1, 4, 5, 0);
     gm->getWaves()->addObject(wave2);
-    Wave* wave3 = Wave::create(1, 4, 5, 4);
+    Wave* wave3 = Wave::create(1, 4, 2, 0);
     gm->getWaves()->addObject(wave3);
-    Wave* wave4 = Wave::create(1, 2, 4, 5);
+    Wave* wave4 = Wave::create(1, 2, 0, 0);
     gm->getWaves()->addObject(wave4);
 
 }
@@ -189,11 +238,11 @@ void LevelLayer::addEnemy(float dt)
     Enemy* target = NULL;
     if (wave) {
         if (wave->getNumSmallCar() > 0) {
-            target = SmallCarEnemy::create();
+            target = SmallDragonEnemy::create();
             wave->setNumSmallCar(wave->getNumSmallCar() - 1);
         }else
         if (wave->getNumMediumCar() > 0) {
-            target = MediumCarEnemy::create();
+            target = SmallFlyDragonEnemy::create();
             wave->setNumMediumCar(wave->getNumMediumCar() - 1);
         }else
         if (wave->getNumBigCar() > 0){
@@ -201,7 +250,7 @@ void LevelLayer::addEnemy(float dt)
             wave->setNumBigCar(wave->getNumBigCar() - 1);
         }
         if(target){
-            target->setPosition(rootPoint);
+            //target->setPosition(rootPoint);
             gm->getTargets()->addObject(target);
             this->addChild(target, 1);
         }
@@ -209,6 +258,15 @@ void LevelLayer::addEnemy(float dt)
     }
 }
 
+bool LevelLayer::isOutOfBound(cocos2d::Point pos)
+{
+    TMXTiledMap* map = MapManager::shareMap()->getTileMap();
+    Rect mapRect = map->getBoundingBox();
+    if (!mapRect.containsPoint(pos)) {
+        return true;
+    }
+    return false;
+}
 void LevelLayer::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {
     GameMediator* gm = GameMediator::shareInstance();

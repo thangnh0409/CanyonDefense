@@ -82,6 +82,18 @@
 		5F0CB3F418BB36D700D5C65B /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0CB3F118BB36D700D5C65B /* Projectile.cpp */; };
 		5F0E1E4518BDD86700F6F644 /* GameHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0E1E4318BDD86700F6F644 /* GameHUD.cpp */; };
 		5F0E1E4618BDD86700F6F644 /* GameHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0E1E4318BDD86700F6F644 /* GameHUD.cpp */; };
+		5F6ED0A718D31CAD00DA90C2 /* HelpScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED09B18D31CAC00DA90C2 /* HelpScene.cpp */; };
+		5F6ED0A818D31CAD00DA90C2 /* HelpScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED09B18D31CAC00DA90C2 /* HelpScene.cpp */; };
+		5F6ED0A918D31CAD00DA90C2 /* ScoreScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED09D18D31CAC00DA90C2 /* ScoreScene.cpp */; };
+		5F6ED0AA18D31CAD00DA90C2 /* ScoreScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED09D18D31CAC00DA90C2 /* ScoreScene.cpp */; };
+		5F6ED0AB18D31CAD00DA90C2 /* SelectDifficuldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED09F18D31CAC00DA90C2 /* SelectDifficuldScene.cpp */; };
+		5F6ED0AC18D31CAD00DA90C2 /* SelectDifficuldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED09F18D31CAC00DA90C2 /* SelectDifficuldScene.cpp */; };
+		5F6ED0AD18D31CAD00DA90C2 /* SelectMapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED0A118D31CAC00DA90C2 /* SelectMapScene.cpp */; };
+		5F6ED0AE18D31CAD00DA90C2 /* SelectMapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED0A118D31CAC00DA90C2 /* SelectMapScene.cpp */; };
+		5F6ED0AF18D31CAD00DA90C2 /* SelectSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED0A318D31CAC00DA90C2 /* SelectSprite.cpp */; };
+		5F6ED0B018D31CAD00DA90C2 /* SelectSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED0A318D31CAC00DA90C2 /* SelectSprite.cpp */; };
+		5F6ED0B118D31CAD00DA90C2 /* Variable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED0A518D31CAC00DA90C2 /* Variable.cpp */; };
+		5F6ED0B218D31CAD00DA90C2 /* Variable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6ED0A518D31CAC00DA90C2 /* Variable.cpp */; };
 		5F86808318BAFD1B00A95253 /* Tower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F86808118BAFD1A00A95253 /* Tower.cpp */; };
 		5F86808418BAFD1B00A95253 /* Tower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F86808118BAFD1A00A95253 /* Tower.cpp */; };
 		5F86808D18BB040700A95253 /* GameMediator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F86808B18BB040700A95253 /* GameMediator.cpp */; };
@@ -343,6 +355,18 @@
 		5F0CB3F218BB36D700D5C65B /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Projectile.h; path = ../Classes/Projectile.h; sourceTree = "<group>"; };
 		5F0E1E4318BDD86700F6F644 /* GameHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameHUD.cpp; path = ../Classes/GameHUD.cpp; sourceTree = "<group>"; };
 		5F0E1E4418BDD86700F6F644 /* GameHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameHUD.h; path = ../Classes/GameHUD.h; sourceTree = "<group>"; };
+		5F6ED09B18D31CAC00DA90C2 /* HelpScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelpScene.cpp; path = ../Classes/HelpScene.cpp; sourceTree = "<group>"; };
+		5F6ED09C18D31CAC00DA90C2 /* HelpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpScene.h; path = ../Classes/HelpScene.h; sourceTree = "<group>"; };
+		5F6ED09D18D31CAC00DA90C2 /* ScoreScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScoreScene.cpp; path = ../Classes/ScoreScene.cpp; sourceTree = "<group>"; };
+		5F6ED09E18D31CAC00DA90C2 /* ScoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScoreScene.h; path = ../Classes/ScoreScene.h; sourceTree = "<group>"; };
+		5F6ED09F18D31CAC00DA90C2 /* SelectDifficuldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectDifficuldScene.cpp; path = ../Classes/SelectDifficuldScene.cpp; sourceTree = "<group>"; };
+		5F6ED0A018D31CAC00DA90C2 /* SelectDifficuldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectDifficuldScene.h; path = ../Classes/SelectDifficuldScene.h; sourceTree = "<group>"; };
+		5F6ED0A118D31CAC00DA90C2 /* SelectMapScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectMapScene.cpp; path = ../Classes/SelectMapScene.cpp; sourceTree = "<group>"; };
+		5F6ED0A218D31CAC00DA90C2 /* SelectMapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectMapScene.h; path = ../Classes/SelectMapScene.h; sourceTree = "<group>"; };
+		5F6ED0A318D31CAC00DA90C2 /* SelectSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectSprite.cpp; path = ../Classes/SelectSprite.cpp; sourceTree = "<group>"; };
+		5F6ED0A418D31CAC00DA90C2 /* SelectSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectSprite.h; path = ../Classes/SelectSprite.h; sourceTree = "<group>"; };
+		5F6ED0A518D31CAC00DA90C2 /* Variable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Variable.cpp; path = ../Classes/Variable.cpp; sourceTree = "<group>"; };
+		5F6ED0A618D31CAD00DA90C2 /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Variable.h; path = ../Classes/Variable.h; sourceTree = "<group>"; };
 		5F86808118BAFD1A00A95253 /* Tower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tower.cpp; path = ../Classes/Tower.cpp; sourceTree = "<group>"; };
 		5F86808218BAFD1A00A95253 /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tower.h; path = ../Classes/Tower.h; sourceTree = "<group>"; };
 		5F86808B18BB040700A95253 /* GameMediator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameMediator.cpp; path = ../Classes/GameMediator.cpp; sourceTree = "<group>"; };
@@ -560,6 +584,8 @@
 				5F86808C18BB040700A95253 /* GameMediator.h */,
 				5F066BE718BD2AC6006A7DA4 /* MapManager.cpp */,
 				5F066BE818BD2AC6006A7DA4 /* MapManager.h */,
+				5F6ED0A518D31CAC00DA90C2 /* Variable.cpp */,
+				5F6ED0A618D31CAD00DA90C2 /* Variable.h */,
 			);
 			name = GameBusiness;
 			sourceTree = "<group>";
@@ -588,6 +614,16 @@
 		5F0816EE18B355C900BD2D93 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5F6ED09B18D31CAC00DA90C2 /* HelpScene.cpp */,
+				5F6ED09C18D31CAC00DA90C2 /* HelpScene.h */,
+				5F6ED09D18D31CAC00DA90C2 /* ScoreScene.cpp */,
+				5F6ED09E18D31CAC00DA90C2 /* ScoreScene.h */,
+				5F6ED09F18D31CAC00DA90C2 /* SelectDifficuldScene.cpp */,
+				5F6ED0A018D31CAC00DA90C2 /* SelectDifficuldScene.h */,
+				5F6ED0A118D31CAC00DA90C2 /* SelectMapScene.cpp */,
+				5F6ED0A218D31CAC00DA90C2 /* SelectMapScene.h */,
+				5F6ED0A318D31CAC00DA90C2 /* SelectSprite.cpp */,
+				5F6ED0A418D31CAC00DA90C2 /* SelectSprite.h */,
 				5F07C26D18B3BE5F00000925 /* GameScene.cpp */,
 				5F07C26E18B3BE5F00000925 /* GameScene.h */,
 				5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */,
@@ -873,6 +909,12 @@
 				5FCC274618BCF93100348E3C /* Wave.cpp in Sources */,
 				5F066BE918BD2AC6006A7DA4 /* MapManager.cpp in Sources */,
 				5F0E1E4518BDD86700F6F644 /* GameHUD.cpp in Sources */,
+				5F6ED0A718D31CAD00DA90C2 /* HelpScene.cpp in Sources */,
+				5F6ED0A918D31CAD00DA90C2 /* ScoreScene.cpp in Sources */,
+				5F6ED0AB18D31CAD00DA90C2 /* SelectDifficuldScene.cpp in Sources */,
+				5F6ED0AD18D31CAD00DA90C2 /* SelectMapScene.cpp in Sources */,
+				5F6ED0AF18D31CAD00DA90C2 /* SelectSprite.cpp in Sources */,
+				5F6ED0B118D31CAD00DA90C2 /* Variable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,6 +938,12 @@
 				5FCC274718BCF93100348E3C /* Wave.cpp in Sources */,
 				5F066BEA18BD2AC6006A7DA4 /* MapManager.cpp in Sources */,
 				5F0E1E4618BDD86700F6F644 /* GameHUD.cpp in Sources */,
+				5F6ED0A818D31CAD00DA90C2 /* HelpScene.cpp in Sources */,
+				5F6ED0AA18D31CAD00DA90C2 /* ScoreScene.cpp in Sources */,
+				5F6ED0AC18D31CAD00DA90C2 /* SelectDifficuldScene.cpp in Sources */,
+				5F6ED0AE18D31CAD00DA90C2 /* SelectMapScene.cpp in Sources */,
+				5F6ED0B018D31CAD00DA90C2 /* SelectSprite.cpp in Sources */,
+				5F6ED0B218D31CAD00DA90C2 /* Variable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +1028,7 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1009,6 +1058,7 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

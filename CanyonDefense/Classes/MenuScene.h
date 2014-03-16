@@ -1,14 +1,23 @@
-//
-//  MenuScene.h
-//  CanyonDefense
-//
-//  Created by thang nguyen on 2/18/14.
-//
-//
+#ifndef __MENU_SCENE_H__
+#define __MENU_SCENE_H__
 
-#ifndef __CanyonDefense__MenuScene__
-#define __CanyonDefense__MenuScene__
+#include "cocos2d.h"
 
-#include <iostream>
+USING_NS_CC;
 
-#endif /* defined(__CanyonDefense__MenuScene__) */
+class MenuScene : public cocos2d::Layer
+{
+	
+public:
+    
+    static Scene* createScene();
+	virtual bool init();
+
+	void menuPlayCallback(Object* pSender);
+	void menuHelpCallback(Object* pSender);
+	void menuScoreCallback(Object* pSender);
+
+	CREATE_FUNC(MenuScene);
+};
+
+#endif //__MENU_SCENE_H__

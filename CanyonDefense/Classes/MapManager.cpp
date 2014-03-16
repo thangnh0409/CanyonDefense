@@ -31,7 +31,7 @@ void MapManager::setMapTileForGame()
 
     switch (getMapId()) {
         case 1:
-            _tileMap = TMXTiledMap::create("map1.tmx");
+            _tileMap = TMXTiledMap::create("map_lv1.tmx");
 
             log("set tile map");
             break;

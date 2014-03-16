@@ -10,6 +10,7 @@
 #define __CanyonDefense__Projectile__
 
 #include "cocos2d.h"
+#include "Enemy.h"
 
 USING_NS_CC;
 
@@ -32,13 +33,31 @@ public:
 
 };
 
+/**
+ Ten lua ban ra tu Catapult
+ **/
+
 class MissileProjectile : public Projectile {
 public:
-    bool initWithTargetPos(Point pos, Point selfPos);
-    static MissileProjectile* create(Point targetPos, Point selfPos);
+    bool initWithTarget(Enemy* enemy);
+    static MissileProjectile* create(Enemy* enemy);
     void update(float dt);
-    void moveToTargetPos();
     
+private:
+    
+	float angularVelocity ;
+    
+	cocos2d::ParticleFire* m_emitter;
+    
+	float to360Angle(float angle)
+	{
+		angle = (int)angle % 360;
+		if (angle < 0)
+			angle += 360;
+		return angle;
+	}
+    
+	Enemy* myEnemy;
 };
 
 /**
@@ -52,5 +71,20 @@ public:
     void moveToTargetPos();
     
 };
+
+/**
+ Dan xanh ban ra tu SacredOakTower
+ */
+class SacredOakProjectile : public Projectile {
+private:
+    Enemy* myEnemy;
+public:
+    bool initWithTarget(Enemy* enemy, Point selfPost);
+    static SacredOakProjectile* create(Enemy* enemy, Point selfPost);
+    void update(float dt);
+    void moveToTargetPos();
+    
+};
+
 
 #endif /* defined(__CanyonDefense__Projectile__) */

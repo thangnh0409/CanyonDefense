@@ -11,7 +11,7 @@
 Wave* Wave::create(int spawnRate, int smallCar, int mediumCar, int bigCar)
 {
     Wave* wave = new Wave();
-    if (wave && wave->initWith(spawnRate, smallCar, smallCar, bigCar)) {
+    if (wave && wave->initWith(spawnRate, smallCar, mediumCar, bigCar)) {
         wave->autorelease();
         return wave;
     }

@@ -10,21 +10,21 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/ccConfig.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCPlatformConfig.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/CCPlatformDefine.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/android/log.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/android/log.h \
  /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/string \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/ccMacros.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCConsole.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/sys/select.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/sys/select.h \
  /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/thread \
  /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
  /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/CCStdC.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCPlatformMacros.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/math.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/stdlib.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/alloca.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/strings.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/memory.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/math.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/stdlib.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/alloca.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/strings.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/memory.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCConsole.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCGeometry.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCObject.h \
@@ -36,7 +36,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/kazmath.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/vec2.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/vec3.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/assert.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/assert.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/mat3.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/utility.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/mat4.h \
@@ -47,10 +47,10 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCArray.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/ccCArray.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/CCGL.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/GLES2/gl2platform.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/KHR/khrplatform.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/GLES2/gl2.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/GLES2/gl2ext.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/ccGLStateCache.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCGLProgram.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCScriptSupport.h \
@@ -96,7 +96,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/renderer/CCRenderCommandPool.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCDictionary.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/uthash.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/inttypes.h \
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/inttypes.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCArray.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCString.h \
  /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream \
@@ -212,7 +212,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCDeprecated.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCEventType.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/jni/JniHelper.h \
- /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/jni.h
+ /Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/jni.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -236,7 +236,7 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/CCPlatformDefine.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/android/log.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/android/log.h:
 
 /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/string:
 
@@ -244,7 +244,7 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCConsole.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/sys/select.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/sys/select.h:
 
 /Users/huuthang/Documents/Dev/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.8/include/thread:
 
@@ -256,15 +256,15 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCPlatformMacros.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/math.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/math.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/stdlib.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/stdlib.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/alloca.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/alloca.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/strings.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/strings.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/memory.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/memory.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCConsole.h:
 
@@ -288,7 +288,7 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/vec3.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/assert.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/assert.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../math/kazmath/include/kazmath/mat3.h:
 
@@ -310,13 +310,13 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/CCGL.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/GLES2/gl2platform.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/KHR/khrplatform.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/GLES2/gl2.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/GLES2/gl2ext.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/ccGLStateCache.h:
 
@@ -408,7 +408,7 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/uthash.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/inttypes.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/inttypes.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/../base/CCArray.h:
 
@@ -640,4 +640,4 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/platform/android/jni/JniHelper.h:
 
-/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-9/arch-arm/usr/include/jni.h:
+/Users/huuthang/Documents/Dev/android-ndk-r9c/platforms/android-19/arch-arm/usr/include/jni.h:

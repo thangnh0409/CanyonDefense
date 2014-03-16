@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "GameScene.h"
+#include "MenuScene.h"
 #include "HelloWorldScene.h"
 #include <vector>
 #include <string>
@@ -49,7 +50,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     else if (frameSize.height > smallResource.size.height)
     {
         log("medium resource put back");
-        searchPath.push_back(smallResource.directory);
+        searchPath.push_back(mediumResource.directory);
         
         director->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height, mediumResource.size.width/designResolutionSize.width));
     }

@@ -55,6 +55,11 @@ public:
      **/
     void addEnemy(float dt);
     
+    /**
+     detect out of bound Screen
+     @param: pos: position check
+     */
+    bool isOutOfBound(Point pos);
     void spriteMoveFinish(Node *sender);
     
     /*

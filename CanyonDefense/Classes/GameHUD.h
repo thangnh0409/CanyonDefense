@@ -18,6 +18,7 @@ private:
     Sprite* hudBackground;
     Sprite* hudChildBackground;
     Sprite* towerSprite;
+    bool towerIsSelected;
     Sprite* rangeSprite;
     Array* moveableSprite;
     LabelTTF* resourceLabel;
@@ -36,6 +37,7 @@ public:
     void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesMoved(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event);
+    void onTouchesCancelled(const std::vector<Touch*>&touches, Event *unused_event);
     
     void updateResource(int value);
     void updateLive();

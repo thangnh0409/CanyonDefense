@@ -23,7 +23,7 @@ bool Tower::initWithFileAndRange(const char *pszFilename, int range)
         
         twSprite = Sprite::create(pszFilename);
         this->addChild(twSprite);
-        
+        this->setContentSize(twSprite->getContentSize());
         this->setRange(range);
         _target = NULL;
         
@@ -40,7 +40,7 @@ Enemy* Tower::getClosestTarget()
     GameMediator* gm = GameMediator::shareInstance();
     CCARRAY_FOREACH(gm->getTargets(), child){
         Enemy* enemy = (Enemy*)child;
-        double distance = ccpDistance(this->getPosition() , enemy->getPosition());
+        double distance = this->getPosition().getDistance(enemy->getPosition());
         if (distance < minDistance) {
             minDistance = distance;
             closestEnemy = enemy;
@@ -110,8 +110,8 @@ void MissileTurretTower::fire(float dt)
 		Point overshotVector = normalizedShootVector * this->getRange();
 		Point offscreenPoint = this->getPosition() + overshotVector;
         
-		MissileProjectile* projectile = MissileProjectile::create(offscreenPoint, this->getPosition());
-		m->getGameLayer()->addChild(projectile);
+		//MissileProjectile* projectile = MissileProjectile::create(offscreenPoint, this->getPosition());
+		//m->getGameLayer()->addChild(projectile);
 	}
 }
 
@@ -149,7 +149,121 @@ void HutBasicTower::fire(float dt)
 		Point overshotVector = normalizedShootVector * this->getRange();
 		Point offscreenPoint = this->getPosition() + overshotVector;
         
+		ArcheryProjectile* projectile = ArcheryProjectile::create(offscreenPoint, this->getPosition() + Point(0, this->getContentSize().height/2));
+		m->getGameLayer()->addChild(projectile);
+	}
+}
+
+// hut advance tower
+
+HutAdvanceTower* HutAdvanceTower::create()
+{
+    HutAdvanceTower* mtt = new HutAdvanceTower;
+    if (mtt && mtt->initWithFileAndRange("hut_1.png", 100)) {
+        mtt->autorelease();
+        
+        return mtt;
+    }
+    
+    CC_SAFE_DELETE(mtt);
+    return NULL;
+}
+bool HutAdvanceTower::initWithFileAndRange(const char *pszFilename, int range)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Tower::initWithFileAndRange(pszFilename, range));
+        this->schedule(schedule_selector(HutAdvanceTower::fire), 1.0f);
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+void HutAdvanceTower::fire(float dt)
+{
+    if(this->getTarget() != NULL){
+		GameMediator* m = GameMediator::shareInstance();
+        
+		Point shootVector = this->getTarget()->getPosition() - this->getPosition();
+		Point normalizedShootVector = shootVector.normalize();
+		Point overshotVector = normalizedShootVector * this->getRange();
+		Point offscreenPoint = this->getPosition() + overshotVector;
+        
 		ArcheryProjectile* projectile = ArcheryProjectile::create(offscreenPoint, this->getPosition());
 		m->getGameLayer()->addChild(projectile);
 	}
+}
+
+/**
+Sung ban ten lua
+*/
+
+CatapultTower* CatapultTower::create()
+{
+    CatapultTower* mtt = new CatapultTower;
+    if (mtt && mtt->initWithFileAndRange("ballias_3.png", 100)) {
+        mtt->autorelease();
+        
+        return mtt;
+    }
+    
+    CC_SAFE_DELETE(mtt);
+    return NULL;
+}
+bool CatapultTower::initWithFileAndRange(const char *pszFilename, int range)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Tower::initWithFileAndRange(pszFilename, range));
+        this->schedule(schedule_selector(CatapultTower::fire), 1.0f);
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+void CatapultTower::fire(float dt)
+{
+    if(this->getTarget() != NULL){
+		GameMediator* m = GameMediator::shareInstance();        
+		MissileProjectile* projectile = MissileProjectile::create(this->getTarget());
+        projectile->setPosition(this->getPosition());
+		projectile->setRotation(this->getRotation());
+		m->getGameLayer()->addChild(projectile);
+	}
+}
+
+
+/**
+ Sung ban rong bay tren khong
+ */
+
+SacredOakTower* SacredOakTower::create()
+{
+    SacredOakTower* mtt = new SacredOakTower;
+    if (mtt && mtt->initWithFileAndRange("sacred_oak_1.png", 150)) {
+        mtt->autorelease();
+        
+        return mtt;
+    }
+    
+    CC_SAFE_DELETE(mtt);
+    return NULL;
+}
+bool SacredOakTower::initWithFileAndRange(const char *pszFilename, int range)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Tower::initWithFileAndRange(pszFilename, range));
+        this->schedule(schedule_selector(SacredOakTower::fire), 1.0f);
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+void SacredOakTower::fire(float dt)
+{
+    if(this->getTarget() != NULL && this->getTarget()->getEnemyType() == AIR){
+		GameMediator* m = GameMediator::shareInstance();
+		SacredOakProjectile* projectile = SacredOakProjectile::create(this->getTarget(), this->getPosition());
+        projectile->setPosition(this->getPosition());
+		m->getGameLayer()->addChild(projectile);
+	}else
+        this->getClosestTarget();
 }

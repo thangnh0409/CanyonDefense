@@ -66,6 +66,7 @@ public:
     Enemy();
     virtual ~Enemy();
     virtual bool initWithFile(const char* filename);
+    virtual bool initWithSpriteFrame(SpriteFrame* frame);
     virtual void update(float dt);
     void removeSelf();
     void updateEnergy();
@@ -106,5 +107,27 @@ class BigCarEnemy : public Enemy {
 public:
     static BigCarEnemy* create();
     bool initWithFile(const char* filename);
+};
+
+/*
+ Class for small dragon
+ */
+class SmallDragonEnemy : public Enemy {
+public:
+    static SmallDragonEnemy* create();
+    bool initWithFile(const char* filename);
+    void update(float dt);
+    
+};
+
+/*
+ Class for small fly dragon
+ */
+class SmallFlyDragonEnemy : public Enemy {
+public:
+    static SmallFlyDragonEnemy* create();
+    bool initWithFile(const char* filename);
+    void update(float dt);
+    
 };
 #endif /* defined(__CanyonDefense__Enemy__) */

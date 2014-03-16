@@ -8,6 +8,22 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
+                   ../../Classes/GameMediator.cpp \
+                   ../../Classes/MapManager.cpp \
+                   ../../Classes/Variable.cpp \
+                   ../../Classes/HelpScene.cpp \
+                   ../../Classes/ScoreScene.cpp \
+                   ../../Classes/SelectDifficuldScene.cpp \
+                   ../../Classes/SelectMapScene.cpp \
+                   ../../Classes/SelectSprite.cpp \
+                   ../../Classes/GameScene.cpp \
+                   ../../Classes/LevelLayer.cpp \
+                   ../../Classes/MenuScene.cpp \
+                   ../../Classes/GameHUD.cpp \
+                   ../../Classes/Enemy.cpp \
+                   ../../Classes/Tower.cpp \
+                   ../../Classes/Projectile.cpp \
+                   ../../Classes/Wave.cpp \
                    ../../Classes/HelloWorldScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

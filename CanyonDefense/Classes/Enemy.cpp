@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "GameMediator.h"
+#include "MapManager.h"
 
 enum{
     TOP,
@@ -60,6 +61,27 @@ bool Enemy::initWithFile(const char *filename)
         bRet = true;
     } while (0);
     return bRet;
+}
+
+bool Enemy::initWithSpriteFrame(cocos2d::SpriteFrame *frame)
+{
+    bool bRet= false;
+    do {
+        sprite = Sprite::createWithSpriteFrame(frame);
+        sprite->setAnchorPoint(Point::ZERO);
+        this->addChild(sprite);
+        energySprite = Sprite::create("energy.png");
+        energySprite->setPosition(this->getPosition() + Point(10, 25));
+        this->addChild(energySprite);
+        
+        gm = GameMediator::shareInstance();
+        
+        scheduleUpdate();
+        
+        bRet = true;
+    } while (0);
+    return bRet;
+
 }
 void Enemy::update(float dt)
 {
@@ -265,4 +287,160 @@ bool BigCarEnemy::initWithFile(const char *filename)
         bRet = true;
     } while (0);
     return bRet;
+}
+
+/**
+ Rong boi duoi mat nuoc - loai nho
+ */
+
+SmallDragonEnemy* SmallDragonEnemy::create()
+{
+    SmallDragonEnemy* smallCar = new SmallDragonEnemy();
+    if (smallCar && smallCar->initWithFile("dragon_1_1.png")) {
+        smallCar->autorelease();
+        return smallCar;
+    }
+    CC_SAFE_DELETE(smallCar);
+    return NULL;
+}
+bool SmallDragonEnemy::initWithFile(const char *filename)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Enemy::initWithFile(filename));
+        setEnergy(kEnergySmallCar);
+        setMaxEnergy(kEnergySmallCar);
+        setEnemyType(GROUND);
+        bRet = true;
+        
+        
+        TMXTiledMap* map = MapManager::shareMap()->getTileMap();
+        auto objectGroup = map->getObjectGroup("objects");
+        auto& rootObj = objectGroup->getObjects();
+        
+        Value objectsVal = Value(rootObj);
+        
+        auto arrayPoint = PointArray::create(20);
+        
+        for (auto& obj : rootObj)
+        {
+            ValueMap& dict = obj.asValueMap();
+            float x = dict["x"].asFloat();
+            float y = dict["y"].asFloat();
+            arrayPoint->addControlPoint(Point(x ,y));
+        }
+        
+        this->setPosition(arrayPoint->getControlPointAtIndex(0));
+        auto action = CatmullRomTo::create(20, arrayPoint);
+        this->runAction(action);
+        
+        
+    } while (0);
+    return bRet;
+}
+
+void SmallDragonEnemy::update(float dt)
+{
+    Point pos = this->getPosition();
+    
+    if (this->getEnergy() <= 0) {
+        removeSelf();
+        gm->getGameHUD()->updateResource(kResourceSmallCar);
+    }else
+        updateEnergy();
+    if (gm->getGameLayer()->isOutOfBound(pos)) {
+        removeSelf();
+        gm->getGameHUD()->updateLive();
+    }
+    
+}
+
+/**
+@Rong bay tren troi - loai nho
+*/
+
+
+SmallFlyDragonEnemy* SmallFlyDragonEnemy::create()
+{
+    SmallFlyDragonEnemy* smallCar = new SmallFlyDragonEnemy();
+    if (smallCar && smallCar->initWithFile("dragon_fly0.png")) {
+        smallCar->autorelease();
+        return smallCar;
+    }
+    CC_SAFE_DELETE(smallCar);
+    return NULL;
+}
+bool SmallFlyDragonEnemy::initWithFile(const char *filename)
+{
+    bool bRet = false;
+    do {
+        auto texture = Director::getInstance()->getTextureCache()->addImage(filename);
+        
+        float scale = Director::getInstance()->getContentScaleFactor();
+        // manually add frames to the frame cache
+        auto frame0 = SpriteFrame::createWithTexture(texture, Rect(128*0, 128*0, 128/scale, 128/scale));
+        auto frame1 = SpriteFrame::createWithTexture(texture, Rect(128*1/scale, 128*0, 128/scale, 128/scale));
+        auto frame2 = SpriteFrame::createWithTexture(texture, Rect(128*2/scale, 128*0, 128/scale, 128/scale));
+        auto frame3 = SpriteFrame::createWithTexture(texture, Rect(128*3/scale, 128*0, 128/scale, 128/scale));
+        auto frame4 = SpriteFrame::createWithTexture(texture, Rect(128*4/scale, 128*0, 128/scale, 128/scale));
+        auto frame5 = SpriteFrame::createWithTexture(texture, Rect(128*5/scale, 128*0, 128/scale, 128/scale));
+        auto frame6 = SpriteFrame::createWithTexture(texture, Rect(128*6/scale, 128*0, 128/scale, 128/scale));
+        auto frame7 = SpriteFrame::createWithTexture(texture, Rect(128*7/scale, 128*0, 128/scale, 128/scale));
+        
+        CC_BREAK_IF(!Enemy::initWithSpriteFrame(frame0));
+        
+        setEnergy(kEnergySmallCar);
+        setMaxEnergy(kEnergySmallCar);
+        setEnemyType(AIR);
+        velocity = 0.5 ;
+        bRet = true;
+        
+        Size size = Director::getInstance()->getVisibleSize();
+        int x = arc4random() % ((int)size.width - 100) + 100;
+        log("x = %d", x);
+        this->setPosition(Point(x, size.height));
+    
+        
+        //
+        // Animation using Sprite BatchNode
+        
+        sprite->setScale(0.3);
+        
+        Vector<SpriteFrame*> animFrames(10);
+        animFrames.pushBack(frame0);
+        animFrames.pushBack(frame1);
+        animFrames.pushBack(frame2);
+        animFrames.pushBack(frame3);
+        animFrames.pushBack(frame4);
+        animFrames.pushBack(frame5);
+        animFrames.pushBack(frame6);
+        animFrames.pushBack(frame7);
+        //animFrames.pushBack(frame8);
+        //animFrames.pushBack(frame9);
+        
+        auto animation = Animation::createWithSpriteFrames(animFrames,0.2f);
+        auto animate = Animate::create(animation);
+        sprite->runAction(RepeatForever::create( animate ) );
+        
+
+        
+    } while (0);
+    return bRet;
+}
+
+void SmallFlyDragonEnemy::update(float dt)
+{
+    this->setPosition(Point(this->getPositionX(), this->getPositionY() - velocity));
+    Point pos = this->getPosition();
+    
+    if (this->getEnergy() <= 0) {
+        removeSelf();
+        gm->getGameHUD()->updateResource(kResourceSmallCar);
+    }else
+        updateEnergy();
+    if (gm->getGameLayer()->isOutOfBound(pos)) {
+        removeSelf();
+        gm->getGameHUD()->updateLive();
+    }
+    
 }
