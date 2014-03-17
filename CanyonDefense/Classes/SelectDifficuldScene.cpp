@@ -61,7 +61,7 @@ SelectDifficuldScene::SelectDifficuldScene(void)
 	voidNode = ParallaxNode::create();
 	auto paddleTexture = Director::getInstance()->getTextureCache()->addImage("difficuld1.png");
     
-	SelectSprite* paddle = new SelectSprite(this,paddleTexture, voidNode, new HelloWorld(),2);
+	SelectSprite* paddle = new SelectSprite(this,paddleTexture, voidNode, new LevelLayer(), 2);
 	 paddle->setScaleX(scaleX);
 	 paddle->setScaleY(scaleY);
 	 paddle->setPosition( Point(0,0));

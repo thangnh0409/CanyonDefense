@@ -15,9 +15,15 @@
 USING_NS_CC;
 
 enum LEVEL_TYPE {
-    EASY = 0,
-    NORMAL = 1,
-    HARD = 2
+    EASY = 1,
+    NORMAL = 2,
+    HARD = 3
+    };
+enum GAME_STATE {
+    RUNNING = 0,
+    PAUSE = 1,
+    FINISH = 2,
+    WAIT_NEXT_WAVE = 3
     };
 
 class LevelLayer : public Layer {
@@ -56,10 +62,34 @@ public:
     void addEnemy(float dt);
     
     /**
+     Call play game when you're wating for next wave
+     */
+    void playGameWhiteWaitNextWave();
+    
+    /**
+     Call play game after pause
+     **/
+    void playGameAfterPause();
+    /**
+     check finish wave
+     */
+    void checkFinishWave(float dt);
+    /**
      detect out of bound Screen
      @param: pos: position check
      */
     bool isOutOfBound(Point pos);
+    
+    /**
+     get timer delay by level map
+     */
+    float getTimerDelay(int levelMap);
+    
+    /**
+     update game each frame
+     */
+    void update(float dt);
+    
     void spriteMoveFinish(Node *sender);
     
     /*
@@ -68,11 +98,9 @@ public:
     void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
     
     Point rootPoint;
-    /*
-     variable for get level type
-     **/
-    CC_SYNTHESIZE(int, _levelType, LevelType);
+
     CC_SYNTHESIZE(int, _currentWaveCount, CurrentWaveCount);
+    CC_SYNTHESIZE(int, _gameState, GameState);
     
     CREATE_FUNC(LevelLayer);
 };

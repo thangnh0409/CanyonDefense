@@ -38,7 +38,7 @@ bool GameHUD::init()
     startMenu->setAnchorPoint(Point::ZERO);
     this->addChild(startMenu);
     
-    auto btnPauseItem = MenuItemImage::create("pause2.png", "pause1.png", CC_CALLBACK_1(GameHUD::onButtonPauseClick, this));
+    btnPauseItem = MenuItemImage::create("play.png", "play.png", CC_CALLBACK_1(GameHUD::onButtonPauseClick, this));
     auto btnPause = Menu::create(btnPauseItem, NULL);
     btnPause->setPosition(Point(visibleSize.width - btnPauseItem->getContentSize().width/2, visibleSize.height - btnPauseItem->getContentSize().height/2));
     this->addChild(btnPause);
@@ -99,7 +99,7 @@ bool GameHUD::init()
     resources = 22200;
     resourceLabel = LabelTTF::create("300", "Marker Felt", 25);
     resourceLabel->setPosition(Point(resource->getPositionX() + resource->getContentSize().width + 30, resource->getPositionY()));
-    resourceLabel->setColor(Color3B(255, 80, 20));
+    resourceLabel->setColor(Color3B(0, 0, 255));
     this->addChild(resourceLabel, 1);
     
     auto livesSpr = Sprite::create("lives.png");
@@ -117,6 +117,12 @@ bool GameHUD::init()
     waveLabel->setPosition(Point(liveLabel->getPositionX() + liveLabel->getContentSize().width + 40 , liveLabel->getPositionY()));
     waveLabel->setColor(Color3B(255, 0, 0));
     this->addChild(waveLabel);
+    
+    times = 60;
+    timeLabel = LabelTTF::create("Time: 60", "Marker Felt", 25);
+    timeLabel->setPosition(Point(visibleSize.width - timeLabel->getContentSize().width, timeLabel->getContentSize().height));
+    timeLabel->setColor(Color3B(255, 0, 0));
+    this->addChild(timeLabel);
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchAllAtOnce::create();
@@ -196,7 +202,19 @@ void GameHUD::onButtonBuildingClick(cocos2d::Object *sender)
 
 }
 void GameHUD::onButtonPauseClick(cocos2d::Object *senser){
-    
+    if (GameMediator::shareInstance()->getGameLayer()->getGameState() == RUNNING) {
+        btnPauseItem->setNormalImage(Sprite::create("play.png"));
+        GameMediator::shareInstance()->getGameLayer()->setGameState(PAUSE);
+    }else
+        if (GameMediator::shareInstance()->getGameLayer()->getGameState() == PAUSE) {
+            btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
+            GameMediator::shareInstance()->getGameLayer()->setGameState(RUNNING);
+        }else
+            if (GameMediator::shareInstance()->getGameLayer()->getGameState() == WAIT_NEXT_WAVE) {
+                btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
+                GameMediator::shareInstance()->getGameLayer()->setGameState(RUNNING);
+                GameMediator::shareInstance()->getGameLayer()->playGameWhiteWaitNextWave();
+            }
 }
 void GameHUD::onButtonPlayClick(cocos2d::Object *sender)
 {
@@ -341,7 +359,7 @@ void GameHUD::updateResource(int value)
     CCARRAY_FOREACH(moveableSprite, child){
         Sprite* sprite = (Sprite*)child;
         int twMoney = sprite->getTag();
-        log("tower money : %d", twMoney);
+        //log("tower money : %d", twMoney);
         if (resources >= twMoney) {
             sprite->setOpacity(255);
         }else
@@ -358,4 +376,23 @@ void GameHUD::updateWave()
 {
     waves ++;
     waveLabel->setString(String::createWithFormat("Wave: %d", waves)->getCString());
+}
+void GameHUD::updateTime(float dt)
+{
+    if (times > 0) {
+        times--;
+    }
+    timeLabel->setString(String::createWithFormat("Time: %d", times)->getCString());
+}
+void GameHUD::showTimerCount()
+{
+    GameMediator* gm = GameMediator::shareInstance();
+    timeLabel->setVisible(true);
+    times = gm->getGameLayer()->getTimerDelay(gm->getLevelMap());
+    schedule(schedule_selector(GameHUD::updateTime), 1.0f);
+}
+void GameHUD::hideTimerCount()
+{
+    unschedule(schedule_selector(GameHUD::updateTime));
+    timeLabel->setVisible(false);
 }

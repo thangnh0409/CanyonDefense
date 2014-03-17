@@ -24,6 +24,8 @@ public:
     static GameMediator* shareInstance();
     bool init();
     
+    CC_SYNTHESIZE(int, LevelMap, LevelMap);
+    CC_SYNTHESIZE(int, mapID, MapID);
     CC_SYNTHESIZE_RETAIN(LevelLayer*, _gameLayer, GameLayer);
     CC_SYNTHESIZE_RETAIN(MapManager*, _mapGame, MapGame);
     CC_SYNTHESIZE_RETAIN(GameHUD*, _gameHUD, GameHUD);

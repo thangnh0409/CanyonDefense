@@ -21,7 +21,6 @@
 #define CATAPULT_BASIC_MONEY        400
 #define SACRED_OAK_ADVANCE_MONEY    500
 
-extern int difficuld;
 extern int map;
 extern int selected;
 
@@ -53,58 +52,28 @@ bool LevelLayer::init()
     float scaleFactorX = frameSize.width / 800;
     float scaleFactorY = frameSize.height / 480;
     //this->setScale(scaleFactorX, scaleFactorY);
-    this->setLevelType(NORMAL);
+    
+    log("map id: %d, select: %d", map, selected);
+    
+    GameMediator::shareInstance()->setLevelMap(selected);
+    GameMediator::shareInstance()->setMapID(map);
     this->addWave();
     
     //add map background
     
-    TMXTiledMap* map = MapManager::shareMap()->getTileMap();
+    TMXTiledMap* tileMap = MapManager::shareMap()->getTileMap();
     //TMXTiledMap* map = TMXTiledMap::create("TileMap.tmx");
-    TMXLayer* metaLayer = map->getLayer("meta");
+    TMXLayer* metaLayer = tileMap->getLayer("meta");
     metaLayer->setVisible(false);
-    map->setAnchorPoint(Point(0.5, 0.5));
-    map->setScale(scaleFactorX, scaleFactorY);
-    map->setPosition(visibleSize.width/2, visibleSize.height/2);
-    addChild(map, -1 , 1);
+    tileMap->setAnchorPoint(Point(0.5, 0.5));
+    tileMap->setScale(scaleFactorX, scaleFactorY);
+    tileMap->setPosition(visibleSize.width/2, visibleSize.height/2);
+    addChild(tileMap, -1 , 1);
     
-    Size CC_UNUSED s = map->getContentSize();
+    Size CC_UNUSED s = tileMap->getContentSize();
     CCLOG("Contentsize: %f, %f", s.width, s.height);
     
-    //SmallCarEnemy* enemy = SmallCarEnemy::create();
-    auto enemySprite = Sprite::create("dragon_1_1.png");
-    //enemySprite->setScale(0.15);
-    auto objectGroup = map->getObjectGroup("objects");
-    auto& rootObj = objectGroup->getObjects();
-
-    Value objectsVal = Value(rootObj);
-    CCLOG("%s", objectsVal.getDescription().c_str());
-    
-    auto arrayPoint = PointArray::create(20);
-    
-    for (auto& obj : rootObj)
-    {
-        ValueMap& dict = obj.asValueMap();
-        float x = dict["x"].asFloat();
-        float y = dict["y"].asFloat();
-        log("obj: x = %f, y = %f", x, y);
-        rootPoint = Point(0, 150);
-        arrayPoint->addControlPoint(Point(x ,y));
-        //enemy->setScale(0.3);
-        //addChild(enemy, 1);
-    }
-    
-    enemySprite->setPosition(arrayPoint->getControlPointAtIndex(0));
-    auto action = CatmullRomTo::create(40, arrayPoint);
-    enemySprite->runAction(action);
-    addChild(enemySprite, 1);
-    //GameMediator::shareInstance()->getTargets()->addObject(enemy);
-    
     Animation* animationTest = Animation::create();
-    /*for (int i=1; i < 7; i++) {
-        char imgName[100] = {0};
-        sprintf(imgName, "dragon_1_%d.png", i);
-        animationTest->addSpriteFrameWithFile(imgName);
-    }*/
     animationTest->addSpriteFrameWithFile("dragon_1_1.png");
     animationTest->addSpriteFrameWithFile("dragon_1_2.png");
     animationTest->addSpriteFrameWithFile("dragon_1_3.png");
@@ -145,24 +114,35 @@ bool LevelLayer::init()
     listener->onTouchesBegan = CC_CALLBACK_2(LevelLayer::onTouchesBegan, this);
     dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
+    scheduleUpdate();
+    
+    _currentWaveCount = -1;
     /**
      cap nhat resource de set opacity cua tower image
      */
     GameHUD::shareInstance()->updateResource(0);
+    GameHUD::shareInstance()->showTimerCount();
+    _gameState = WAIT_NEXT_WAVE;
+    schedule(schedule_selector(LevelLayer::levelLogic),
+             getTimerDelay(GameMediator::shareInstance()->getLevelMap()), 0, 0);
     
-    schedule(schedule_selector(LevelLayer::levelLogic), 60.0f, 1, 0);
-    schedule(schedule_selector(LevelLayer::addEnemy), 2.5f);
+    
     
     return true;
 }
 
 void LevelLayer::levelLogic(float dt)
 {
-    Wave* wave = this->getCurrentWave();
-    if ( wave && wave->getNumSmallCar() <= 0 && wave->getNumMediumCar() <= 0 && wave->getNumBigCar() <= 0) {
-        this->getNextWave();
-        log("call get next wave");
+    log("call level logic");
+    this->getNextWave();
+    GameHUD::shareInstance()->hideTimerCount();
+    if (!isScheduled(schedule_selector(LevelLayer::addEnemy))) {
+         schedule(schedule_selector(LevelLayer::addEnemy), 2.5f);
     }
+    if (!isScheduled(schedule_selector(LevelLayer::checkFinishWave))) {
+        schedule(schedule_selector(LevelLayer::checkFinishWave), 2.0f);
+    }
+
 }
 void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 {
@@ -210,29 +190,66 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 void LevelLayer::addWave()
 {
     GameMediator* gm = GameMediator::shareInstance();
-    Wave* wave1 = Wave::create(1, 4, 2, 2);
-    gm->getWaves()->addObject(wave1);
-    Wave* wave2 = Wave::create(1, 4, 5, 3);
-    gm->getWaves()->addObject(wave2);
-    Wave* wave3 = Wave::create(1, 4, 2, 3);
-    gm->getWaves()->addObject(wave3);
-    Wave* wave4 = Wave::create(1, 2, 0, 4);
-    gm->getWaves()->addObject(wave4);
+    switch (gm->getLevelMap()) {
+        case EASY:{
+            Wave* wave1 = Wave::create(1, 4, 2, 2);
+            gm->getWaves()->addObject(wave1);
+            Wave* wave2 = Wave::create(1, 4, 5, 3);
+            gm->getWaves()->addObject(wave2);
+//            Wave* wave3 = Wave::create(1, 4, 2, 3);
+//            gm->getWaves()->addObject(wave3);
+//            Wave* wave4 = Wave::create(1, 2, 0, 4);
+//            gm->getWaves()->addObject(wave4);
+            break;
+        }
+        case NORMAL:{
+            Wave* wave1 = Wave::create(1, 4, 2, 2);
+            gm->getWaves()->addObject(wave1);
+            Wave* wave2 = Wave::create(1, 4, 5, 3);
+            gm->getWaves()->addObject(wave2);
+            Wave* wave3 = Wave::create(1, 4, 2, 3);
+            gm->getWaves()->addObject(wave3);
+            Wave* wave4 = Wave::create(1, 2, 0, 4);
+            gm->getWaves()->addObject(wave4);
+            break;
+        }
+        case HARD:{
+            Wave* wave1 = Wave::create(1, 4, 2, 2);
+            gm->getWaves()->addObject(wave1);
+            Wave* wave2 = Wave::create(1, 4, 5, 3);
+            gm->getWaves()->addObject(wave2);
+            Wave* wave3 = Wave::create(1, 4, 2, 3);
+            gm->getWaves()->addObject(wave3);
+            Wave* wave4 = Wave::create(1, 2, 0, 4);
+            gm->getWaves()->addObject(wave4);
+            break;
+        }
+        default:
+            break;
+    }
 
 }
 Wave* LevelLayer::getCurrentWave()
 {
-    Wave* currentWave = (Wave*)GameMediator::shareInstance()->getWaves()->getObjectAtIndex(getCurrentWaveCount());
-    return currentWave;
+    if (GameMediator::shareInstance()->getWaves()->count() > getCurrentWaveCount()) {
+        Wave* currentWave = (Wave*)GameMediator::shareInstance()->getWaves()->getObjectAtIndex(getCurrentWaveCount());
+        return currentWave;
+    }
+    return NULL;
 }
 void LevelLayer::getNextWave()
 {
-    setCurrentWaveCount(_currentWaveCount + 1);
-    
+    _currentWaveCount = _currentWaveCount + 1;
+    log("waves count: %zd, current waves: %d", GameMediator::shareInstance()->getWaves()->count(), _currentWaveCount);
+    if (_currentWaveCount >= GameMediator::shareInstance()->getWaves()->count()) {
+        log("finish game");
+        unschedule(schedule_selector(LevelLayer::checkFinishWave));
+        unschedule(schedule_selector(LevelLayer::addEnemy));
+    }
 }
 void LevelLayer::addEnemy(float dt)
 {
-    //log("call add enemy");
+    log("call add enemy");
     GameMediator* gm = GameMediator::shareInstance();
     Wave* wave = this->getCurrentWave();
     Enemy* target = NULL;
@@ -248,16 +265,46 @@ void LevelLayer::addEnemy(float dt)
         if (wave->getNumBigCar() > 0){
             target = SmallFlyDragonEnemy::create();
             wave->setNumBigCar(wave->getNumBigCar() - 1);
-        }
+        }else
+            unschedule(schedule_selector(LevelLayer::addEnemy));
+        
         if(target){
             //target->setPosition(rootPoint);
             gm->getTargets()->addObject(target);
             this->addChild(target, 1);
         }
-
     }
 }
 
+void LevelLayer::playGameAfterPause()
+{
+    
+}
+
+void LevelLayer::playGameWhiteWaitNextWave()
+{
+    if (isScheduled(schedule_selector(LevelLayer::levelLogic))) {
+        unschedule(schedule_selector(LevelLayer::levelLogic));
+    }
+    this->levelLogic(1);
+}
+
+void LevelLayer::checkFinishWave(float dt)
+{
+    GameMediator* gm = GameMediator::shareInstance();
+    Wave* wave = this->getCurrentWave();
+    if (gm->getTargets()->count() == 0 && wave
+        && wave->getNumSmallCar() <= 0
+        && wave->getNumMediumCar() <= 0
+        && wave->getNumBigCar() <= 0) {
+        unschedule(schedule_selector(LevelLayer::checkFinishWave));
+        GameHUD::shareInstance()->showTimerCount();
+        _gameState = WAIT_NEXT_WAVE;
+        schedule(schedule_selector(LevelLayer::levelLogic),
+                 getTimerDelay(GameMediator::shareInstance()->getLevelMap()), 0, 0);
+    }else
+        log("NUM TARGETS = %zd", gm->getTargets()->count());
+}
 bool LevelLayer::isOutOfBound(cocos2d::Point pos)
 {
     TMXTiledMap* map = MapManager::shareMap()->getTileMap();
@@ -266,6 +313,23 @@ bool LevelLayer::isOutOfBound(cocos2d::Point pos)
         return true;
     }
     return false;
+}
+float LevelLayer::getTimerDelay(int levelMap)
+{
+    switch (levelMap) {
+        case 1:
+            return 5;
+        case 2:
+            return 60;
+        case 3:
+            return 40;
+        default:
+            return 40;
+    }
+}
+void LevelLayer::update(float dt)
+{
+    
 }
 void LevelLayer::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {

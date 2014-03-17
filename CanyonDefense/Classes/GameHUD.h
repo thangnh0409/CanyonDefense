@@ -24,7 +24,9 @@ private:
     LabelTTF* resourceLabel;
     LabelTTF* liveLabel;
     LabelTTF* waveLabel;
+    LabelTTF* timeLabel;
     Menu* btnPlay;
+    MenuItemImage* btnPauseItem;
 public:
     static GameHUD* shareInstance();
     bool init();
@@ -43,10 +45,14 @@ public:
     void updateResource(int value);
     void updateLive();
     void updateWave();
+    void updateTime(float dt);
+    void showTimerCount();
+    void hideTimerCount();
     
     CC_SYNTHESIZE(int, resources, Resources);
     CC_SYNTHESIZE(int, lives, Lives);
     CC_SYNTHESIZE(int, waves, Waves);
+    CC_SYNTHESIZE(int, times, Time);
     
 };
 
