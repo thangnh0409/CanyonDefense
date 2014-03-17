@@ -210,13 +210,13 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 void LevelLayer::addWave()
 {
     GameMediator* gm = GameMediator::shareInstance();
-    Wave* wave1 = Wave::create(1, 4, 2, 0);
+    Wave* wave1 = Wave::create(1, 4, 2, 2);
     gm->getWaves()->addObject(wave1);
-    Wave* wave2 = Wave::create(1, 4, 5, 0);
+    Wave* wave2 = Wave::create(1, 4, 5, 3);
     gm->getWaves()->addObject(wave2);
-    Wave* wave3 = Wave::create(1, 4, 2, 0);
+    Wave* wave3 = Wave::create(1, 4, 2, 3);
     gm->getWaves()->addObject(wave3);
-    Wave* wave4 = Wave::create(1, 2, 0, 0);
+    Wave* wave4 = Wave::create(1, 2, 0, 4);
     gm->getWaves()->addObject(wave4);
 
 }
@@ -242,11 +242,11 @@ void LevelLayer::addEnemy(float dt)
             wave->setNumSmallCar(wave->getNumSmallCar() - 1);
         }else
         if (wave->getNumMediumCar() > 0) {
-            target = SmallFlyDragonEnemy::create();
+            target = MediumDragonEnemy::create();
             wave->setNumMediumCar(wave->getNumMediumCar() - 1);
         }else
         if (wave->getNumBigCar() > 0){
-            target = BigCarEnemy::create();
+            target = SmallFlyDragonEnemy::create();
             wave->setNumBigCar(wave->getNumBigCar() - 1);
         }
         if(target){

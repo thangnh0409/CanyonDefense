@@ -51,6 +51,7 @@ public:
     };
     Sprite* sprite;
     Sprite* energySprite;
+    PointArray* arrayPoint;
     
     GameMediator* gm;
     /**
@@ -119,6 +120,20 @@ public:
     void update(float dt);
     
 };
+
+/*
+ Class for medium water dragon
+ @mau:
+ @toc do:
+ */
+class MediumDragonEnemy : public Enemy {
+public:
+    static MediumDragonEnemy* create();
+    bool initWithFile(const char* filename);
+    void update(float dt);
+    
+};
+
 
 /*
  Class for small fly dragon
