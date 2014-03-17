@@ -23,6 +23,7 @@ private:
     Array* moveableSprite;
     LabelTTF* resourceLabel;
     LabelTTF* liveLabel;
+    LabelTTF* waveLabel;
     Menu* btnPlay;
 public:
     static GameHUD* shareInstance();
@@ -41,10 +42,11 @@ public:
     
     void updateResource(int value);
     void updateLive();
-
+    void updateWave();
     
     CC_SYNTHESIZE(int, resources, Resources);
     CC_SYNTHESIZE(int, lives, Lives);
+    CC_SYNTHESIZE(int, waves, Waves);
     
 };
 

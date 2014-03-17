@@ -92,30 +92,31 @@ bool GameHUD::init()
     //add image resources
     
     auto resource = Sprite::create("resource.png");
-    resource->setPosition(Point(visibleSize.width/2 - resource->getContentSize().width, visibleSize.height - resource->getContentSize().height));
+    resource->setPosition(Point(resource->getContentSize().width, visibleSize.height - resource->getContentSize().height));
     this->addChild(resource);
-    auto livesSpr = Sprite::create("live.png");
-    livesSpr->setPosition(Point(visibleSize.width/2 - 15 + livesSpr->getContentSize().width/2, resource->getPositionY()));
-    this->addChild(livesSpr);
-    auto score = Sprite::create("scores.png");
-    score->setPosition(Point(visibleSize.width/2 + livesSpr->getContentSize().width + 10 + score->getContentSize().width/2, resource->getPositionY()));
-    this->addChild(score);
-    
     // add label
     
     resources = 22200;
-    resourceLabel = LabelTTF::create("300", "Marker Felt", 15);
-    resourceLabel->setPosition(Point(resource->getPositionX() + resource->getContentSize().width/2-20, resource->getPositionY()));
+    resourceLabel = LabelTTF::create("300", "Marker Felt", 25);
+    resourceLabel->setPosition(Point(resource->getPositionX() + resource->getContentSize().width + 30, resource->getPositionY()));
     resourceLabel->setColor(Color3B(255, 80, 20));
     this->addChild(resourceLabel, 1);
     
+    auto livesSpr = Sprite::create("lives.png");
+    livesSpr->setPosition(resourceLabel->getPosition() + Point(resourceLabel->getContentSize().width + livesSpr->getContentSize().width/2, 0));
+    this->addChild(livesSpr);
+    
     lives = 10;
-    liveLabel = LabelTTF::create("10", "Marker Felt", 15);
-    liveLabel->setPosition(Point(livesSpr->getPositionX() + livesSpr->getContentSize().width/2 - 20 , livesSpr->getPositionY()));
-    liveLabel->setColor(Color3B(50, 80, 255));
+    liveLabel = LabelTTF::create("10", "Marker Felt", 25);
+    liveLabel->setPosition(Point(livesSpr->getPositionX() + livesSpr->getContentSize().width/2 + 20 , livesSpr->getPositionY()));
+    liveLabel->setColor(Color3B(0, 0, 255));
     this->addChild(liveLabel);
     
-    
+    waves = 10;
+    waveLabel = LabelTTF::create("Wave: 1", "Marker Felt", 25);
+    waveLabel->setPosition(Point(liveLabel->getPositionX() + liveLabel->getContentSize().width + 40 , liveLabel->getPositionY()));
+    waveLabel->setColor(Color3B(255, 0, 0));
+    this->addChild(waveLabel);
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchAllAtOnce::create();
@@ -352,4 +353,9 @@ void GameHUD::updateLive()
 {
     lives --;
     liveLabel->setString(String::createWithFormat("%d", lives)->getCString());
+}
+void GameHUD::updateWave()
+{
+    waves ++;
+    waveLabel->setString(String::createWithFormat("Wave: %d", waves)->getCString());
 }
