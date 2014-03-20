@@ -10,6 +10,11 @@
 #include "GameMediator.h"
 #include "Enemy.h"
 
+#define kArcheryProjectileDamage            2
+#define kMissileProjectileDamage            3
+#define kSacredOakProjectileDamage          4
+#define kThorTempleProjectileDamage         10
+
 bool Projectile::initWithFileName(const char* filename)
 {
     mySprite = Sprite::create(filename);
@@ -52,7 +57,7 @@ bool MissileProjectile::initWithTarget(Enemy* enemy)
     do {
         CC_BREAK_IF(!Projectile::initWithFileName("rocket.png"));
         myEnemy = enemy;
-        this->setDamage(1);
+        this->setDamage(kMissileProjectileDamage);
 		this->setSpeed(120);
         
 		angularVelocity = 5.0f;
@@ -75,7 +80,8 @@ void MissileProjectile::update(float dt)
     
 	if(this->getRect().intersectsRect(myEnemy->getRect()) && myEnemy->getEnergy() > 0){
 		myEnemy->setEnergy(myEnemy->getEnergy() - this->getDamage());
-		
+        gm->getGameLayer()->addExplosion(myEnemy->getPosition(), 1);
+        
 		removeSelf();
 	}
     
@@ -128,7 +134,7 @@ bool ArcheryProjectile::initWithTargetPos(cocos2d::Point pos, Point selfPos)
         this->setPosition(selfPos);
         setTargetPos(pos);
         moveToTargetPos();
-        this->setDamage(1);
+        this->setDamage(kArcheryProjectileDamage);
         scheduleUpdate();
         
         bRet = true;
@@ -182,7 +188,7 @@ bool SacredOakProjectile::initWithTarget(Enemy* enemy, Point selfPos)
         CC_BREAK_IF(!Projectile::initWithFileName("sacred_oak_projectile.png"));
         myEnemy = enemy;
         this->setPosition(selfPos);
-        this->setDamage(1);
+        this->setDamage(kSacredOakProjectileDamage);
 		this->setSpeed(300);
         this->moveToTargetPos();
         scheduleUpdate();
@@ -196,7 +202,7 @@ void SacredOakProjectile::moveToTargetPos()
     float distance = this->getPosition().getDistance(myEnemy->getPosition());
     float duration = distance / this->getSpeed();
     auto actionMove = MoveTo::create(duration , myEnemy->getPosition());
-    this->runAction(actionMove);
+    this->runAction(Sequence::create(actionMove, CallFuncN::create(CC_CALLBACK_1(Projectile::projectileMoveFinish, this)), NULL));
 }
 void SacredOakProjectile::update(float dt)
 {
@@ -210,7 +216,54 @@ void SacredOakProjectile::update(float dt)
     
 	if(this->getRect().intersectsRect(myEnemy->getRect()) && myEnemy->getEnergy() > 0){
 		myEnemy->setEnergy(myEnemy->getEnergy() - this->getDamage());
-		
+		gm->getGameLayer()->addExplosion(myEnemy->getPosition(), 0);
 		removeSelf();
 	}
+}
+
+/**
+ Ten lua ban ra tu ThorTemple
+ */
+
+ThorTempleProjectile* ThorTempleProjectile::create(Point tgPos)
+{
+    ThorTempleProjectile* mp = new ThorTempleProjectile();
+    if (mp && mp->initWithTargetPos(tgPos)) {
+        mp->autorelease();
+        return mp;
+    }
+    CC_SAFE_DELETE(mp);
+    return NULL;
+}
+bool ThorTempleProjectile::initWithTargetPos(cocos2d::Point tgPos)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Projectile::initWithFileName("range.png"));
+
+        this->setDamage(kThorTempleProjectileDamage);
+        this->setTargetPos(tgPos);
+        this->setPosition(tgPos);
+        
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+void ThorTempleProjectile::createExplosion()
+{
+    GameMediator* gm = GameMediator::shareInstance();
+    gm->getGameLayer()->addExplosion(getTargetPos(), 2);
+    Object* child = NULL;
+    CCARRAY_FOREACH(gm->getTargets(), child){
+        Enemy* enemy = (Enemy*)child;
+        log("RECT: width = %f, h = %f", this->getRect().size.width, this->getRect().size.height);
+        if (this->getRect().intersectsRect(enemy->getRect())) {
+            log("intersect");
+            enemy->setEnergy(enemy->getEnergy() - this->getDamage());
+            
+        }
+        removeSelf();
+    }
+    
+
 }

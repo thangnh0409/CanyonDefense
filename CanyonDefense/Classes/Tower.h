@@ -88,4 +88,23 @@ public:
     void fire(float dt);
     
 };
+
+/*************************
+ 
+ BUIDNG TOWER
+ *************************/
+
+/**
+ Den tho Thor
+ @chuc nang:ban ten lua hanh trinh
+ **/
+
+class ThorTempleTower: public Tower {
+    
+public:
+    static ThorTempleTower* create();
+    bool initWithFileAndRange(const char *pszFilename, int range);
+    void addSkill(float dt);
+    
+};
 #endif /* defined(__CanyonDefense__Tower__) */

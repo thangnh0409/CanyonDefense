@@ -11,10 +11,12 @@
 #include "MapManager.h"
 #include "Tower.h"
 
-#define HUT_BASIC_MONEY             200
+#define HUT_BASIC_MONEY             100
 #define HUT_ADVANCE_MONEY           300
-#define CATAPULT_BASIC_MONEY        400
-#define SACRED_OAK_ADVANCE_MONEY    500
+#define CATAPULT_BASIC_MONEY        200
+#define SACRED_OAK_ADVANCE_MONEY    120
+#define THOR_TEMPLATE_MONEY         250
+#define MISSILE_BUILDING            150
 
 static GameHUD* _shareContext;
 
@@ -31,63 +33,103 @@ bool GameHUD::init()
 {
     towerSprite = NULL;
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    auto btnStart = MenuItemImage::create("btnShowMenu.png", "btnShowMenu1.png", CC_CALLBACK_1(GameHUD::onButtonShowMenuClick, this));
-    btnStart->setPosition(Point::ZERO);
-    auto startMenu = Menu::create(btnStart, NULL);
-    startMenu->setPosition(Point(20, 20));
-    startMenu->setAnchorPoint(Point::ZERO);
-    this->addChild(startMenu);
     
     btnPauseItem = MenuItemImage::create("play.png", "play.png", CC_CALLBACK_1(GameHUD::onButtonPauseClick, this));
     auto btnPause = Menu::create(btnPauseItem, NULL);
     btnPause->setPosition(Point(visibleSize.width - btnPauseItem->getContentSize().width/2, visibleSize.height - btnPauseItem->getContentSize().height/2));
     this->addChild(btnPause);
     
-//    auto playItem = MenuItemImage::create("play1.png", "play2.png", CC_CALLBACK_1(GameHUD::onButtonPlayClick, this));
-//    btnPlay = Menu::create(playItem, NULL);
-//    btnPlay->setPosition(Point(visibleSize.width - playItem->getContentSize().width/2 , playItem->getContentSize().height));
-//    this->addChild(btnPlay);
     
     moveableSprite = Array::create();
     moveableSprite->retain();
+    _numDragonIsKilled = 0;
+    
     hudBackground = Sprite::create("hud.png");
     hudBackground->setAnchorPoint(Point::ZERO);
-    hudBackground->setVisible(false);
-    hudBackground->setPosition(Point(40, 5));
     this->addChild(hudBackground);
     Point hubPos = hudBackground->getPosition();
     
     //add HutBasicTower
-    auto sprite = Sprite::create("hut_2.png");
-    sprite->setPosition(Point(hubPos.x + 50, hubPos.y + 50));
+    auto sprite = Sprite::create("hut_2_menu.png");
+    sprite->setPosition(Point(hubPos.x + 35, hubPos.y+30));
     sprite->setTag(HUT_BASIC_MONEY);
     //sprite->setScale(0.8);
     this->addChild(sprite);
     moveableSprite->addObject(sprite);
     
-    auto sprite1 = Sprite::create("hut_1.png");
-    sprite1->setPosition(sprite->getPosition() + Point(100 + sprite1->getContentSize().width, 0));
-    sprite1->setTag(HUT_ADVANCE_MONEY);
+    //add CatapultTower
+    auto sprite1 = Sprite::create("lock_menu.png");
+    sprite1->setPosition(sprite->getPosition() + Point(30 + sprite1->getContentSize().width/2, -5));
+    sprite1->setTag(CATAPULT_BASIC_MONEY);
     this->addChild(sprite1);
     moveableSprite->addObject(sprite1);
     
-    //add CatapultTower
+    //add lock
     
-    auto sprite2 = Sprite::create("ballias_3.png");
-    sprite2->setPosition(sprite1->getPosition() + Point(100 + sprite2->getContentSize().width, 0));
-    sprite2->setTag(CATAPULT_BASIC_MONEY);
+    auto sprLock = Sprite::create("lock_menu.png");
+    sprLock->setPosition(sprite1->getPosition() + Point(30 + sprLock->getContentSize().width/2, 0));
+    this->addChild(sprLock);
+
+    //add SacredOakTower
+    auto sprite2 = Sprite::create("sacred_oak_1.png");
+    sprite2->setPosition(sprLock->getPosition() + Point(50 + sprite2->getContentSize().width, 0));
+    sprite2->setTag(SACRED_OAK_ADVANCE_MONEY);
     this->addChild(sprite2);
     moveableSprite->addObject(sprite2);
     
-    //add SacredOakTower
     
-    auto sprite3 = Sprite::create("sacred_oak_1.png");
-    sprite3->setPosition(sprite2->getPosition() + Point(100 + sprite3->getContentSize().width, 0));
+    
+    auto sprite3 = Sprite::create("hut_1_menu.png");
+    sprite3->setPosition(sprite2->getPosition() + Point(30 + sprite3->getContentSize().width, 0));
     sprite3->setTag(SACRED_OAK_ADVANCE_MONEY);
     this->addChild(sprite3);
     moveableSprite->addObject(sprite3);
     
+    //add lock2
     
+    auto sprLock2 = Sprite::create("lock_menu.png");
+    sprLock2->setPosition(sprite3->getPosition() + Point(30 + sprLock2->getContentSize().width/2, 0));
+    this->addChild(sprLock2);
+    
+    // add ThorTemple
+    
+    auto sprite4 = Sprite::create("temple_of_thor_menu.png");
+    sprite4->setPosition(sprLock2->getPosition() + Point(40 + sprite4->getContentSize().width, 0));
+    sprite4->setTag(THOR_TEMPLATE_MONEY);
+    this->addChild(sprite4);
+    moveableSprite->addObject(sprite4);
+    
+    //add lock3
+    
+    auto sprLock3 = Sprite::create("lock_menu.png");
+    sprLock3->setPosition(sprite4->getPosition() + Point(30 + sprLock3->getContentSize().width/2, 0));
+    this->addChild(sprLock3);
+    
+    //add lock4
+    
+    auto sprLock4 = Sprite::create("lock_menu.png");
+    sprLock4->setPosition(sprLock3->getPosition() + Point(30 + sprLock4->getContentSize().width/2, 0));
+    this->addChild(sprLock4);
+    
+    // add Missile Building
+    
+    auto sprite5 = Sprite::create("tenlua_menu.png");
+    sprite5->setPosition(sprLock4->getPosition() + Point(40 + sprite5->getContentSize().width, 0));
+    sprite5->setTag(MISSILE_BUILDING);
+    this->addChild(sprite5);
+    moveableSprite->addObject(sprite5);
+    
+    //add lock5
+    
+    auto sprLock5 = Sprite::create("lock_menu.png");
+    sprLock5->setPosition(sprite5->getPosition() + Point(30 + sprLock5->getContentSize().width/2, 0));
+    this->addChild(sprLock5);
+    
+    //add lock6
+    
+    auto sprLock6 = Sprite::create("lock_menu.png");
+    sprLock6->setPosition(sprLock5->getPosition() + Point(30 + sprLock6->getContentSize().width/2, 0));
+    this->addChild(sprLock6);
     
     //add image resources
     
@@ -96,7 +138,7 @@ bool GameHUD::init()
     this->addChild(resource);
     // add label
     
-    resources = 22200;
+    resources = 500;
     resourceLabel = LabelTTF::create("300", "Marker Felt", 25);
     resourceLabel->setPosition(Point(resource->getPositionX() + resource->getContentSize().width + 30, resource->getPositionY()));
     resourceLabel->setColor(Color3B(0, 0, 255));
@@ -123,6 +165,21 @@ bool GameHUD::init()
     timeLabel->setPosition(Point(visibleSize.width - timeLabel->getContentSize().width, timeLabel->getContentSize().height));
     timeLabel->setColor(Color3B(255, 0, 0));
     this->addChild(timeLabel);
+    
+    
+    // add pause dialog
+    
+    pauseBg = Sprite::create("pause_bg.png");
+    pauseBg->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
+    pauseBg->setVisible(false);
+    this->addChild(pauseBg, 100);
+    auto resumeItem = MenuItemImage::create("tieptuc1.png", "tieptuc2.png", CC_CALLBACK_1(GameHUD::onButtonResumeClick, this));
+    auto exitItem = MenuItemImage::create("thoat1.png", "thoat2.png", CC_CALLBACK_1(GameHUD::onButtonExitClick, this));
+    
+    auto menuDialog = Menu::create(resumeItem, exitItem, NULL);
+    menuDialog->setPosition(Point(pauseBg->getContentSize().width/2, pauseBg->getContentSize().height/2));
+    menuDialog->alignItemsVertically();
+    pauseBg->addChild(menuDialog);
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchAllAtOnce::create();
@@ -204,21 +261,30 @@ void GameHUD::onButtonBuildingClick(cocos2d::Object *sender)
 void GameHUD::onButtonPauseClick(cocos2d::Object *senser){
     if (GameMediator::shareInstance()->getGameLayer()->getGameState() == RUNNING) {
         btnPauseItem->setNormalImage(Sprite::create("play.png"));
-        GameMediator::shareInstance()->getGameLayer()->setGameState(PAUSE);
+        GameMediator::shareInstance()->getGameLayer()->callPauseGame();
+        pauseBg->setVisible(true);
     }else
-        if (GameMediator::shareInstance()->getGameLayer()->getGameState() == PAUSE) {
+        if (GameMediator::shareInstance()->getGameLayer()->getGameState() == WAIT_NEXT_WAVE) {
             btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
             GameMediator::shareInstance()->getGameLayer()->setGameState(RUNNING);
-        }else
-            if (GameMediator::shareInstance()->getGameLayer()->getGameState() == WAIT_NEXT_WAVE) {
-                btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
-                GameMediator::shareInstance()->getGameLayer()->setGameState(RUNNING);
-                GameMediator::shareInstance()->getGameLayer()->playGameWhiteWaitNextWave();
-            }
+            GameMediator::shareInstance()->getGameLayer()->playGameWhiteWaitNextWave();
+        }
 }
 void GameHUD::onButtonPlayClick(cocos2d::Object *sender)
 {
     
+}
+void GameHUD::onButtonResumeClick(cocos2d::Object *sender)
+{
+    pauseBg->setVisible(false);
+    if (GameMediator::shareInstance()->getGameLayer()->getGameState() == PAUSE) {
+        btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
+        GameMediator::shareInstance()->getGameLayer()->callResumeGame();
+    }
+}
+void GameHUD::onButtonExitClick(cocos2d::Object *sender)
+{
+    GameMediator::shareInstance()->getGameLayer()->backScene();
 }
 void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {
@@ -232,8 +298,6 @@ void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event
         Sprite* sprite = (Sprite*)child;
         Rect sprRect = sprite->getBoundingBox();
         if (sprRect.containsPoint(location) && sprite->getTag() <= resources) {
-            towerIsSelected = true;
-            newSprite = Sprite::createWithTexture(sprite->getTexture());
             switch (sprite->getTag()) {
                 case HUT_BASIC_MONEY:
                     sprite->setTexture("hut_2_selected.png");
@@ -241,9 +305,17 @@ void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event
                 case HUT_ADVANCE_MONEY:
                     sprite->setTexture("hut_1_selected.png");
                     break;
+                case MISSILE_BUILDING:
+                {
+                    if (!_thorSkillAvailible) {
+                        return;
+                    }
+                }
                 default:
                     break;
             }
+            towerIsSelected = true;
+            newSprite = Sprite::createWithTexture(sprite->getTexture());
             newSprite->setTag(sprite->getTag());
             newSprite->setPosition(sprite->getPosition());
             rangeSprite = Sprite::create("range.png");
@@ -313,6 +385,16 @@ void GameHUD::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event
          * Khong dat o vi tri goc
          * phai chon tower truoc do
          */
+        if (towerSprite->getTag() == MISSILE_BUILDING && !hudBgRect.containsPoint(location) && towerIsSelected) {
+            towerIsSelected = false;
+            GameMediator::shareInstance()->getGameLayer()->addTower(location, towerSprite->getTag());
+            if (rangeSprite) {
+                this->removeChild(rangeSprite);
+            }
+            this->removeChild(towerSprite, true);
+            
+            towerSprite = NULL;
+        }
         if (!hudBgRect.containsPoint(location) && canBuilderInMap(location) && !haveTower && towerIsSelected) {
             towerIsSelected = false;
             GameMediator::shareInstance()->getGameLayer()->addTower(location, towerSprite->getTag());
@@ -327,17 +409,16 @@ void GameHUD::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event
                 Sprite* sprite = (Sprite*)child;
                 switch (sprite->getTag()) {
                     case HUT_BASIC_MONEY:
-                        sprite->setTexture("hut_2.png");
+                        sprite->setTexture("hut_2_menu.png");
                         break;
                     case HUT_ADVANCE_MONEY:
-                        sprite->setTexture("hut_1.png");
+                        sprite->setTexture("hut_1_menu.png");
                         break;
                     default:
                         break;
                 }
-
+                
             }
-            log("tesst");
 
         }
        
@@ -351,6 +432,24 @@ void GameHUD::updateResource(int value)
 {
     resources = resources + value;
     resourceLabel->setString(String::createWithFormat("%d", resources)->getCString());
+    
+    /**
+     Mo khoa cho vu khi
+     **/
+    if (_numDragonIsKilled >= 10 && !catapultUnlocked) {
+        Object* child = NULL;
+        CCARRAY_FOREACH(moveableSprite, child){
+            Sprite* sprite = (Sprite*)child;
+            if (sprite->getTag() == CATAPULT_BASIC_MONEY) {
+                sprite->setTexture("ballias_3.png");
+                catapultUnlocked = true;
+                break;
+            }
+        }
+    }else
+        if (_numDragonIsKilled >= 20) {
+            
+        }
     
     /**
      cap nhat xem co the dung duoc Tower hay ko
@@ -387,6 +486,7 @@ void GameHUD::updateTime(float dt)
 void GameHUD::showTimerCount()
 {
     GameMediator* gm = GameMediator::shareInstance();
+    btnPauseItem->setNormalImage(Sprite::create("play.png"));
     timeLabel->setVisible(true);
     times = gm->getGameLayer()->getTimerDelay(gm->getLevelMap());
     schedule(schedule_selector(GameHUD::updateTime), 1.0f);
@@ -395,4 +495,5 @@ void GameHUD::hideTimerCount()
 {
     unschedule(schedule_selector(GameHUD::updateTime));
     timeLabel->setVisible(false);
+    btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
 }

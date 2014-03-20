@@ -24,7 +24,7 @@
    eJzrYGBg6EDCDDjY5GAGEs1AV49NLy7zcKllQJMnpA6ZTyqgVzjh0oPuFlzuQ2dT4j8A/PMw4Q==
   </data>
  </layer>
- <objectgroup name="objects" width="16" height="9">
+ <objectgroup name="path1" width="16" height="9">
   <object x="315" y="27"/>
   <object x="316" y="181"/>
   <object x="195" y="181"/>
@@ -33,5 +33,17 @@
   <object x="669" y="276"/>
   <object x="784" y="270"/>
   <object x="848" y="269" width="1"/>
+ </objectgroup>
+ <objectgroup name="path2" width="16" height="9">
+  <object x="309" y="23"/>
+  <object x="334" y="179"/>
+  <object x="199" y="180"/>
+  <object x="199" y="242"/>
+  <object x="195" y="327"/>
+  <object x="329" y="302"/>
+  <object x="456" y="321"/>
+  <object x="606" y="293"/>
+  <object x="710" y="273"/>
+  <object x="868" y="272"/>
  </objectgroup>
 </map>

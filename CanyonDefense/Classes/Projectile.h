@@ -86,5 +86,17 @@ public:
     
 };
 
+/**
+ Ten lua ban ra tu ThorTemple
+ */
+class ThorTempleProjectile : public Projectile {
+private:
+    Point targetPos;
+public:
+    bool initWithTargetPos(Point tgPos);
+    static ThorTempleProjectile* create(Point tgPos);
+    void createExplosion();
+    
+};
 
 #endif /* defined(__CanyonDefense__Projectile__) */

@@ -28,6 +28,11 @@ enum GAME_STATE {
 
 class LevelLayer : public Layer {
     
+private:
+    SpriteFrameCache* cache;
+    Vector<Node*> actionManager;
+    Vector<Object*> schedulerManager;
+    
     
 public:
     static Scene *scene();
@@ -65,11 +70,20 @@ public:
      Call play game when you're wating for next wave
      */
     void playGameWhiteWaitNextWave();
+
+    /**
+     method for pause game
+     */
+    void callPauseGame();
+    /**
+     method for resume game
+     */
+    void callResumeGame();
     
     /**
-     Call play game after pause
-     **/
-    void playGameAfterPause();
+     back to select difficult scene
+     */
+    void backScene();
     /**
      check finish wave
      */
@@ -89,6 +103,8 @@ public:
      update game each frame
      */
     void update(float dt);
+    
+    void addExplosion(Point pos, int projectileType);
     
     void spriteMoveFinish(Node *sender);
     

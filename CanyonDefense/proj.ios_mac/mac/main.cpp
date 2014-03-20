@@ -30,6 +30,6 @@ int main(int argc, char *argv[])
 {
     AppDelegate app;
     EGLView eglView;
-    eglView.init("Hello World",480,320);
+    eglView.init("Hello World",800,480);
     return Application::getInstance()->run();
 }

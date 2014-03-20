@@ -210,9 +210,9 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/Projectile.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCComponent.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCComponentContainer.h \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCDeprecated.h \
- jni/../../Classes/GameMediator.h jni/../../Classes/LevelLayer.h \
- jni/../../Classes/Wave.h jni/../../Classes/MapManager.h \
- jni/../../Classes/GameHUD.h jni/../../Classes/Enemy.h
+ jni/../../Classes/Enemy.h jni/../../Classes/GameMediator.h \
+ jni/../../Classes/LevelLayer.h jni/../../Classes/Wave.h \
+ jni/../../Classes/MapManager.h jni/../../Classes/GameHUD.h
 
 jni/../../Classes/Projectile.h:
 
@@ -636,6 +636,8 @@ jni/../../Classes/Projectile.h:
 
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCDeprecated.h:
 
+jni/../../Classes/Enemy.h:
+
 jni/../../Classes/GameMediator.h:
 
 jni/../../Classes/LevelLayer.h:
@@ -645,5 +647,3 @@ jni/../../Classes/Wave.h:
 jni/../../Classes/MapManager.h:
 
 jni/../../Classes/GameHUD.h:
-
-jni/../../Classes/Enemy.h:

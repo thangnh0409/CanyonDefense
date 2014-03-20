@@ -45,28 +45,28 @@ bool MenuScene::init()
 
 	//Font Item
 	auto playSpriteNormal = Sprite::create("play1.png");
-    auto playSpriteSelected = Sprite::create("CloseSelected.png");
-    auto playSpriteDisabled = Sprite::create("CloseNormal.png");
+    auto playSpriteSelected = Sprite::create("play1.png");
+    auto playSpriteDisabled = Sprite::create("play1.png");
     
 	auto item1 = MenuItemSprite::create(playSpriteNormal, playSpriteSelected, playSpriteDisabled, CC_CALLBACK_1(MenuScene::menuPlayCallback, this) );
     
 	
 	auto helpSpriteNormal = Sprite::create("help1.png");
-    auto helpSpriteSelected = Sprite::create("CloseSelected.png");
-    auto helpSpriteDisabled = Sprite::create("CloseNormal.png");
+    auto helpSpriteSelected = Sprite::create("help1.png");
+    auto helpSpriteDisabled = Sprite::create("help1.png");
 
 	auto item2 = MenuItemSprite::create(helpSpriteNormal, helpSpriteSelected, helpSpriteDisabled, CC_CALLBACK_1(MenuScene::menuHelpCallback, this) );
 
 	auto scoreSpriteNormal = Sprite::create("score1.png");
-    auto scoreSpriteSelected = Sprite::create("CloseSelected.png");
-    auto scoreSpriteDisabled = Sprite::create("CloseNormal.png");
+    auto scoreSpriteSelected = Sprite::create("score1.png");
+    auto scoreSpriteDisabled = Sprite::create("score1.png");
 
 	auto item3 = MenuItemSprite::create(scoreSpriteNormal, scoreSpriteSelected, scoreSpriteDisabled, CC_CALLBACK_1(MenuScene::menuScoreCallback, this) );
     
 	//Menu
 	auto menu = Menu::create(item1, item2, item3, NULL);
     menu->setPosition(Point(org.x + s.width/2, s.height/3));
-	menu->alignItemsVertically();
+	menu->alignItemsVerticallyWithPadding(-60);
 	// elastic effect
    
     
@@ -94,7 +94,7 @@ void MenuScene::menuPlayCallback(Object* pSender)
 	auto newScene = Scene::create();
 	auto layer = new SelectMapScene();
 	newScene->addChild(layer,0);
-	Director::getInstance()->replaceScene(newScene);
+	Director::getInstance()->pushScene(newScene);
 }
 void MenuScene::menuHelpCallback(Object* pSender)
 {

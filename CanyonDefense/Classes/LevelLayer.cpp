@@ -14,12 +14,16 @@
 #include "GameMediator.h"
 #include "Tower.h"
 #include "GameHUD.h"
+#include "Projectile.h"
 
 #define kMapTag 3
-#define HUT_BASIC_MONEY             200
+#define HUT_BASIC_MONEY             100
 #define HUT_ADVANCE_MONEY           300
-#define CATAPULT_BASIC_MONEY        400
-#define SACRED_OAK_ADVANCE_MONEY    500
+#define CATAPULT_BASIC_MONEY        200
+#define SACRED_OAK_ADVANCE_MONEY    120
+#define THOR_TEMPLATE_MONEY         250
+#define MISSILE_BUILDING            150
+
 
 extern int map;
 extern int selected;
@@ -49,8 +53,6 @@ bool LevelLayer::init()
     auto glView = EGLView::getInstance();
 	Size frameSize = glView->getFrameSize();
     
-    float scaleFactorX = frameSize.width / 800;
-    float scaleFactorY = frameSize.height / 480;
     //this->setScale(scaleFactorX, scaleFactorY);
     
     log("map id: %d, select: %d", map, selected);
@@ -60,8 +62,11 @@ bool LevelLayer::init()
     this->addWave();
     
     //add map background
-    
-    TMXTiledMap* tileMap = MapManager::shareMap()->getTileMap();
+    MapManager* mapmanager = MapManager::shareMap();
+    mapmanager->initMapWithMapId(map);
+    TMXTiledMap* tileMap = mapmanager->getTileMap();
+    float scaleFactorX = frameSize.width / (tileMap->getMapSize().width * tileMap->getTileSize().width );
+    float scaleFactorY = frameSize.height / (tileMap->getMapSize().height * tileMap->getTileSize().height);
     //TMXTiledMap* map = TMXTiledMap::create("TileMap.tmx");
     TMXLayer* metaLayer = tileMap->getLayer("meta");
     metaLayer->setVisible(false);
@@ -73,41 +78,10 @@ bool LevelLayer::init()
     Size CC_UNUSED s = tileMap->getContentSize();
     CCLOG("Contentsize: %f, %f", s.width, s.height);
     
-    Animation* animationTest = Animation::create();
-    animationTest->addSpriteFrameWithFile("dragon_1_1.png");
-    animationTest->addSpriteFrameWithFile("dragon_1_2.png");
-    animationTest->addSpriteFrameWithFile("dragon_1_3.png");
-    animationTest->addSpriteFrameWithFile("hut_2.png");
-    animationTest->addSpriteFrameWithFile("dragon_1_5.png");
-    animationTest->addSpriteFrameWithFile("dragon_1_6.png"  );
-    
-    animationTest->setDelayPerUnit(4 / 6);
-    animationTest->setRestoreOriginalFrame(true);
-    animationTest->setLoops(1);
-
-    Sprite* spr = Sprite::create("dragon_1_1.png");
-    spr->setScale(1.5);
-    spr->setPosition(Point(150, 170));
-    this->addChild(spr, 3);
-    spr->runAction(RepeatForever::create(Animate::create(animationTest)));
-    
     //load textTure
-    
-    Vector<SpriteFrame*> aniFrame(6);
-    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+
+    cache = SpriteFrameCache::getInstance();
     cache->addSpriteFramesWithFile("yulei1.plist", "yulei1.png");
-    
-//    auto missile = Sprite::create("Player.png");
-//    missile->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
-//    this->addChild(missile, 1);
-//    char str[100] = {0};
-//    for (int i = 1; i < 6; i++) {
-//        sprintf(str, "yulei1_0%d.png", i);
-//        auto frame = cache->getSpriteFrameByName(str);
-//        aniFrame.pushBack(frame);
-//    }
-//    Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.3f);
-//    missile->runAction(RepeatForever::create(Animate::create(animation)));
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchAllAtOnce::create();
@@ -116,6 +90,7 @@ bool LevelLayer::init()
     
     scheduleUpdate();
     
+    //init all value constructor
     _currentWaveCount = -1;
     /**
      cap nhat resource de set opacity cua tower image
@@ -179,7 +154,22 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
             GameHUD::shareInstance()->updateResource(- SACRED_OAK_ADVANCE_MONEY);
             break;
         }
+        case THOR_TEMPLATE_MONEY:{
+            Tower* tower = ThorTempleTower::create();
+            tower->setPosition(pos);
+            this->addChild(tower, 2);
+            GameMediator::shareInstance()->getTowers()->addObject(tower);
+            GameHUD::shareInstance()->updateResource(- THOR_TEMPLATE_MONEY);
+            break;
+        }
             
+        case MISSILE_BUILDING:{
+            ThorTempleProjectile* thorProjectile = ThorTempleProjectile::create(pos);
+            this->addChild(thorProjectile);
+            thorProjectile->createExplosion();
+            
+            break;
+        }
             
            
         default:
@@ -192,35 +182,35 @@ void LevelLayer::addWave()
     GameMediator* gm = GameMediator::shareInstance();
     switch (gm->getLevelMap()) {
         case EASY:{
-            Wave* wave1 = Wave::create(1, 4, 2, 2);
+            Wave* wave1 = Wave::create(1, 8, 0, 0, 0, 0);
             gm->getWaves()->addObject(wave1);
-            Wave* wave2 = Wave::create(1, 4, 5, 3);
+            Wave* wave2 = Wave::create(1, 4, 5, 3, 3, 2);
             gm->getWaves()->addObject(wave2);
-//            Wave* wave3 = Wave::create(1, 4, 2, 3);
-//            gm->getWaves()->addObject(wave3);
-//            Wave* wave4 = Wave::create(1, 2, 0, 4);
-//            gm->getWaves()->addObject(wave4);
+            Wave* wave3 = Wave::create(1, 4, 2, 3, 1, 4);
+            gm->getWaves()->addObject(wave3);
+            Wave* wave4 = Wave::create(1, 2, 0, 4, 4, 6);
+            gm->getWaves()->addObject(wave4);
             break;
         }
         case NORMAL:{
-            Wave* wave1 = Wave::create(1, 4, 2, 2);
+            Wave* wave1 = Wave::create(1, 4, 2, 2, 1, 3);
             gm->getWaves()->addObject(wave1);
-            Wave* wave2 = Wave::create(1, 4, 5, 3);
+            Wave* wave2 = Wave::create(1, 4, 5, 3, 3, 2);
             gm->getWaves()->addObject(wave2);
-            Wave* wave3 = Wave::create(1, 4, 2, 3);
+            Wave* wave3 = Wave::create(1, 4, 2, 3, 1, 4);
             gm->getWaves()->addObject(wave3);
-            Wave* wave4 = Wave::create(1, 2, 0, 4);
+            Wave* wave4 = Wave::create(1, 2, 0, 4, 4, 6);
             gm->getWaves()->addObject(wave4);
             break;
         }
         case HARD:{
-            Wave* wave1 = Wave::create(1, 4, 2, 2);
+            Wave* wave1 = Wave::create(1, 4, 2, 2, 1, 3);
             gm->getWaves()->addObject(wave1);
-            Wave* wave2 = Wave::create(1, 4, 5, 3);
+            Wave* wave2 = Wave::create(1, 4, 5, 3, 3, 2);
             gm->getWaves()->addObject(wave2);
-            Wave* wave3 = Wave::create(1, 4, 2, 3);
+            Wave* wave3 = Wave::create(1, 4, 2, 3, 1, 4);
             gm->getWaves()->addObject(wave3);
-            Wave* wave4 = Wave::create(1, 2, 0, 4);
+            Wave* wave4 = Wave::create(1, 2, 0, 4, 4, 6);
             gm->getWaves()->addObject(wave4);
             break;
         }
@@ -254,31 +244,62 @@ void LevelLayer::addEnemy(float dt)
     Wave* wave = this->getCurrentWave();
     Enemy* target = NULL;
     if (wave) {
-        if (wave->getNumSmallCar() > 0) {
+        if (wave->getNumSmallDragon() > 0) {
             target = SmallDragonEnemy::create();
-            wave->setNumSmallCar(wave->getNumSmallCar() - 1);
+            wave->setNumSmallDragon(wave->getNumSmallDragon() - 1);
         }else
-        if (wave->getNumMediumCar() > 0) {
+        if (wave->getNumMediumDragon() > 0) {
             target = MediumDragonEnemy::create();
-            wave->setNumMediumCar(wave->getNumMediumCar() - 1);
+            wave->setNumMediumDragon(wave->getNumMediumDragon() - 1);
         }else
-        if (wave->getNumBigCar() > 0){
+        if (wave->getNumBigDragon() > 0){
             target = SmallFlyDragonEnemy::create();
-            wave->setNumBigCar(wave->getNumBigCar() - 1);
+            wave->setNumBigDragon(wave->getNumBigDragon() - 1);
+        }else
+        if (wave->getNumSmallFlyDragon() > 0) {
+            target = SmallFlyDragonEnemy::create();
+            wave->setNumSmallFlyDragon(wave->getNumSmallFlyDragon() - 1);
+        }else
+        if(wave->getNumMediumFlyDragon() > 0){
+            target = MediumFlyDragonEnemy::create();
+            wave->setNumMediumFlyDragon(wave->getNumMediumFlyDragon() - 1);
         }else
             unschedule(schedule_selector(LevelLayer::addEnemy));
         
         if(target){
             //target->setPosition(rootPoint);
             gm->getTargets()->addObject(target);
-            this->addChild(target, 1);
+            this->addChild(target, 100);
         }
     }
 }
 
-void LevelLayer::playGameAfterPause()
+void LevelLayer::callPauseGame()
 {
+    _gameState = PAUSE;
+//    unscheduleAllSelectors();
+//    unscheduleUpdate();
+    actionManager = Director::getInstance()->getActionManager()->pauseAllRunningActions();
+    schedulerManager = Director::getInstance()->getScheduler()->pauseAllTargets();
+}
+void LevelLayer::callResumeGame()
+{
+    _gameState = RUNNING;
+    for (auto sp: actionManager) {
+        Director::getInstance()->getActionManager()->resumeTarget(sp);
+    }
+    for (auto schl : schedulerManager) {
+        Director::getInstance()->getScheduler()->resumeTarget(schl);
+    }
     
+}
+
+void LevelLayer::backScene()
+{
+    for (auto sp: actionManager) {
+        Director::getInstance()->getActionManager()->resumeTarget(sp);
+    }
+    Director::getInstance()->popScene();
 }
 
 void LevelLayer::playGameWhiteWaitNextWave()
@@ -294,9 +315,11 @@ void LevelLayer::checkFinishWave(float dt)
     GameMediator* gm = GameMediator::shareInstance();
     Wave* wave = this->getCurrentWave();
     if (gm->getTargets()->count() == 0 && wave
-        && wave->getNumSmallCar() <= 0
-        && wave->getNumMediumCar() <= 0
-        && wave->getNumBigCar() <= 0) {
+        && wave->getNumSmallDragon() <= 0
+        && wave->getNumMediumDragon() <= 0
+        && wave->getNumBigDragon() <= 0
+        && wave->getNumSmallFlyDragon() <=0
+        && wave->getNumMediumFlyDragon() <= 0 ){
         unschedule(schedule_selector(LevelLayer::checkFinishWave));
         GameHUD::shareInstance()->showTimerCount();
         _gameState = WAIT_NEXT_WAVE;
@@ -318,7 +341,7 @@ float LevelLayer::getTimerDelay(int levelMap)
 {
     switch (levelMap) {
         case 1:
-            return 5;
+            return 60;
         case 2:
             return 60;
         case 3:
@@ -330,6 +353,60 @@ float LevelLayer::getTimerDelay(int levelMap)
 void LevelLayer::update(float dt)
 {
     
+}
+
+void LevelLayer::addExplosion(cocos2d::Point pos, int projectileType)
+{
+
+    Vector<SpriteFrame*> aniFrame(6);
+    auto missile = Sprite::createWithSpriteFrameName("yulei1_11.png");
+    missile->setScale(0.3f);
+    missile->setPosition(pos);
+    this->addChild(missile, 1);
+    char str[100] = {0};
+    switch (projectileType) {
+        case 0:{
+            for (int i = 1; i < 3; i++) {
+                sprintf(str, "yulei1_0%d.png", i);
+                auto frame = cache->getSpriteFrameByName(str);
+                aniFrame.pushBack(frame);
+            }
+            break;
+        }
+        case 1:{
+            for (int i = 11; i < 15; i++) {
+                sprintf(str, "yulei1_%d.png", i);
+                auto frame = cache->getSpriteFrameByName(str);
+                aniFrame.pushBack(frame);
+            }
+            break;
+        }
+        // vu no do ten lua cua ThoTemple tao ra
+        case 2:{
+            missile->setScale(0.8f);
+            for (int i = 1; i < 6; i++) {
+                sprintf(str, "yulei1_0%d.png", i);
+                auto frame = cache->getSpriteFrameByName(str);
+                aniFrame.pushBack(frame);
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+    Animation* animation = Animation::createWithSpriteFrames(aniFrame, 0.1f);
+    Animate* animate = Animate::create(animation);
+    missile->runAction(Sequence::create(animate, CallFuncN::create(CC_CALLBACK_1(LevelLayer::spriteMoveFinish, this)), NULL));
+
+}
+void LevelLayer::spriteMoveFinish(cocos2d::Node *sender)
+{
+    Sprite* sprt = (Sprite*)sender;
+    if (sprt) {
+        sprt->stopAllActions();
+        sprt->removeFromParentAndCleanup(true);
+    }
 }
 void LevelLayer::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {

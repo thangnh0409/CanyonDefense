@@ -52,6 +52,7 @@ public:
     Sprite* sprite;
     Sprite* energySprite;
     PointArray* arrayPoint;
+    PointArray* arrayPoint2;
     
     GameMediator* gm;
     /**
@@ -141,6 +142,17 @@ public:
 class SmallFlyDragonEnemy : public Enemy {
 public:
     static SmallFlyDragonEnemy* create();
+    bool initWithFile(const char* filename);
+    void update(float dt);
+    
+};
+
+/*
+ Class for small fly dragon
+ */
+class MediumFlyDragonEnemy : public Enemy {
+public:
+    static MediumFlyDragonEnemy* create();
     bool initWithFile(const char* filename);
     void update(float dt);
     

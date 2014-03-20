@@ -141,7 +141,7 @@ bool HutBasicTower::initWithFileAndRange(const char *pszFilename, int range)
 }
 void HutBasicTower::fire(float dt)
 {
-    if(this->getTarget() != NULL){
+    if(this->getTarget() != NULL && this->getTarget()->getEnemyType() == GROUND ){
 		GameMediator* m = GameMediator::shareInstance();
         
 		Point shootVector = this->getTarget()->getPosition() - this->getPosition();
@@ -263,7 +263,45 @@ void SacredOakTower::fire(float dt)
 		GameMediator* m = GameMediator::shareInstance();
 		SacredOakProjectile* projectile = SacredOakProjectile::create(this->getTarget(), this->getPosition());
         projectile->setPosition(this->getPosition());
+//        ThorTempleProjectile* projectile = ThorTempleProjectile::create(Point(50, 100), this->getPosition());
 		m->getGameLayer()->addChild(projectile);
 	}else
         this->getClosestTarget();
+}
+
+/**
+ Vu khi xay dung, ban ten lua
+ */
+
+ThorTempleTower* ThorTempleTower::create()
+{
+    ThorTempleTower* mtt = new ThorTempleTower;
+    if (mtt && mtt->initWithFileAndRange("temple_of_thor.png", 150)) {
+        mtt->autorelease();
+        
+        return mtt;
+    }
+    
+    CC_SAFE_DELETE(mtt);
+    return NULL;
+}
+bool ThorTempleTower::initWithFileAndRange(const char *pszFilename, int range)
+{
+    bool bRet = false;
+    do {
+        CC_BREAK_IF(!Tower::initWithFileAndRange(pszFilename, range));
+        ParticleSystemQuad* _emitter = ParticleGalaxy::create();
+        //_emitter->setTexture( Director::getInstance()->getTextureCache()->addImage("fire.png") );
+        _emitter->setPosition(this->getPosition()+ Point(0, 20));
+        _emitter->setScale(0.3);
+        this->addChild(_emitter);
+        
+        this->schedule(schedule_selector(ThorTempleTower::addSkill), 10.0f);
+        bRet = true;
+    } while (0);
+    return bRet;
+}
+void ThorTempleTower::addSkill(float dt)
+{
+    GameHUD::shareInstance()->setThorSkillAvailble(true);
 }

@@ -26,19 +26,19 @@ SelectDifficuldScene::SelectDifficuldScene(void)
 	this->addChild(backgroundSprite,1);
 
 	auto backSpriteNormal = Sprite::create("back1.png");
-    auto backSpriteSelected = Sprite::create("CloseSelected.png");
-    auto backSpriteDisabled = Sprite::create("CloseNormal.png");
+    auto backSpriteSelected = Sprite::create("back1.png");
+    auto backSpriteDisabled = Sprite::create("back1.png");
 	auto item1 = MenuItemSprite::create(backSpriteNormal, backSpriteSelected, backSpriteDisabled, CC_CALLBACK_1(SelectDifficuldScene::backCallback, this) );
     
 	auto nextSpriteNormal = Sprite::create("next1.png");
-    auto nextSpriteSelected = Sprite::create("CloseSelected.png");
-    auto nextSpriteDisabled = Sprite::create("CloseNormal.png");
+    auto nextSpriteSelected = Sprite::create("next1.png");
+    auto nextSpriteDisabled = Sprite::create("next1.png");
 
 	auto item2 = MenuItemSprite::create(nextSpriteNormal, nextSpriteSelected, nextSpriteDisabled, CC_CALLBACK_1(SelectDifficuldScene::nextCallback, this) );
     
 	//Menu
 	auto menu = Menu::create(item1,item2, NULL);
-	menu->alignItemsHorizontally();
+	menu->alignItemsHorizontallyWithPadding(-120);
 	// elastic effect
     
     int i=0;
@@ -74,16 +74,13 @@ SelectDifficuldScene::SelectDifficuldScene(void)
 
 void SelectDifficuldScene::backCallback(Object* sender)
 {
-	auto newScene = Scene::create();
-	auto layer = new SelectMapScene();
-	newScene->addChild(layer,0);
-	Director::getInstance()->replaceScene(newScene);
+	Director::getInstance()->popScene();
 }
 
 void SelectDifficuldScene::nextCallback(Object* sender)
 {
 	auto mainGame = LevelLayer::scene();
-	Director::getInstance()->replaceScene(mainGame);
+	Director::getInstance()->pushScene(mainGame);
 }
 
 

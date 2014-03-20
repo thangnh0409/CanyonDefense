@@ -17,6 +17,7 @@ class GameHUD : public Layer {
 private:
     Sprite* hudBackground;
     Sprite* hudChildBackground;
+    Sprite* pauseBg;
     Sprite* towerSprite;
     bool towerIsSelected;
     Sprite* rangeSprite;
@@ -27,6 +28,9 @@ private:
     LabelTTF* timeLabel;
     Menu* btnPlay;
     MenuItemImage* btnPauseItem;
+    
+    bool catapultUnlocked;
+
 public:
     static GameHUD* shareInstance();
     bool init();
@@ -36,6 +40,8 @@ public:
     void onButtonBuildingClick(Object* sender);
     void onButtonPauseClick(Object* senser);
     void onButtonPlayClick(Object* sender);
+    void onButtonResumeClick(Object* sender);
+    void onButtonExitClick(Object* sender);
     bool canBuilderInMap(Point pos);
     void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesMoved(const std::vector<Touch*>& touches, Event *unused_event);
@@ -53,7 +59,9 @@ public:
     CC_SYNTHESIZE(int, lives, Lives);
     CC_SYNTHESIZE(int, waves, Waves);
     CC_SYNTHESIZE(int, times, Time);
-    
+    CC_SYNTHESIZE(int, _numDragonIsKilled, NumDrgIsKilled);
+CC_SYNTHESIZE(bool, _thorSkillAvailible, ThorSkillAvailble);
+
 };
 
 #endif /* defined(__CanyonDefense__GameHUD__) */

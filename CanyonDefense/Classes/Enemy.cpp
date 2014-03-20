@@ -25,9 +25,25 @@ enum{
 #define kEnergySmallCar     6
 #define kEnergyMediumCar    4
 #define kEnergyBigCar       5
-#define kResourceSmallCar   20
-#define kResourceMediumCar  40
-#define kResourceBigCar     100
+
+#define kSmallDragonEnergy              3
+#define kMediumDragonEnergy             7
+#define kBigDragonEnergy                15
+
+#define kSmallFlyDragonEnergy           5
+#define kMediumFlyDragonEnergy          10
+#define kBigFlyDragonEnergy             15
+
+#define kResourceSmallCar               20
+#define kResourceMediumCar              40
+#define kResourceBigCar                 100
+
+#define kSmallDragonResource            20
+#define kMediumDragonResource           40
+#define kBigDragonResource              50
+#define kSmallFlyDragonResource         40
+#define kMediumFlyDragonResource        60
+#define kBigFlyDragonResource           80
 /*
  construction method
  **/
@@ -39,12 +55,13 @@ Enemy::Enemy()
     //array point for get path
     
     TMXTiledMap* map = MapManager::shareMap()->getTileMap();
-    auto objectGroup = map->getObjectGroup("objects");
+    auto objectGroup = map->getObjectGroup("path1");
     auto& rootObj = objectGroup->getObjects();
-    
-    Value objectsVal = Value(rootObj);
+    auto objectGroup2 = map->getObjectGroup("path2");
+    auto& rootObj2 = objectGroup2->getObjects();
     
     arrayPoint = PointArray::create(20);
+    arrayPoint2 = PointArray::create(20);
     
     for (auto& obj : rootObj)
     {
@@ -52,6 +69,13 @@ Enemy::Enemy()
         float x = dict["x"].asFloat();
         float y = dict["y"].asFloat();
         arrayPoint->addControlPoint(Point(x ,y));
+    }
+    for (auto& obj : rootObj2)
+    {
+        ValueMap& dict = obj.asValueMap();
+        float x = dict["x"].asFloat();
+        float y = dict["y"].asFloat();
+        arrayPoint2->addControlPoint(Point(x ,y));
     }
 
 }
@@ -326,14 +350,27 @@ bool SmallDragonEnemy::initWithFile(const char *filename)
     bool bRet = false;
     do {
         CC_BREAK_IF(!Enemy::initWithFile(filename));
-        setEnergy(kEnergySmallCar);
-        setMaxEnergy(kEnergySmallCar);
+        setEnergy(kSmallDragonEnergy);
+        setMaxEnergy(kSmallDragonEnergy);
         setEnemyType(GROUND);
         bRet = true;
         
-        this->setPosition(arrayPoint->getControlPointAtIndex(0));
-        auto action = CatmullRomTo::create(20, arrayPoint);
-        this->runAction(action);
+        switch (arc4random()%2) {
+            case 0:{
+                this->setPosition(arrayPoint->getControlPointAtIndex(0));
+                auto action = CatmullRomTo::create(20, arrayPoint);
+                this->runAction(action);
+                break;
+            }
+            case 1:{
+                this->setPosition(arrayPoint2->getControlPointAtIndex(0));
+                auto action = CatmullRomTo::create(20, arrayPoint2);
+                this->runAction(action);
+                break;
+            }
+            default:
+                break;
+        }
         
         
     } while (0);
@@ -346,7 +383,8 @@ void SmallDragonEnemy::update(float dt)
     
     if (this->getEnergy() <= 0) {
         removeSelf();
-        gm->getGameHUD()->updateResource(kResourceSmallCar);
+        gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
+        gm->getGameHUD()->updateResource(kSmallDragonResource);
     }else
         updateEnergy();
     if (gm->getGameLayer()->isOutOfBound(pos)) {
@@ -384,8 +422,8 @@ bool MediumDragonEnemy::initWithFile(const char *filename)
         }
         
         CC_BREAK_IF(!Enemy::initWithSpriteFrame(animFrames.front()));
-        setEnergy(kEnergySmallCar);
-        setMaxEnergy(kEnergySmallCar);
+        setEnergy(kMediumDragonEnergy);
+        setMaxEnergy(kMediumDragonEnergy);
         setEnemyType(GROUND);
         bRet = true;
         
@@ -394,9 +432,22 @@ bool MediumDragonEnemy::initWithFile(const char *filename)
         auto animate = Animate::create(animation);
         sprite->runAction(RepeatForever::create( animate ) );
                 
-        this->setPosition(arrayPoint->getControlPointAtIndex(0));
-        auto action = CatmullRomTo::create(20, arrayPoint);
-        this->runAction(action);
+        switch (arc4random()%2) {
+            case 0:{
+                this->setPosition(arrayPoint->getControlPointAtIndex(0));
+                auto action = CatmullRomTo::create(20, arrayPoint);
+                this->runAction(action);
+                break;
+            }
+            case 1:{
+                this->setPosition(arrayPoint2->getControlPointAtIndex(0));
+                auto action = CatmullRomTo::create(20, arrayPoint2);
+                this->runAction(action);
+                break;
+            }
+            default:
+                break;
+        }
         
         
     } while (0);
@@ -409,7 +460,8 @@ void MediumDragonEnemy::update(float dt)
     
     if (this->getEnergy() <= 0) {
         removeSelf();
-        gm->getGameHUD()->updateResource(kResourceSmallCar);
+        gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
+        gm->getGameHUD()->updateResource(kMediumDragonResource);
     }else
         updateEnergy();
     if (gm->getGameLayer()->isOutOfBound(pos)) {
@@ -448,14 +500,14 @@ bool SmallFlyDragonEnemy::initWithFile(const char *filename)
         
         CC_BREAK_IF(!Enemy::initWithSpriteFrame(animFrames.front()));
         
-        setEnergy(kEnergySmallCar);
-        setMaxEnergy(kEnergySmallCar);
+        setEnergy(kSmallFlyDragonEnergy);
+        setMaxEnergy(kSmallFlyDragonEnergy);
         setEnemyType(AIR);
-        velocity = 0.5 ;
+        velocity = 0.3 ;
         bRet = true;
         
         Size size = Director::getInstance()->getVisibleSize();
-        int x = arc4random() % ((int)size.width - (int)sprite->getContentSize().width) + sprite->getContentSize().width;
+        int x = (arc4random() % 500) + 200;
         log("x = %d", x);
         this->setPosition(Point(x, size.height));
     
@@ -463,7 +515,7 @@ bool SmallFlyDragonEnemy::initWithFile(const char *filename)
         //
         // Animation using Sprite BatchNode
         
-        sprite->setScale(0.3);
+        sprite->setScale(0.4);
         auto animation = Animation::createWithSpriteFrames(animFrames,0.2f);
         auto animate = Animate::create(animation);
         sprite->runAction(RepeatForever::create( animate ) );
@@ -481,7 +533,8 @@ void SmallFlyDragonEnemy::update(float dt)
     
     if (this->getEnergy() <= 0) {
         removeSelf();
-        gm->getGameHUD()->updateResource(kResourceSmallCar);
+        gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
+        gm->getGameHUD()->updateResource(kSmallFlyDragonResource);
     }else
         updateEnergy();
     if (gm->getGameLayer()->isOutOfBound(pos)) {
@@ -490,3 +543,77 @@ void SmallFlyDragonEnemy::update(float dt)
     }
     
 }
+
+/**
+ @Rong bay tren troi - loai vua
+ */
+
+
+MediumFlyDragonEnemy* MediumFlyDragonEnemy::create()
+{
+    MediumFlyDragonEnemy* mediumFlyDragon = new MediumFlyDragonEnemy();
+    if (mediumFlyDragon && mediumFlyDragon->initWithFile("dragon_fly4.png")) {
+        mediumFlyDragon->autorelease();
+        return mediumFlyDragon;
+    }
+    CC_SAFE_DELETE(mediumFlyDragon);
+    return NULL;
+}
+bool MediumFlyDragonEnemy::initWithFile(const char *filename)
+{
+    bool bRet = false;
+    do {
+        auto texture = Director::getInstance()->getTextureCache()->addImage(filename);
+        Vector<SpriteFrame*> animFrames(10);
+        float scale = Director::getInstance()->getContentScaleFactor();
+        // manually add frames to the frame cache
+        for (int i=0; i < 4; i++){
+            auto frame = SpriteFrame::createWithTexture(texture, Rect(128*i/scale, 128*0, 128/scale, 128/scale));
+            animFrames.pushBack(frame);
+        }
+        
+        CC_BREAK_IF(!Enemy::initWithSpriteFrame(animFrames.front()));
+        
+        setEnergy(kMediumFlyDragonEnergy);
+        setMaxEnergy(kMediumFlyDragonEnergy);
+        setEnemyType(AIR);
+        velocity = 0.5 ;
+        bRet = true;
+        
+        Size size = Director::getInstance()->getVisibleSize();
+        int x = (arc4random() % 500) + 100;
+        this->setPosition(Point(x, size.height));
+        
+        
+        //
+        // Animation using Sprite BatchNode
+        
+        sprite->setScale(0.5);
+        auto animation = Animation::createWithSpriteFrames(animFrames,0.1f);
+        auto animate = Animate::create(animation);
+        sprite->runAction(RepeatForever::create( animate ) );
+        
+        
+        
+    } while (0);
+    return bRet;
+}
+
+void MediumFlyDragonEnemy::update(float dt)
+{
+    this->setPosition(Point(this->getPositionX(), this->getPositionY() - velocity));
+    Point pos = this->getPosition();
+    
+    if (this->getEnergy() <= 0) {
+        removeSelf();
+        gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
+        gm->getGameHUD()->updateResource(kMediumFlyDragonResource);
+    }else
+        updateEnergy();
+    if (gm->getGameLayer()->isOutOfBound(pos)) {
+        removeSelf();
+        gm->getGameHUD()->updateLive();
+    }
+    
+}
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="9" tilewidth="50" tileheight="50">
+ <tileset firstgid="1" name="map_1" tilewidth="50" tileheight="50" spacing="1" margin="1">
+  <image source="map_1.png" width="800" height="480"/>
+  <tile id="22">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="136" name="meta_tiles" tilewidth="50" tileheight="50" spacing="1" margin="1">
+  <image source="meta_tiles.png" width="103" height="52"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="background" width="16" height="9">
+  <data encoding="base64" compression="zlib">
+   eJwty9ciFmAAANDfLCsUoVS2kIhkR1b2nlFmRkaRVaIkvHbn4rs4lycqEolEE0MsccRzh7skkEgSyaRwj9QgjXTu84AMMnlIFtnk8IjH5PKEp+E/I498CiikiGJKKOU5ZZRTwQsqw39JFdW8ooZaXlPHG+ppoJEmmmkJWnlLG+28o4NOuuimh/f00kc/A8EgQwwzwihjjDPBJFNMM8Msc8EH5lngI59YZIllVlhljc+ss8EmW8EXttlhlz2+8o19DvjOIUccc8Jp8IOfnPGLcy74zR8u+csV/7jmhtvgPxhTJlI=
+  </data>
+ </layer>
+ <layer name="meta" width="16" height="9">
+  <properties>
+   <property name="Collidable" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOOqCYXDBQ+jvQMLl6yQGE9KK7DV0tNnlCekhxGy0AAKB/EHk=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="16" height="9">
+  <object x="366" y="12"/>
+  <object x="380" y="134"/>
+  <object x="274" y="190"/>
+  <object x="176" y="256"/>
+  <object x="294" y="331"/>
+  <object x="444" y="315"/>
+  <object x="557" y="351"/>
+  <object x="694" y="262"/>
+  <object x="782" y="287"/>
+ </objectgroup>
+</map>

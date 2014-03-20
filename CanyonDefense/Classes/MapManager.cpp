@@ -14,7 +14,6 @@ MapManager* MapManager::shareMap()
 {
     if (!_sharedContext) {
         _sharedContext = new MapManager;
-        _sharedContext->initMapWithMapId(1);
     }
     return _sharedContext;
 }
@@ -36,10 +35,13 @@ void MapManager::setMapTileForGame()
             log("set tile map");
             break;
         case 2:
-            _tileMap = TMXTiledMap::create("map1.tmx");
+            _tileMap = TMXTiledMap::create("map_lv3.tmx");
             break;
-            
+        case 3:
+            _tileMap = TMXTiledMap::create("map_lv2.tmx");
+            break;
         default:
+            _tileMap = TMXTiledMap::create("map_lv1.tmx");
             break;
     }
 }

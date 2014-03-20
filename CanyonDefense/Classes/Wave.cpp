@@ -8,20 +8,24 @@
 
 #include "Wave.h"
 
-Wave* Wave::create(int spawnRate, int smallCar, int mediumCar, int bigCar)
+Wave* Wave::create(int spawnRate, int smallDragon, int mediumDragon, int bigDragon, int smallFlyDrg, int mediumFlyDrg)
 {
     Wave* wave = new Wave();
-    if (wave && wave->initWith(spawnRate, smallCar, mediumCar, bigCar)) {
+    if (wave && wave->initWith(spawnRate, smallDragon, mediumDragon, bigDragon, smallFlyDrg, mediumFlyDrg)) {
         wave->autorelease();
         return wave;
     }
     return NULL;
 }
-bool Wave::initWith(int spawnRate, int smallCar, int mediumCar, int bigCar)
+bool Wave::initWith(int spawnRate, int smallDragon, int mediumDragon, int bigDragon, int smallFlyDrg, int mediumFlyDrg)
 {
     this->setSpawnRate(spawnRate);
-    this->setNumSmallCar(smallCar);
-    this->setNumMediumCar(mediumCar);
-    this->setNumBigCar(bigCar);
+
+    this->setNumSmallDragon(smallDragon);
+    this->setNumMediumDragon(mediumDragon);
+    this->setNumBigDragon(bigDragon);
+    this->setNumSmallFlyDragon(smallFlyDrg);
+    this->setNumMediumFlyDragon(mediumFlyDrg);
+    
     return true;
 }

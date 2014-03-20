@@ -16,13 +16,21 @@ USING_NS_CC;
 class Wave: public Node {
     
 public:
-    static Wave* create(int spawnRate, int smallCar, int mediumCar, int bigCar);
-    bool initWith(int spawnRate, int smallCar, int mediumCar, int bigCar);
+    static Wave* create(int spawnRate, int smallDragon, int mediumDragon, int bigDragon, int smallFlyDrg, int mediumFlyDrg);
+    bool initWith(int spawnRate, int smallDragon, int mediumDragon, int bigDragon, int smallFlyDrg, int mediumFlyDrg);
 
     CC_SYNTHESIZE(int, _spawnRate, SpawnRate);
-    CC_SYNTHESIZE(int, _numSmallCar, NumSmallCar);
-    CC_SYNTHESIZE(int, _numMediumCar, NumMediumCar);
-    CC_SYNTHESIZE(int, _numBigCar, NumBigCar);
+    /**
+     water dragon
+     */
+    CC_SYNTHESIZE(int, _numSmallDragon, NumSmallDragon);
+    CC_SYNTHESIZE(int, _numMediumDragon, NumMediumDragon);
+    CC_SYNTHESIZE(int, _numBigDragon, NumBigDragon);
+    /**
+     fly dragon
+     */
+    CC_SYNTHESIZE(int, _numSmallFlyDragon, NumSmallFlyDragon);
+    CC_SYNTHESIZE(int, _numMediumFlyDragon, NumMediumFlyDragon);
 };
 
 #endif /* defined(__CanyonDefense__Wave__) */
