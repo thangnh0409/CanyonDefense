@@ -21,6 +21,7 @@ GameMediator* GameMediator::shareInstance()
 }
 GameMediator::~GameMediator(){
 	CC_SAFE_RELEASE_NULL(_gameLayer);
+    CC_SAFE_RELEASE_NULL(_gameHUD);
     CC_SAFE_RELEASE_NULL(_mapGame);
 	CC_SAFE_RELEASE_NULL(_targets);
 	

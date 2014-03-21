@@ -50,6 +50,7 @@ public:
     void onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesCancelled(const std::vector<Touch*>&touches, Event *unused_event);
     
+    void initForNewGame();
     void updateResource(int value);
     void updateLive();
     void updateWave();

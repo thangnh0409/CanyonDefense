@@ -32,22 +32,22 @@ SelectMapScene::SelectMapScene(void)
     
 	//Menu
 	auto menu = Menu::create(item1,item2, NULL);
-	menu->alignItemsHorizontallyWithPadding(-120);
+	menu->alignItemsHorizontallyWithPadding(120);
 	// elastic effect
     
-    int i=0;
-    for(const auto &child : menu->getChildren()) {
-        auto dstPoint = child->getPosition();
-        int offset = (int) (size.width/2 + 50);
-        if( i % 2 == 0)
-            offset = -offset;
-        
-        child->setPosition( Point( dstPoint.x + offset, dstPoint.y) );
-        child->runAction(
-                         EaseElasticOut::create(MoveBy::create(2, Point(dstPoint.x - offset,0)), 0.35f)
-                         );
-        i++;
-    }
+//    int i=0;
+//    for(const auto &child : menu->getChildren()) {
+//        auto dstPoint = child->getPosition();
+//        int offset = (int) (size.width/2 + 50);
+//        if( i % 2 == 0)
+//            offset = -offset;
+//        
+//        child->setPosition( Point( dstPoint.x + offset, dstPoint.y) );
+//        child->runAction(
+//                         EaseElasticOut::create(MoveBy::create(2, Point(dstPoint.x - offset,0)), 0.35f)
+//                         );
+//        i++;
+//    }
 	
 	menu->setPosition(Point(size.width/2, size.height - backgroundSprite->getContentSize().height/9*8*scaleY));
     this->addChild(menu,1);

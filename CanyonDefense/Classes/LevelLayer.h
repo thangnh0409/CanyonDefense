@@ -37,7 +37,6 @@ private:
 public:
     static Scene *scene();
     virtual bool init();
-    virtual void release();
     bool collisionWithTile(Point pos);
     
     /*

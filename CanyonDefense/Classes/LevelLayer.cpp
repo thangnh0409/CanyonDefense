@@ -33,11 +33,12 @@ Scene* LevelLayer::scene()
 {
     auto scene = Scene::create();
     
-    GameMediator *gm = GameMediator::shareInstance();
-    auto layer = LevelLayer::create();
+    GameMediator* gm = GameMediator::shareInstance();
+    LevelLayer* layer = LevelLayer::create();
     gm->setGameLayer(layer);
     
     GameHUD* gh = GameHUD::shareInstance();
+    gh->initForNewGame();
     gm->setGameHUD(gh);
     
     scene->addChild(layer);
@@ -304,6 +305,7 @@ void LevelLayer::backScene()
 //    
 //    Director::getInstance()->replaceScene(mainMenu);
     Director::getInstance()->popScene();
+    log("pop to select difficult");
 }
 
 void LevelLayer::playGameWhiteWaitNextWave()

@@ -31,6 +31,9 @@ GameHUD* GameHUD::shareInstance()
 
 bool GameHUD::init()
 {
+    if (!Layer::init()) {
+        return false;
+    }
     towerSprite = NULL;
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -215,6 +218,14 @@ bool GameHUD::init()
     return true;
 }
 
+void GameHUD::initForNewGame()
+{
+    resources = 500;
+    lives = 10;
+    waves = 0;
+    times = 60;
+    _numDragonIsKilled = 0;
+}
 bool GameHUD::canBuilderInMap(cocos2d::Point pos)
 {
     TMXTiledMap* map = MapManager::shareMap()->getTileMap();
@@ -308,6 +319,7 @@ void GameHUD::onButtonResumeClick(cocos2d::Object *sender)
 void GameHUD::onButtonExitClick(cocos2d::Object *sender)
 {
     GameMediator::shareInstance()->getGameLayer()->backScene();
+    pauseBg->setVisible(false);
 }
 void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {
