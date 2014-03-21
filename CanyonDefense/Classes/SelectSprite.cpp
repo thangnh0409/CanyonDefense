@@ -1,6 +1,7 @@
 #include "SelectSprite.h"
 #include "SelectDifficuldScene.h"
 #include "HelloWorldScene.h"
+#include "LevelLayer.h"
 //#include "Variable.h"
 extern float scaleX;
 extern float scaleY;
@@ -135,7 +136,7 @@ bool SelectSprite::onTouchBegan(Touch* touch, Event* event)
     if ( !containsTouchLocation(touch) ) return false;
     
     _state = kPaddleStateGrabbed;
-   // CCLOG("return true");
+    
     return true;
 }
 
@@ -149,7 +150,6 @@ void SelectSprite::onTouchMoved(Touch* touch, Event* event)
     //auto touchPoint = touch->getLocation();
     
     //setPosition( Point(touchPoint.x, getPosition().y) );
-	auto size = Director::getInstance()->getWinSizeInPixels();
     auto diff = touch->getDelta();
     
 
@@ -168,7 +168,7 @@ void SelectSprite::onTouchMoved(Touch* touch, Event* event)
 
 void SelectSprite::onTouchEnded(Touch* touch, Event* event)
 {
-	auto size = Director::getInstance()->getWinSizeInPixels();
+	auto size = Director::getInstance()->getVisibleSize();
 
 		//auto node = getChildByTag(1);
 	auto currentPos = voidNode->getPosition();
@@ -211,16 +211,20 @@ void SelectSprite::arriveLayer(Layer* _layer)
 {
 	switch(indicator)
 	{
-	case 1:
-		map = selected;
-		_layer = new SelectDifficuldScene();
-		break;
-	case 2:
-		difficuld = selected;
-		_layer = new HelloWorld();
-		break;
+        case 1:{
+            map = selected;
+            _layer = new SelectDifficuldScene();
+            auto newScene = Scene::create();
+            newScene->addChild(_layer, 0);
+            Director::getInstance()->pushScene(newScene);
+            break;
+        }
+        case 2:{
+            difficuld = selected;
+            auto mainScene = LevelLayer::scene();
+            Director::getInstance()->pushScene(mainScene);
+            break;
+        }
 	}
-	auto newScene = Scene::create();
-	newScene->addChild(_layer, 0);
-	Director::getInstance()->replaceScene(newScene);
+	
 }

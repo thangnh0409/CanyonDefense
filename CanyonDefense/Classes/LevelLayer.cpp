@@ -15,6 +15,7 @@
 #include "Tower.h"
 #include "GameHUD.h"
 #include "Projectile.h"
+#include "MenuScene.h"
 
 #define kMapTag 3
 #define HUT_BASIC_MONEY             100
@@ -22,7 +23,7 @@
 #define CATAPULT_BASIC_MONEY        200
 #define SACRED_OAK_ADVANCE_MONEY    120
 #define THOR_TEMPLATE_MONEY         250
-#define MISSILE_BUILDING            150
+#define MISSILE_BUILDING            0
 
 
 extern int map;
@@ -87,8 +88,7 @@ bool LevelLayer::init()
     auto listener = EventListenerTouchAllAtOnce::create();
     listener->onTouchesBegan = CC_CALLBACK_2(LevelLayer::onTouchesBegan, this);
     dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-    
-    scheduleUpdate();
+
     
     //init all value constructor
     _currentWaveCount = -1;
@@ -182,7 +182,7 @@ void LevelLayer::addWave()
     GameMediator* gm = GameMediator::shareInstance();
     switch (gm->getLevelMap()) {
         case EASY:{
-            Wave* wave1 = Wave::create(1, 8, 0, 0, 0, 0);
+            Wave* wave1 = Wave::create(1, 8, 4, 0, 0, 0);
             gm->getWaves()->addObject(wave1);
             Wave* wave2 = Wave::create(1, 4, 5, 3, 3, 2);
             gm->getWaves()->addObject(wave2);
@@ -230,7 +230,8 @@ Wave* LevelLayer::getCurrentWave()
 void LevelLayer::getNextWave()
 {
     _currentWaveCount = _currentWaveCount + 1;
-    log("waves count: %zd, current waves: %d", GameMediator::shareInstance()->getWaves()->count(), _currentWaveCount);
+    GameHUD::shareInstance()->updateWave();
+    //log("waves count: %zd, current waves: %d", GameMediator::shareInstance()->getWaves()->count(), _currentWaveCount);
     if (_currentWaveCount >= GameMediator::shareInstance()->getWaves()->count()) {
         log("finish game");
         unschedule(schedule_selector(LevelLayer::checkFinishWave));
@@ -269,7 +270,7 @@ void LevelLayer::addEnemy(float dt)
         if(target){
             //target->setPosition(rootPoint);
             gm->getTargets()->addObject(target);
-            this->addChild(target, 100);
+            this->addChild(target, 1000);
         }
     }
 }
@@ -299,6 +300,9 @@ void LevelLayer::backScene()
     for (auto sp: actionManager) {
         Director::getInstance()->getActionManager()->resumeTarget(sp);
     }
+//    auto mainMenu = MenuScene::createScene();
+//    
+//    Director::getInstance()->replaceScene(mainMenu);
     Director::getInstance()->popScene();
 }
 
@@ -325,8 +329,7 @@ void LevelLayer::checkFinishWave(float dt)
         _gameState = WAIT_NEXT_WAVE;
         schedule(schedule_selector(LevelLayer::levelLogic),
                  getTimerDelay(GameMediator::shareInstance()->getLevelMap()), 0, 0);
-    }else
-        log("NUM TARGETS = %zd", gm->getTargets()->count());
+    }
 }
 bool LevelLayer::isOutOfBound(cocos2d::Point pos)
 {
@@ -349,10 +352,6 @@ float LevelLayer::getTimerDelay(int levelMap)
         default:
             return 40;
     }
-}
-void LevelLayer::update(float dt)
-{
-    
 }
 
 void LevelLayer::addExplosion(cocos2d::Point pos, int projectileType)
@@ -419,7 +418,10 @@ void LevelLayer::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Ev
         if (tower) {
             Rect twRect = tower->getRect();
             if (twRect.containsPoint(location)) {
-                
+                if(tower->rangeTower->isVisible()){
+                    tower->rangeTower->setVisible(false);
+                }else
+                    tower->rangeTower->setVisible(true);
             }
         }
     }

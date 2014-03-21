@@ -25,6 +25,11 @@ bool MenuScene::init()
     {
         return false;
     }
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyReleased = CC_CALLBACK_2(MenuScene::onKeyReleased, this);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
     Size s = Director::getInstance()->getVisibleSize();
     Point org = Director::getInstance()->getVisibleOrigin();
 
@@ -45,20 +50,20 @@ bool MenuScene::init()
 
 	//Font Item
 	auto playSpriteNormal = Sprite::create("play1.png");
-    auto playSpriteSelected = Sprite::create("play1.png");
+    auto playSpriteSelected = Sprite::create("play1_press.png");
     auto playSpriteDisabled = Sprite::create("play1.png");
     
 	auto item1 = MenuItemSprite::create(playSpriteNormal, playSpriteSelected, playSpriteDisabled, CC_CALLBACK_1(MenuScene::menuPlayCallback, this) );
     
 	
 	auto helpSpriteNormal = Sprite::create("help1.png");
-    auto helpSpriteSelected = Sprite::create("help1.png");
+    auto helpSpriteSelected = Sprite::create("help1_press.png");
     auto helpSpriteDisabled = Sprite::create("help1.png");
 
 	auto item2 = MenuItemSprite::create(helpSpriteNormal, helpSpriteSelected, helpSpriteDisabled, CC_CALLBACK_1(MenuScene::menuHelpCallback, this) );
 
 	auto scoreSpriteNormal = Sprite::create("score1.png");
-    auto scoreSpriteSelected = Sprite::create("score1.png");
+    auto scoreSpriteSelected = Sprite::create("score1_press.png");
     auto scoreSpriteDisabled = Sprite::create("score1.png");
 
 	auto item3 = MenuItemSprite::create(scoreSpriteNormal, scoreSpriteSelected, scoreSpriteDisabled, CC_CALLBACK_1(MenuScene::menuScoreCallback, this) );
@@ -109,4 +114,16 @@ void MenuScene::menuScoreCallback(Object* pSender)
 	auto layer = new SelectDifficuldScene();
 	newScene->addChild(layer,0);
 	Director::getInstance()->replaceScene(newScene);
+}
+
+void MenuScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)
+{
+    if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE)
+    {
+        Director::getInstance()->end();
+    }
+    else if (keycode == EventKeyboard::KeyCode::KEY_MENU)
+    {
+        log("MENU clicked!");
+    }
 }

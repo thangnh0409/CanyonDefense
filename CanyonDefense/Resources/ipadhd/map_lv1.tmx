@@ -4,7 +4,7 @@
   <image source="map_1_1_bank.png" width="800" height="480"/>
  </tileset>
  <tileset firstgid="241" name="meta_tiles1" tilewidth="40" tileheight="40" spacing="1" margin="1">
-  <image source="../iphone/meta_tiles1.png" width="83" height="42"/>
+  <image source="meta_tiles1.png" width="83" height="42"/>
   <tile id="0">
    <properties>
     <property name="Collidable" value="true"/>

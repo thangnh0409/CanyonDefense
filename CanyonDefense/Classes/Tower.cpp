@@ -23,6 +23,19 @@ bool Tower::initWithFileAndRange(const char *pszFilename, int range)
         
         twSprite = Sprite::create(pszFilename);
         this->addChild(twSprite);
+        switch (range) {
+            case 100:
+                rangeTower = Sprite::create("range_small.png");
+                break;
+            case 150:
+                rangeTower = Sprite::create("range_big.png");
+                break;
+            default:
+                rangeTower = Sprite::create("range_small.png");
+                break;
+        }
+        rangeTower->setVisible(false);
+        this->addChild(rangeTower);
         this->setContentSize(twSprite->getContentSize());
         this->setRange(range);
         _target = NULL;
@@ -81,7 +94,7 @@ Rect Tower::getRect()
 MissileTurretTower* MissileTurretTower::create()
 {
     MissileTurretTower* mtt = new MissileTurretTower;
-    if (mtt && mtt->initWithFileAndRange("CannonTurret.png", 100)) {
+    if (mtt && mtt->initWithFileAndRange("CannonTurret.png", 150)) {
         mtt->autorelease();
         
         return mtt;
@@ -200,7 +213,7 @@ Sung ban ten lua
 CatapultTower* CatapultTower::create()
 {
     CatapultTower* mtt = new CatapultTower;
-    if (mtt && mtt->initWithFileAndRange("ballias_3.png", 100)) {
+    if (mtt && mtt->initWithFileAndRange("ballias_3.png", 150)) {
         mtt->autorelease();
         
         return mtt;
@@ -292,7 +305,7 @@ bool ThorTempleTower::initWithFileAndRange(const char *pszFilename, int range)
         CC_BREAK_IF(!Tower::initWithFileAndRange(pszFilename, range));
         ParticleSystemQuad* _emitter = ParticleGalaxy::create();
         //_emitter->setTexture( Director::getInstance()->getTextureCache()->addImage("fire.png") );
-        _emitter->setPosition(this->getPosition()+ Point(0, 20));
+        _emitter->setPosition(this->getPosition()+ Point(5, 20));
         _emitter->setScale(0.3);
         this->addChild(_emitter);
         

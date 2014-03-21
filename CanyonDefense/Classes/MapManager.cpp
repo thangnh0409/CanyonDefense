@@ -44,6 +44,7 @@ void MapManager::setMapTileForGame()
             _tileMap = TMXTiledMap::create("map_lv1.tmx");
             break;
     }
+    _tileMap->retain();
 }
 TMXTiledMap* MapManager::getTileMap()
 {

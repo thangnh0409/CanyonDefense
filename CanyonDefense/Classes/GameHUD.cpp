@@ -16,7 +16,7 @@
 #define CATAPULT_BASIC_MONEY        200
 #define SACRED_OAK_ADVANCE_MONEY    120
 #define THOR_TEMPLATE_MONEY         250
-#define MISSILE_BUILDING            150
+#define MISSILE_BUILDING            0
 
 static GameHUD* _shareContext;
 
@@ -71,7 +71,7 @@ bool GameHUD::init()
     this->addChild(sprLock);
 
     //add SacredOakTower
-    auto sprite2 = Sprite::create("sacred_oak_1.png");
+    auto sprite2 = Sprite::create("sacred_oak_1_menu.png");
     sprite2->setPosition(sprLock->getPosition() + Point(50 + sprite2->getContentSize().width, 0));
     sprite2->setTag(SACRED_OAK_ADVANCE_MONEY);
     this->addChild(sprite2);
@@ -154,7 +154,7 @@ bool GameHUD::init()
     liveLabel->setColor(Color3B(0, 0, 255));
     this->addChild(liveLabel);
     
-    waves = 10;
+    waves = 0;
     waveLabel = LabelTTF::create("Wave: 1", "Marker Felt", 25);
     waveLabel->setPosition(Point(liveLabel->getPositionX() + liveLabel->getContentSize().width + 40 , liveLabel->getPositionY()));
     waveLabel->setColor(Color3B(255, 0, 0));
@@ -173,13 +173,36 @@ bool GameHUD::init()
     pauseBg->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
     pauseBg->setVisible(false);
     this->addChild(pauseBg, 100);
-    auto resumeItem = MenuItemImage::create("tieptuc1.png", "tieptuc2.png", CC_CALLBACK_1(GameHUD::onButtonResumeClick, this));
-    auto exitItem = MenuItemImage::create("thoat1.png", "thoat2.png", CC_CALLBACK_1(GameHUD::onButtonExitClick, this));
+    auto resumeItem = MenuItemImage::create("resume.png", "resume_press.png", CC_CALLBACK_1(GameHUD::onButtonResumeClick, this));
+    auto exitItem = MenuItemImage::create("exit.png", "exit_press.png", CC_CALLBACK_1(GameHUD::onButtonExitClick, this));
     
     auto menuDialog = Menu::create(resumeItem, exitItem, NULL);
     menuDialog->setPosition(Point(pauseBg->getContentSize().width/2, pauseBg->getContentSize().height/2));
     menuDialog->alignItemsVertically();
     pauseBg->addChild(menuDialog);
+    
+    // add level complete dialog
+    
+    levelCompleteBg = Sprite::create("level_complete.png");
+    levelCompleteBg->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
+    levelCompleteBg->setVisible(false);
+    this->addChild(levelCompleteBg, 100);
+    auto okItem = MenuItemImage::create("ok.png", "ok_press.png", CC_CALLBACK_1(GameHUD::onButtonExitClick, this));
+
+    auto okMenu = Menu::create(okItem, NULL);
+    okMenu->setPosition(Point(levelCompleteBg->getContentSize().width/2, levelCompleteBg->getContentSize().height/4));
+    levelCompleteBg->addChild(okMenu);
+    
+    // add level fail dialog
+    
+    levelFailBg = Sprite::create("level_fail.png");
+    levelFailBg->setPosition(Point(visibleSize.width/2, visibleSize.height/2));
+    levelFailBg->setVisible(false);
+    auto okItem2 = MenuItemImage::create("ok.png", "ok_press.png", CC_CALLBACK_1(GameHUD::onButtonExitClick, this));
+    auto okMenu2 = Menu::create(okItem2, NULL);
+    okMenu2->setPosition(Point(levelFailBg->getContentSize().width/2, levelFailBg->getContentSize().height/4));
+    this->addChild(levelFailBg, 100);
+    levelFailBg->addChild(okMenu2);
     
     auto dispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchAllAtOnce::create();
@@ -310,6 +333,7 @@ void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event
                     if (!_thorSkillAvailible) {
                         return;
                     }
+                    break;
                 }
                 default:
                     break;
@@ -470,10 +494,19 @@ void GameHUD::updateLive()
 {
     lives --;
     liveLabel->setString(String::createWithFormat("%d", lives)->getCString());
+    if (lives <= 0) {
+        levelFailBg->setVisible(true);
+        GameMediator::shareInstance()->getGameLayer()->setGameState(FINISH);
+        GameMediator::shareInstance()->getGameLayer()->callPauseGame();
+    }
+    
 }
 void GameHUD::updateWave()
 {
     waves ++;
+    if (waves >= GameMediator::shareInstance()->getWaves()->count()) {
+        levelCompleteBg->setVisible(true);
+    }
     waveLabel->setString(String::createWithFormat("Wave: %d", waves)->getCString());
 }
 void GameHUD::updateTime(float dt)

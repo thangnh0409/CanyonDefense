@@ -12,6 +12,8 @@ public:
     
     static Scene* createScene();
 	virtual bool init();
+    
+    void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
 
 	void menuPlayCallback(Object* pSender);
 	void menuHelpCallback(Object* pSender);

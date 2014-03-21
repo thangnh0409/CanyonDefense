@@ -37,6 +37,7 @@ private:
 public:
     static Scene *scene();
     virtual bool init();
+    virtual void release();
     bool collisionWithTile(Point pos);
     
     /*
@@ -98,11 +99,7 @@ public:
      get timer delay by level map
      */
     float getTimerDelay(int levelMap);
-    
-    /**
-     update game each frame
-     */
-    void update(float dt);
+
     
     void addExplosion(Point pos, int projectileType);
     

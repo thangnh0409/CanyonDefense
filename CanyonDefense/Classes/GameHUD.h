@@ -18,6 +18,8 @@ private:
     Sprite* hudBackground;
     Sprite* hudChildBackground;
     Sprite* pauseBg;
+    Sprite* levelCompleteBg;
+    Sprite* levelFailBg;
     Sprite* towerSprite;
     bool towerIsSelected;
     Sprite* rangeSprite;

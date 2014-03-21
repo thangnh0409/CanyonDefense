@@ -25,6 +25,7 @@ public:
     Enemy* getClosestTarget();
     
     Sprite* twSprite;
+    Sprite* rangeTower;
     
 	CC_SYNTHESIZE(int, _range,  Range);
     

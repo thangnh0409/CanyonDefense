@@ -26,12 +26,12 @@ SelectDifficuldScene::SelectDifficuldScene(void)
 	this->addChild(backgroundSprite,1);
 
 	auto backSpriteNormal = Sprite::create("back1.png");
-    auto backSpriteSelected = Sprite::create("back1.png");
+    auto backSpriteSelected = Sprite::create("back1_press.png");
     auto backSpriteDisabled = Sprite::create("back1.png");
 	auto item1 = MenuItemSprite::create(backSpriteNormal, backSpriteSelected, backSpriteDisabled, CC_CALLBACK_1(SelectDifficuldScene::backCallback, this) );
     
 	auto nextSpriteNormal = Sprite::create("next1.png");
-    auto nextSpriteSelected = Sprite::create("next1.png");
+    auto nextSpriteSelected = Sprite::create("next1_press.png");
     auto nextSpriteDisabled = Sprite::create("next1.png");
 
 	auto item2 = MenuItemSprite::create(nextSpriteNormal, nextSpriteSelected, nextSpriteDisabled, CC_CALLBACK_1(SelectDifficuldScene::nextCallback, this) );

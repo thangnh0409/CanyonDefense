@@ -44,7 +44,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         log("large resource put back");
         searchPath.push_back(largeResource.directory);
         
-        director->setContentScaleFactor(MIN(largeResource.size.height/designResolutionSize.height, largeResource.size.width/designResolutionSize.width));
+//        director->setContentScaleFactor(MIN(largeResource.size.height/designResolutionSize.height, largeResource.size.width/designResolutionSize.width));
 	}
     // if the frame's height is larger than the height of small resource size, select medium resource. height > 320
     else if (frameSize.height > smallResource.size.height)
@@ -52,7 +52,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         log("medium resource put back");
         searchPath.push_back(mediumResource.directory);
         
-        director->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height, mediumResource.size.width/designResolutionSize.width));
+//        director->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height, mediumResource.size.width/designResolutionSize.width));
     }
     // if the frame's height is smaller than the height of medium resource size, select small resource. 320 x 480
 	else
@@ -60,8 +60,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
         log("small resource put back");
         searchPath.push_back(smallResource.directory);
         
-        director->setContentScaleFactor(MIN(smallResource.size.height/designResolutionSize.height, smallResource.size.width/designResolutionSize.width));
+//        director->setContentScaleFactor(MIN(smallResource.size.height/designResolutionSize.height, smallResource.size.width/designResolutionSize.width));
     }
+    
+    /**them ngay 21/03*/
+    director->setContentScaleFactor(MIN(frameSize.height/designResolutionSize.height, frameSize.width/designResolutionSize.width));
     
     // set searching path
     FileUtils::getInstance()->setSearchPaths(searchPath);
@@ -73,7 +76,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
     
     // create a scene. it's an autorelease object
-    auto scene = GameScene::createScene();
+    auto scene = MenuScene::createScene();
     //auto scene = HelloWorld::createScene();
     // run
     director->runWithScene(scene);
