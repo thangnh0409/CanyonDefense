@@ -10,6 +10,7 @@
 #include "GameMediator.h"
 #include "MapManager.h"
 #include "Tower.h"
+#include "SimpleAudioEngine.h"
 
 #define HUT_BASIC_MONEY             100
 #define HUT_ADVANCE_MONEY           300
@@ -142,7 +143,7 @@ bool GameHUD::init()
     // add label
     
     resources = 500;
-    resourceLabel = LabelTTF::create("300", "Marker Felt", 25);
+    resourceLabel = LabelTTF::create("300", "fonts/Marker Felt", 25);
     resourceLabel->setPosition(Point(resource->getPositionX() + resource->getContentSize().width + 30, resource->getPositionY()));
     resourceLabel->setColor(Color3B(0, 0, 255));
     this->addChild(resourceLabel, 1);
@@ -152,20 +153,20 @@ bool GameHUD::init()
     this->addChild(livesSpr);
     
     lives = 10;
-    liveLabel = LabelTTF::create("10", "Marker Felt", 25);
+    liveLabel = LabelTTF::create("10", "fonts/Marker Felt", 25);
     liveLabel->setPosition(Point(livesSpr->getPositionX() + livesSpr->getContentSize().width/2 + 20 , livesSpr->getPositionY()));
     liveLabel->setColor(Color3B(0, 0, 255));
     this->addChild(liveLabel);
     
     waves = 0;
-    waveLabel = LabelTTF::create("Wave: 1", "Marker Felt", 25);
+    waveLabel = LabelTTF::create("Wave: 1", "fonts/Marker Felt", 25);
     waveLabel->setPosition(Point(liveLabel->getPositionX() + liveLabel->getContentSize().width + 40 , liveLabel->getPositionY()));
     waveLabel->setColor(Color3B(255, 0, 0));
     this->addChild(waveLabel);
     
     times = 60;
-    timeLabel = LabelTTF::create("Time: 60", "Marker Felt", 25);
-    timeLabel->setPosition(Point(visibleSize.width - timeLabel->getContentSize().width, timeLabel->getContentSize().height));
+    timeLabel = LabelTTF::create("Time: 60", "fonts/Marker Felt", 25);
+    timeLabel->setPosition(Point(visibleSize.width - timeLabel->getContentSize().width/2 - btnPauseItem->getContentSize().width, liveLabel->getPositionY()));
     timeLabel->setColor(Color3B(255, 0, 0));
     this->addChild(timeLabel);
     
@@ -182,6 +183,11 @@ bool GameHUD::init()
     auto menuDialog = Menu::create(resumeItem, exitItem, NULL);
     menuDialog->setPosition(Point(pauseBg->getContentSize().width/2, pauseBg->getContentSize().height/2));
     menuDialog->alignItemsVertically();
+    
+    btnSoundItem = MenuItemImage::create("sound_on.png", "sound_on.png", CC_CALLBACK_1(GameHUD::onButtonSoundClick, this));
+    auto btnSound = Menu::create(btnSoundItem, NULL);
+    btnSound->setPosition(Point(pauseBg->getContentSize().width - btnSoundItem->getContentSize().width/2, btnSoundItem->getContentSize().height/2));
+    pauseBg->addChild(btnSound);
     pauseBg->addChild(menuDialog);
     
     // add level complete dialog
@@ -320,6 +326,21 @@ void GameHUD::onButtonExitClick(cocos2d::Object *sender)
 {
     GameMediator::shareInstance()->getGameLayer()->backScene();
     pauseBg->setVisible(false);
+    levelCompleteBg->setVisible(false);
+    levelFailBg->setVisible(false);
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
+}
+void GameHUD::onButtonSoundClick(cocos2d::Object *sender)
+{
+    if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+        btnSoundItem->setNormalImage(Sprite::create("sound_off.png"));
+    }else{
+        CocosDenshion::SimpleAudioEngine::getInstance()->resumeAllEffects();
+        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("music/nhac_nen_1.mp3");
+        btnSoundItem->setNormalImage(Sprite::create("sound_on.png"));
+    }
 }
 void GameHUD::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
 {
@@ -382,23 +403,23 @@ void GameHUD::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event
 	Point location = touch->getLocation();
     log("touch end: x= %f , y= %f", location.x, location.y);
     
-    TMXTiledMap* map = MapManager::shareMap()->getTileMap();
-    TMXLayer* metaLayer = map->getLayer("meta");
-    int x = location.x / (map->getTileSize().width) ;
-    int y = ((map->getMapSize().height * map->getTileSize().height) - location.y) / map->getTileSize().height;
-    log("col = %d, row =%d", x ,y);
-    Point tileCoord = Point(x, y);
-    int tileGID = metaLayer->getTileGIDAt(tileCoord);
-    
-    if (tileGID) {
-        //const auto& value = map->getPropertiesForGID(tileGID).asValueMap();
-        log("GID:%i, Properties:%s", tileGID, map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString().c_str());
-        std::string collidable = map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString();
-        if (collidable.compare("true") == 0) {
-            log("can't build in map");
-        }
-    }
-    
+//    TMXTiledMap* map = MapManager::shareMap()->getTileMap();
+//    TMXLayer* metaLayer = map->getLayer("meta");
+//    int x = location.x / (map->getTileSize().width) ;
+//    int y = ((map->getMapSize().height * map->getTileSize().height) - location.y) / map->getTileSize().height;
+//    log("col = %d, row =%d", x ,y);
+//    Point tileCoord = Point(x, y);
+//    int tileGID = metaLayer->getTileGIDAt(tileCoord);
+//    
+//    if (tileGID) {
+//        //const auto& value = map->getPropertiesForGID(tileGID).asValueMap();
+//        log("GID:%i, Properties:%s", tileGID, map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString().c_str());
+//        std::string collidable = map->getPropertiesForGID(tileGID).asValueMap()["Collidable"].asString();
+//        if (collidable.compare("true") == 0) {
+//            log("can't build in map");
+//        }
+//    }
+//    
     
     if (towerSprite) {
         bool haveTower = false;
@@ -406,7 +427,7 @@ void GameHUD::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event
         CCARRAY_FOREACH(GameMediator::shareInstance()->getTowers(), tws){
             Tower* tower = (Tower*)tws;
             if (tower){
-                Rect twRect = tower->getBoundingBox();
+                Rect twRect = tower->getRect();
                 if (twRect.containsPoint(location)) {
                     haveTower = true;
                     break;
@@ -430,9 +451,10 @@ void GameHUD::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event
             this->removeChild(towerSprite, true);
             
             towerSprite = NULL;
-        }
+        }else
         if (!hudBgRect.containsPoint(location) && canBuilderInMap(location) && !haveTower && towerIsSelected) {
             towerIsSelected = false;
+            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/dat_vu_khi_1.wav");
             GameMediator::shareInstance()->getGameLayer()->addTower(location, towerSprite->getTag());
             if (rangeSprite) {
                 this->removeChild(rangeSprite);
@@ -518,6 +540,7 @@ void GameHUD::updateWave()
     waves ++;
     if (waves >= GameMediator::shareInstance()->getWaves()->count()) {
         levelCompleteBg->setVisible(true);
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/nhac_chien_thang.mp3");
     }
     waveLabel->setString(String::createWithFormat("Wave: %d", waves)->getCString());
 }

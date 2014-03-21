@@ -9,6 +9,7 @@
 #include "Tower.h"
 #include "GameMediator.h"
 #include "Projectile.h"
+#include "SimpleAudioEngine.h"
 
 Tower::~Tower()
 {
@@ -162,6 +163,8 @@ void HutBasicTower::fire(float dt)
 		Point overshotVector = normalizedShootVector * this->getRange();
 		Point offscreenPoint = this->getPosition() + overshotVector;
         
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ten_ban_1.wav");
+        
 		ArcheryProjectile* projectile = ArcheryProjectile::create(offscreenPoint, this->getPosition() + Point(0, this->getContentSize().height/2));
 		m->getGameLayer()->addChild(projectile);
 	}
@@ -200,7 +203,7 @@ void HutAdvanceTower::fire(float dt)
 		Point normalizedShootVector = shootVector.normalize();
 		Point overshotVector = normalizedShootVector * this->getRange();
 		Point offscreenPoint = this->getPosition() + overshotVector;
-        
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ten_ban_2.wav");
 		ArcheryProjectile* projectile = ArcheryProjectile::create(offscreenPoint, this->getPosition());
 		m->getGameLayer()->addChild(projectile);
 	}
@@ -235,7 +238,9 @@ bool CatapultTower::initWithFileAndRange(const char *pszFilename, int range)
 void CatapultTower::fire(float dt)
 {
     if(this->getTarget() != NULL){
-		GameMediator* m = GameMediator::shareInstance();        
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ban_tren_troi_1.wav");
+        
+		GameMediator* m = GameMediator::shareInstance();
 		MissileProjectile* projectile = MissileProjectile::create(this->getTarget());
         projectile->setPosition(this->getPosition());
 		projectile->setRotation(this->getRotation());
@@ -273,6 +278,7 @@ bool SacredOakTower::initWithFileAndRange(const char *pszFilename, int range)
 void SacredOakTower::fire(float dt)
 {
     if(this->getTarget() != NULL && this->getTarget()->getEnemyType() == AIR){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ban_tren_troi_4.wav");
 		GameMediator* m = GameMediator::shareInstance();
 		SacredOakProjectile* projectile = SacredOakProjectile::create(this->getTarget(), this->getPosition());
         projectile->setPosition(this->getPosition());

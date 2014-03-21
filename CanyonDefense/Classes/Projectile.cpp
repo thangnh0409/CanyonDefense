@@ -9,6 +9,7 @@
 #include "Projectile.h"
 #include "GameMediator.h"
 #include "Enemy.h"
+#include "SimpleAudioEngine.h"
 
 #define kArcheryProjectileDamage            2
 #define kMissileProjectileDamage            3
@@ -262,6 +263,7 @@ void ThorTempleProjectile::createExplosion()
             enemy->setEnergy(enemy->getEnergy() - this->getDamage());
             
         }
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ten_lua.wav");
         removeSelf();
     }
     

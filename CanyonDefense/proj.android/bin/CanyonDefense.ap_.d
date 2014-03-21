@@ -13,6 +13,7 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/fonts/bitmapFontTest3.fnt \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/fonts/bitmapFontTest3.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/fonts/Marker Felt.ttf \
@@ -32,6 +33,7 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/dragon_fly4.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/dragon_water3.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/energy.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/exit.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/fire.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/HelloWorld.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/help.png \
@@ -44,6 +46,8 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/hut_2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/hut_2_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/hut_2_selected.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/level_complete.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/level_fail.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/lives.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/lock_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/map1.png \
@@ -63,6 +67,8 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/next1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/next1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/next2.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/ok.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/pause.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/pause1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/pause2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/pause_bg.png \
@@ -70,7 +76,10 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/play1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/play1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range_big.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range_small.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/resource.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/resume.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/rocket.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/sacred_oak_1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/sacred_oak_1_menu.png \
@@ -80,11 +89,6 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/temple_of_thor.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/temple_of_thor_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/tenlua_menu.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/thoat1.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/thoat2.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/tieptuc1.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/tieptuc2.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/trolai2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/yulei1.plist \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/yulei1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/back1.png \
@@ -110,6 +114,8 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/dragon_fly4.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/dragon_water3.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/energy.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/exit.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/exit_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/HelloWorld.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/help.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/help1.png \
@@ -121,6 +127,8 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/hut_2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/hut_2_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/hut_2_selected.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/level_complete.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/level_fail.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/lives.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/lock_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/map1.png \
@@ -140,6 +148,8 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/next1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/next1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/next2.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/ok.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/ok_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/pause1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/pause2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/pause_bg.png \
@@ -147,7 +157,11 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/play1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/play1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range_big.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range_small.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/resource.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/resume.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/resume_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/rocket.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/sacred_oak_1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/sacred_oak_1_menu.png \
@@ -157,11 +171,6 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/temple_of_thor.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/temple_of_thor_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/tenlua_menu.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/thoat1.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/thoat2.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/tieptuc1.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/tieptuc2.png \
-/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/trolai2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/yulei1.plist \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/yulei1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/back1.png \
@@ -185,6 +194,7 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/dragon_water3.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/dragon_water4.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/energy.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/exit.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/HelloWorld.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/help.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/help1.png \
@@ -196,6 +206,8 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/hut_2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/hut_2_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/hut_2_selected.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/level_complete.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/level_fail.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/lives.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/lock_menu.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/map1.png \
@@ -221,6 +233,7 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/next1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/next1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/next2.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/ok.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/pause1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/pause2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/pause_bg.png \
@@ -228,7 +241,10 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/play1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/play1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/range.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/range_big.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/range_small.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/resource.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/resume.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/rocket.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/sacred_oak_1.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/sacred_oak_1_menu.png \
@@ -246,4 +262,27 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/tieptuc2.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/yulei1.plist \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/iphone/yulei1.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ban_tren_troi_1.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ban_tren_troi_2.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ban_tren_troi_3.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ban_tren_troi_4.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ban_xuong_nuoc.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/button_click.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/chon_vu_khi.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/dat_vu_khi_1.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/dat_vu_khi_2.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/nhac_chien_thang.mp3 \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/nhac_nen_1.mp3 \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/nhac_nen_2.mp3 \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/nhac_nen_4.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ten_ban_1.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ten_ban_2.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/ten_lua.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/tieng_dragon_1.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/tieng_dragon_2.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/tieng_dragon_3.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/tieng_dragon_4.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/tieng_nuoc_chay.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/toe_nuoc.wav \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/music/wind.wav \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/bin/AndroidManifest.xml \

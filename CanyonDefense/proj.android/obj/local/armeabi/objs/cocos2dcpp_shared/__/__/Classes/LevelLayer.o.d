@@ -214,7 +214,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/LevelLayer.o: \
  jni/../../Classes/Missile.h jni/../../Classes/GameObject.h \
  jni/../../Classes/MissileTurret.h jni/../../Classes/Enemy.h \
  jni/../../Classes/GameMediator.h jni/../../Classes/GameHUD.h \
- jni/../../Classes/Tower.h jni/../../Classes/Projectile.h
+ jni/../../Classes/Tower.h jni/../../Classes/Projectile.h \
+ jni/../../Classes/MenuScene.h
 
 jni/../../Classes/LevelLayer.h:
 
@@ -657,3 +658,5 @@ jni/../../Classes/GameHUD.h:
 jni/../../Classes/Tower.h:
 
 jni/../../Classes/Projectile.h:
+
+jni/../../Classes/MenuScene.h:

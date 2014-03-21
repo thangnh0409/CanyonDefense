@@ -29,6 +29,7 @@ private:
     LabelTTF* waveLabel;
     LabelTTF* timeLabel;
     Menu* btnPlay;
+    MenuItemImage* btnSoundItem;
     MenuItemImage* btnPauseItem;
     
     bool catapultUnlocked;
@@ -44,6 +45,7 @@ public:
     void onButtonPlayClick(Object* sender);
     void onButtonResumeClick(Object* sender);
     void onButtonExitClick(Object* sender);
+    void onButtonSoundClick(Object* sender);
     bool canBuilderInMap(Point pos);
     void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
     void onTouchesMoved(const std::vector<Touch*>& touches, Event *unused_event);

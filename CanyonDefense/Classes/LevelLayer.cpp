@@ -16,6 +16,7 @@
 #include "GameHUD.h"
 #include "Projectile.h"
 #include "MenuScene.h"
+#include "SimpleAudioEngine.h"
 
 #define kMapTag 3
 #define HUT_BASIC_MONEY             100
@@ -50,6 +51,8 @@ bool LevelLayer::init()
     if (!Layer::init()) {
         return false;
     }
+
+    
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
     auto glView = EGLView::getInstance();
@@ -300,6 +303,9 @@ void LevelLayer::backScene()
 {
     for (auto sp: actionManager) {
         Director::getInstance()->getActionManager()->resumeTarget(sp);
+    }
+    for (auto schl : schedulerManager) {
+        Director::getInstance()->getScheduler()->resumeTarget(schl);
     }
 //    auto mainMenu = MenuScene::createScene();
 //    

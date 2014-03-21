@@ -2,6 +2,7 @@
 #include "HelpScene.h"
 #include "SelectMapScene.h"
 #include "SelectDifficuldScene.h"
+#include "SimpleAudioEngine.h"
 //#include "Variable.h"
 USING_NS_CC;
 extern float scaleX;
@@ -25,6 +26,11 @@ bool MenuScene::init()
     {
         return false;
     }
+    /** play background music **/
+    if (!CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("music/nhac_nen_2.mp3", true);
+    }
+    
     auto listener = EventListenerKeyboard::create();
     listener->onKeyReleased = CC_CALLBACK_2(MenuScene::onKeyReleased, this);
     

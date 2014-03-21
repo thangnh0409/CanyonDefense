@@ -78,6 +78,8 @@
 		5F0816ED18B3526100BD2D93 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EB18B3526100BD2D93 /* Enemy.cpp */; };
 		5F0816F118B3563000BD2D93 /* LevelLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816EF18B3563000BD2D93 /* LevelLayer.cpp */; };
 		5F0816FA18B3633500BD2D93 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0816F818B3633500BD2D93 /* MenuScene.cpp */; };
+		5F088D1A18DC94B000C3626B /* music in Resources */ = {isa = PBXBuildFile; fileRef = 5F088D1918DC94AF00C3626B /* music */; };
+		5F088D1B18DC94B000C3626B /* music in Resources */ = {isa = PBXBuildFile; fileRef = 5F088D1918DC94AF00C3626B /* music */; };
 		5F0CB3F318BB36D700D5C65B /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0CB3F118BB36D700D5C65B /* Projectile.cpp */; };
 		5F0CB3F418BB36D700D5C65B /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0CB3F118BB36D700D5C65B /* Projectile.cpp */; };
 		5F0E1E4518BDD86700F6F644 /* GameHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0E1E4318BDD86700F6F644 /* GameHUD.cpp */; };
@@ -351,6 +353,7 @@
 		5F0816F018B3563000BD2D93 /* LevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelLayer.h; path = ../Classes/LevelLayer.h; sourceTree = "<group>"; };
 		5F0816F818B3633500BD2D93 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/MenuScene.cpp; sourceTree = "<group>"; };
 		5F0816F918B3633500BD2D93 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/MenuScene.h; sourceTree = "<group>"; };
+		5F088D1918DC94AF00C3626B /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
 		5F0CB3F118BB36D700D5C65B /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Projectile.cpp; path = ../Classes/Projectile.cpp; sourceTree = "<group>"; };
 		5F0CB3F218BB36D700D5C65B /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Projectile.h; path = ../Classes/Projectile.h; sourceTree = "<group>"; };
 		5F0E1E4318BDD86700F6F644 /* GameHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameHUD.cpp; path = ../Classes/GameHUD.cpp; sourceTree = "<group>"; };
@@ -639,6 +642,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5F088D1918DC94AF00C3626B /* music */,
 				5F92B65B18D201B800FF2788 /* ipad */,
 				5F92B65C18D201B800FF2788 /* iphone */,
 				5F92B65D18D201B800FF2788 /* fonts */,
@@ -866,6 +870,7 @@
 				5F92B66118D201B800FF2788 /* iphone in Resources */,
 				5F92B66318D201B800FF2788 /* fonts in Resources */,
 				5F92B66518D201B800FF2788 /* ipadhd in Resources */,
+				5F088D1A18DC94B000C3626B /* music in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,6 +886,7 @@
 				5F92B66218D201B800FF2788 /* iphone in Resources */,
 				5F92B66418D201B800FF2788 /* fonts in Resources */,
 				5F92B66618D201B800FF2788 /* ipadhd in Resources */,
+				5F088D1B18DC94B000C3626B /* music in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

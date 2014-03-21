@@ -212,7 +212,9 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/MenuScene.o: \
  /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/2d/CCDeprecated.h \
  jni/../../Classes/HelpScene.h jni/../../Classes/SelectMapScene.h \
  jni/../../Classes/SelectSprite.h \
- jni/../../Classes/SelectDifficuldScene.h
+ jni/../../Classes/SelectDifficuldScene.h \
+ /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/SimpleAudioEngine.h \
+ /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/Export.h
 
 jni/../../Classes/MenuScene.h:
 
@@ -643,3 +645,7 @@ jni/../../Classes/SelectMapScene.h:
 jni/../../Classes/SelectSprite.h:
 
 jni/../../Classes/SelectDifficuldScene.h:
+
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/SimpleAudioEngine.h:
+
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/Export.h:

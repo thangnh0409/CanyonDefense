@@ -10,6 +10,7 @@
 #include "Missile.h"
 #include "GameMediator.h"
 #include "MapManager.h"
+#include "SimpleAudioEngine.h"
 
 enum{
     TOP,
@@ -382,6 +383,7 @@ void SmallDragonEnemy::update(float dt)
     Point pos = this->getPosition();
     
     if (this->getEnergy() <= 0) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/tieng_dragon_2.wav");
         removeSelf();
         gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
         gm->getGameHUD()->updateResource(kSmallDragonResource);
@@ -459,6 +461,7 @@ void MediumDragonEnemy::update(float dt)
     Point pos = this->getPosition();
     
     if (this->getEnergy() <= 0) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/tieng_dragon_3.wav");
         removeSelf();
         gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
         gm->getGameHUD()->updateResource(kMediumDragonResource);
@@ -532,6 +535,7 @@ void SmallFlyDragonEnemy::update(float dt)
     Point pos = this->getPosition();
     
     if (this->getEnergy() <= 0) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/tieng_dragon_1.wav");
         removeSelf();
         gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
         gm->getGameHUD()->updateResource(kSmallFlyDragonResource);
@@ -605,6 +609,7 @@ void MediumFlyDragonEnemy::update(float dt)
     Point pos = this->getPosition();
     
     if (this->getEnergy() <= 0) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/tieng_dragon_4.wav");
         removeSelf();
         gm->getGameHUD()->setNumDrgIsKilled(gm->getGameHUD()->getNumDrgIsKilled() + 1);
         gm->getGameHUD()->updateResource(kMediumFlyDragonResource);
