@@ -213,7 +213,9 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/Enemy.o: \
  jni/../../Classes/GameMediator.h jni/../../Classes/LevelLayer.h \
  jni/../../Classes/Wave.h jni/../../Classes/MapManager.h \
  jni/../../Classes/GameHUD.h jni/../../Classes/Missile.h \
- jni/../../Classes/GameObject.h
+ jni/../../Classes/GameObject.h \
+ /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/SimpleAudioEngine.h \
+ /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/Export.h
 
 jni/../../Classes/Enemy.h:
 
@@ -650,3 +652,7 @@ jni/../../Classes/GameHUD.h:
 jni/../../Classes/Missile.h:
 
 jni/../../Classes/GameObject.h:
+
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/SimpleAudioEngine.h:
+
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/../cocos2d/cocos/audio/android/../include/Export.h:

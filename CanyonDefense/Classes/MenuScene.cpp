@@ -116,10 +116,7 @@ void MenuScene::menuHelpCallback(Object* pSender)
 }
 void MenuScene::menuScoreCallback(Object* pSender)
 {
-	auto newScene = Scene::create();
-	auto layer = new SelectDifficuldScene();
-	newScene->addChild(layer,0);
-	Director::getInstance()->replaceScene(newScene);
+    
 }
 
 void MenuScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)

@@ -23,6 +23,7 @@ public:
     
     static GameMediator* shareInstance();
     bool init();
+    void resetForNewGame();
     
     CC_SYNTHESIZE(int, LevelMap, LevelMap);
     CC_SYNTHESIZE(int, mapID, MapID);

@@ -37,6 +37,9 @@ private:
 public:
     static Scene *scene();
     virtual bool init();
+    
+    void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
+    
     bool collisionWithTile(Point pos);
     
     /*

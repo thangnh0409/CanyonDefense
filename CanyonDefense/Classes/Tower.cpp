@@ -29,6 +29,9 @@ bool Tower::initWithFileAndRange(const char *pszFilename, int range)
                 rangeTower = Sprite::create("range_small.png");
                 break;
             case 150:
+                rangeTower = Sprite::create("range_medium.png");
+                break;
+            case 300:
                 rangeTower = Sprite::create("range_big.png");
                 break;
             default:
@@ -175,7 +178,7 @@ void HutBasicTower::fire(float dt)
 HutAdvanceTower* HutAdvanceTower::create()
 {
     HutAdvanceTower* mtt = new HutAdvanceTower;
-    if (mtt && mtt->initWithFileAndRange("hut_1.png", 100)) {
+    if (mtt && mtt->initWithFileAndRange("hut_1.png", 300)) {
         mtt->autorelease();
         
         return mtt;

@@ -85,7 +85,7 @@ bool GameHUD::init()
     
     auto sprite3 = Sprite::create("hut_1_menu.png");
     sprite3->setPosition(sprite2->getPosition() + Point(30 + sprite3->getContentSize().width, 0));
-    sprite3->setTag(SACRED_OAK_ADVANCE_MONEY);
+    sprite3->setTag(HUT_ADVANCE_MONEY);
     this->addChild(sprite3);
     moveableSprite->addObject(sprite3);
     
@@ -117,16 +117,16 @@ bool GameHUD::init()
     
     // add Missile Building
     
-    auto sprite5 = Sprite::create("tenlua_menu.png");
-    sprite5->setPosition(sprLock4->getPosition() + Point(40 + sprite5->getContentSize().width, 0));
-    sprite5->setTag(MISSILE_BUILDING);
-    this->addChild(sprite5);
-    moveableSprite->addObject(sprite5);
+    tenluaMenu = Sprite::create("tenlua_menu_selected.png");
+    tenluaMenu->setPosition(sprLock4->getPosition() + Point(40 + tenluaMenu->getContentSize().width, 0));
+    tenluaMenu->setTag(MISSILE_BUILDING);
+    this->addChild(tenluaMenu);
+    moveableSprite->addObject(tenluaMenu);
     
     //add lock5
     
     auto sprLock5 = Sprite::create("lock_menu.png");
-    sprLock5->setPosition(sprite5->getPosition() + Point(30 + sprLock5->getContentSize().width/2, 0));
+    sprLock5->setPosition(tenluaMenu->getPosition() + Point(30 + sprLock5->getContentSize().width/2, 0));
     this->addChild(sprLock5);
     
     //add lock6
@@ -538,7 +538,7 @@ void GameHUD::updateLive()
 void GameHUD::updateWave()
 {
     waves ++;
-    if (waves >= GameMediator::shareInstance()->getWaves()->count()) {
+    if (waves > GameMediator::shareInstance()->getWaves()->count()) {
         levelCompleteBg->setVisible(true);
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/nhac_chien_thang.mp3");
     }
@@ -564,4 +564,12 @@ void GameHUD::hideTimerCount()
     unschedule(schedule_selector(GameHUD::updateTime));
     timeLabel->setVisible(false);
     btnPauseItem->setNormalImage(Sprite::create("pause2.png"));
+}
+void GameHUD::setThorSkillAvailble(bool value)
+{
+    _thorSkillAvailible = value;
+    if (value) {
+        tenluaMenu->setTexture("tenlua_menu.png");
+    }else
+        tenluaMenu->setTexture("tenlua_menu_selected.png");
 }

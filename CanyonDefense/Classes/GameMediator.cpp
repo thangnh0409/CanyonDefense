@@ -50,3 +50,10 @@ bool GameMediator::init()
     } while (0);
     return bRet;
 }
+void GameMediator::resetForNewGame()
+{
+    _targets->removeAllObjects();
+    _waves->removeAllObjects();
+    _towers->removeAllObjects();
+    _projectiles->removeAllObjects();
+}

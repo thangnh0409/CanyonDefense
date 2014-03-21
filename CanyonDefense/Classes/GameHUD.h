@@ -21,6 +21,7 @@ private:
     Sprite* levelCompleteBg;
     Sprite* levelFailBg;
     Sprite* towerSprite;
+    Sprite* tenluaMenu;
     bool towerIsSelected;
     Sprite* rangeSprite;
     Array* moveableSprite;
@@ -33,6 +34,7 @@ private:
     MenuItemImage* btnPauseItem;
     
     bool catapultUnlocked;
+    bool _thorSkillAvailible;
 
 public:
     static GameHUD* shareInstance();
@@ -60,12 +62,13 @@ public:
     void showTimerCount();
     void hideTimerCount();
     
+    void setThorSkillAvailble(bool value);
+    
     CC_SYNTHESIZE(int, resources, Resources);
     CC_SYNTHESIZE(int, lives, Lives);
     CC_SYNTHESIZE(int, waves, Waves);
     CC_SYNTHESIZE(int, times, Time);
     CC_SYNTHESIZE(int, _numDragonIsKilled, NumDrgIsKilled);
-CC_SYNTHESIZE(bool, _thorSkillAvailible, ThorSkillAvailble);
 
 };
 

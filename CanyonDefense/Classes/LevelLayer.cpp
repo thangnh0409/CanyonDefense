@@ -35,6 +35,7 @@ Scene* LevelLayer::scene()
     auto scene = Scene::create();
     
     GameMediator* gm = GameMediator::shareInstance();
+    gm->resetForNewGame();
     LevelLayer* layer = LevelLayer::create();
     gm->setGameLayer(layer);
     
@@ -51,7 +52,6 @@ bool LevelLayer::init()
     if (!Layer::init()) {
         return false;
     }
-
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -92,6 +92,11 @@ bool LevelLayer::init()
     auto listener = EventListenerTouchAllAtOnce::create();
     listener->onTouchesBegan = CC_CALLBACK_2(LevelLayer::onTouchesBegan, this);
     dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
+    auto listener2 = EventListenerKeyboard::create();
+    listener2->onKeyReleased = CC_CALLBACK_2(LevelLayer::onKeyReleased, this);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
 
     
     //init all value constructor
@@ -108,6 +113,14 @@ bool LevelLayer::init()
     
     
     return true;
+}
+void LevelLayer::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)
+{
+    if (keycode == EventKeyboard::KeyCode::KEY_MENU || keycode == EventKeyboard::KeyCode::KEY_HOME)
+    {
+        callPauseGame();
+
+    }
 }
 
 void LevelLayer::levelLogic(float dt)
@@ -184,26 +197,27 @@ void LevelLayer::addTower(cocos2d::Point pos, int towerTag)
 void LevelLayer::addWave()
 {
     GameMediator* gm = GameMediator::shareInstance();
+    log("add wave, level map= %d", gm->getLevelMap());
     switch (gm->getLevelMap()) {
         case EASY:{
-            Wave* wave1 = Wave::create(1, 8, 4, 0, 0, 0);
+            Wave* wave1 = Wave::create(1, 8, 0, 0, 0, 0);
             gm->getWaves()->addObject(wave1);
-            Wave* wave2 = Wave::create(1, 4, 5, 3, 3, 2);
+            Wave* wave2 = Wave::create(1, 4, 4, 2, 0, 0);
             gm->getWaves()->addObject(wave2);
-            Wave* wave3 = Wave::create(1, 4, 2, 3, 1, 4);
+            Wave* wave3 = Wave::create(1, 4, 2, 2, 1, 4);
             gm->getWaves()->addObject(wave3);
-            Wave* wave4 = Wave::create(1, 2, 0, 4, 4, 6);
+            Wave* wave4 = Wave::create(1, 2, 5, 4, 1, 2);
             gm->getWaves()->addObject(wave4);
             break;
         }
         case NORMAL:{
             Wave* wave1 = Wave::create(1, 4, 2, 2, 1, 3);
             gm->getWaves()->addObject(wave1);
-            Wave* wave2 = Wave::create(1, 4, 5, 3, 3, 2);
+            Wave* wave2 = Wave::create(1, 4, 5, 4, 3, 2);
             gm->getWaves()->addObject(wave2);
-            Wave* wave3 = Wave::create(1, 4, 2, 3, 1, 4);
+            Wave* wave3 = Wave::create(1, 2, 4, 3, 3, 4);
             gm->getWaves()->addObject(wave3);
-            Wave* wave4 = Wave::create(1, 2, 0, 4, 4, 6);
+            Wave* wave4 = Wave::create(1, 6, 3, 4, 3, 6);
             gm->getWaves()->addObject(wave4);
             break;
         }
@@ -214,8 +228,12 @@ void LevelLayer::addWave()
             gm->getWaves()->addObject(wave2);
             Wave* wave3 = Wave::create(1, 4, 2, 3, 1, 4);
             gm->getWaves()->addObject(wave3);
-            Wave* wave4 = Wave::create(1, 2, 0, 4, 4, 6);
+            Wave* wave4 = Wave::create(1, 3, 0, 5, 0, 6);
             gm->getWaves()->addObject(wave4);
+            Wave* wave5 = Wave::create(1, 2, 4, 4, 1, 4);
+            gm->getWaves()->addObject(wave5);
+            Wave* wave6 = Wave::create(1, 5, 4, 4, 4, 6);
+            gm->getWaves()->addObject(wave6);
             break;
         }
         default:
@@ -249,6 +267,7 @@ void LevelLayer::addEnemy(float dt)
     Wave* wave = this->getCurrentWave();
     Enemy* target = NULL;
     if (wave) {
+        log("wave != NULL");
         if (wave->getNumSmallDragon() > 0) {
             target = SmallDragonEnemy::create();
             wave->setNumSmallDragon(wave->getNumSmallDragon() - 1);
@@ -307,10 +326,10 @@ void LevelLayer::backScene()
     for (auto schl : schedulerManager) {
         Director::getInstance()->getScheduler()->resumeTarget(schl);
     }
-//    auto mainMenu = MenuScene::createScene();
-//    
-//    Director::getInstance()->replaceScene(mainMenu);
-    Director::getInstance()->popScene();
+    auto mainMenu = MenuScene::createScene();
+    
+    Director::getInstance()->replaceScene(mainMenu);
+   // Director::getInstance()->popScene();
     log("pop to select difficult");
 }
 
@@ -352,13 +371,13 @@ float LevelLayer::getTimerDelay(int levelMap)
 {
     switch (levelMap) {
         case 1:
-            return 60;
+            return 120;
         case 2:
-            return 60;
+            return 90;
         case 3:
-            return 40;
+            return 60;
         default:
-            return 40;
+            return 60;
     }
 }
 

@@ -27,8 +27,8 @@ bool HelpScene::init()
 	this->addChild(backgroundSprite,0);
 
 	auto backSpriteNormal = Sprite::create("back1.png");
-    auto backSpriteSelected = Sprite::create("CloseSelected.png");
-    auto backSpriteDisabled = Sprite::create("CloseNormal.png");
+    auto backSpriteSelected = Sprite::create("back1_press.png");
+    auto backSpriteDisabled = Sprite::create("back1_press.png");
 
 	auto item1 = MenuItemSprite::create(backSpriteNormal, backSpriteSelected, backSpriteDisabled, CC_CALLBACK_1(HelpScene::helpBackCallback, this) );
     

@@ -263,9 +263,11 @@ void ThorTempleProjectile::createExplosion()
             enemy->setEnergy(enemy->getEnergy() - this->getDamage());
             
         }
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ten_lua.wav");
-        removeSelf();
+       
     }
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("music/ten_lua.wav");
+    removeSelf();
+    GameHUD::shareInstance()->setThorSkillAvailble(false);
     
 
 }
