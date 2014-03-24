@@ -50,7 +50,7 @@ bool GameHUD::init()
     
     hudBackground = Sprite::create("hud.png");
     hudBackground->setAnchorPoint(Point::ZERO);
-    this->addChild(hudBackground);
+    this->addChild(hudBackground, -1);
     Point hubPos = hudBackground->getPosition();
     
     //add HutBasicTower

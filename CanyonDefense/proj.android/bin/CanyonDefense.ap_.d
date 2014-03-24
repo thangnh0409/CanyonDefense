@@ -77,6 +77,7 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/play1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range_big.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range_medium.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/range_small.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/resource.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipad/resume.png \
@@ -161,6 +162,7 @@
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/play1_press.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range_big.png \
+/Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range_medium.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/range_small.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/resource.png \
 /Users/huuthang/Documents/Dev/cocos2d-x/CanyonDefense/proj.android/assets/ipadhd/resume.png \
